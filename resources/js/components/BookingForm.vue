@@ -410,7 +410,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true, addBookingToSession()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true, addBookingToSession(), addSessionKeyToSession()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
 								Klára Pöntun
 							</button>
 						</li>
@@ -564,7 +564,7 @@
 					sessionKey: this.sessionKey
 				})
 				.then(function (response) {
-					console.log(response)
+					console.log(response.data.key)
 				})
 				.catch(function (error) {});
 			}

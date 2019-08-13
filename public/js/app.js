@@ -2389,7 +2389,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
         sessionKey: this.sessionKey
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data.key);
       })["catch"](function (error) {});
     }
   },
@@ -23584,7 +23584,8 @@ var render = function() {
                             click: function($event) {
                               $event.preventDefault()
                               ;(_vm.showPayment = true),
-                                _vm.addBookingToSession()
+                                _vm.addBookingToSession(),
+                                _vm.addSessionKeyToSession()
                             }
                           }
                         },
