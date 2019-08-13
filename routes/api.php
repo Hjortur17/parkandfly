@@ -17,3 +17,4 @@ Route::get('services/get', 'ApiController@getServices');
 Route::get('car/info/get', 'ApiController@getCarInfo');
 Route::post('booking/create', 'ApiController@createBooking');
 Route::post('session/add/booking', 'ApiController@addBookingToSession');
+Route::post('session/add/key', 'ApiController@addKeyToSession');

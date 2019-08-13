@@ -39,22 +39,16 @@ class ApiController extends Controller
 		Session::put('form', $form);
 	}
 
-	public function getSessionData()
+	public function addKeyToSession(Request $request)
 	{
-		$form = collect($request->all());
-		Session::put('form', $form);
+		$key = $request->all();
 
-		$randomString = Hash::make($randomString);
-		Session::put('key', $randomString);
-
-		if ($randomString == session('key')) {
-			return 'Amen!';
-		}
+		Session::put('key', $key);
 	}
 
 	public function createBooking(Request $request)
 	{
-		if (request('form') == session('form', 'key')) {
+		if (request('reference') == session('key')) {
 			request()->validate([
 				'carNumber' => 'required',
 				'carSize' => 'required',
@@ -105,7 +99,7 @@ class ApiController extends Controller
 
 				'paidPrice' => request('paidPrice'),
 
-				'korta_authcode' => request('korta_authcode')
+				'korta_authcode' => request('authcode')
 			]);
 
 			$booking->services()->attach($request->services);
