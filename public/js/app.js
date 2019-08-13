@@ -22758,7 +22758,670 @@ var render = function() {
                   },
                   expression: "selectedValue"
                 }
-              })
+              }),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3 my-6" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "inline-block relative w-full md:w-1/3 px-3 mb-6 md:mb-0"
+                  },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.booking.dropOffTime,
+                            expression: "booking.dropOffTime"
+                          }
+                        ],
+                        staticClass:
+                          "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                        attrs: { name: "dropOffTime" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.booking,
+                              "dropOffTime",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", disabled: "" } },
+                          [_vm._v("Hvenær mættiru á Leifstöð")]
+                        ),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:45")]),
+                        _vm._v("-\n\t\t\t\t\t")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pr-4 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "inline-block relative w-full md:w-1/3 px-3 mb-6 md:mb-0"
+                  },
+                  [
+                    _c(
+                      "select",
+                      {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.booking.pickUpTime,
+                            expression: "booking.pickUpTime"
+                          }
+                        ],
+                        staticClass:
+                          "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                        attrs: { name: "pickUpTime" },
+                        on: {
+                          change: function($event) {
+                            var $$selectedVal = Array.prototype.filter
+                              .call($event.target.options, function(o) {
+                                return o.selected
+                              })
+                              .map(function(o) {
+                                var val = "_value" in o ? o._value : o.value
+                                return val
+                              })
+                            _vm.$set(
+                              _vm.booking,
+                              "pickUpTime",
+                              $event.target.multiple
+                                ? $$selectedVal
+                                : $$selectedVal[0]
+                            )
+                          }
+                        }
+                      },
+                      [
+                        _c(
+                          "option",
+                          { attrs: { selected: "", disabled: "" } },
+                          [_vm._v("Hvenær viltu sækja bílinn?")]
+                        ),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("00:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("01:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("02:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("03:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("04:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("05:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("06:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("07:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("08:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("09:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("10:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("11:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("12:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("13:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("14:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("15:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("16:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("17:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("18:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("19:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("20:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("21:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("22:45")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:00")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:15")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:30")]),
+                        _vm._v(" "),
+                        _c("option", [_vm._v("23:45")]),
+                        _vm._v("-\n\t\t\t\t\t")
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass:
+                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pr-4 text-gray-700"
+                      },
+                      [
+                        _c(
+                          "svg",
+                          {
+                            staticClass: "fill-current h-4 w-4",
+                            attrs: {
+                              xmlns: "http://www.w3.org/2000/svg",
+                              viewBox: "0 0 20 20"
+                            }
+                          },
+                          [
+                            _c("path", {
+                              attrs: {
+                                d:
+                                  "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.flightNumber,
+                          expression: "booking.flightNumber"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Flugnúmer á heimleið",
+                        name: "flightNumber"
+                      },
+                      domProps: { value: _vm.booking.flightNumber },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.booking,
+                            "flightNumber",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
+                _c("div", { staticClass: "w-full px-3 mb-6 md:mb-0" }, [
+                  _c("ul", { staticClass: "flex float-right" }, [
+                    _c("li", { staticClass: "pr-4" }, [
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.prev()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512",
+                                width: "30px",
+                                height: "30px",
+                                fill: "#fff"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "button",
+                        {
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.next()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512",
+                                width: "30px",
+                                height: "30px",
+                                fill: "#fff"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
+              ])
             ],
             1
           )
