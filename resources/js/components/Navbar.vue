@@ -1,5 +1,5 @@
 <template>
-	<nav class="absolute inset-x-0 top-0 container max-w-4xl mx-auto mt-10">
+	<nav class="absolute inset-x-0 top-0 container max-w-4xl mx-auto mt-10 px-6">
 		<ul class="flex justify-between">
 			<li>
 				<a href="/">

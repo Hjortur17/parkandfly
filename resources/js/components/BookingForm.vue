@@ -1,6 +1,6 @@
 <template>
 	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
-		<section class="w-full my-8" id="car-form" v-if="step === 1">
+		<section class="w-full my-8 mt-40 md:mt-0" id="car-form" v-if="step === 1">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Segðu okkur nú aðeins um bílinn þinn</h2>
 			</div>
@@ -90,15 +90,17 @@
 			</div>
 
 			<vc-date-picker
-			mode="range"
-			:value="null"
-			:min-date='new Date()'
-			color="orange"
-			is-inline
-			is-expanded
-			:columns="$screens({ default: 1, lg: 2 })"
-			v-model='selectedValue'
-			name="date"
+				mode="range"
+				:value="null"
+				:min-date='new Date()'
+				color="orange"
+				title-position="left"
+				is-inline
+				is-expanded
+				v-model='selectedValue'
+				name="date"
+				:columns="$screens({ mobile: 1, laptop: 2 })"
+				:is-expanded="true"
 			/>
 
 			<div class="flex flex-wrap -mx-3 my-6">
