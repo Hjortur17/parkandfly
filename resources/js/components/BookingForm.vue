@@ -94,13 +94,12 @@
 				:value="null"
 				:min-date='new Date()'
 				color="orange"
-				title-position="left"
+				is-required
 				is-inline
 				is-expanded
 				v-model='selectedValue'
 				name="date"
 				:columns="$screens({ mobile: 1, table: 2, laptop: 2 })"
-				:is-expanded="true"
 				style="min-height: 100%"
 			/>
 
@@ -594,9 +593,3 @@
 		}
 	}
 </script>
-
-<style type="text/css">
-	.vc-pane {
-		display: block;
-	}
-</style>
