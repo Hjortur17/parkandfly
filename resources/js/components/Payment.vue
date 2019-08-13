@@ -83,23 +83,6 @@
 
 									<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
 								</form>
-								<!-- <form method="post" action="https://test.netgiro.is/securepay">
-									    <input type="hidden" name="ApplicationID" value="881E674F-7891-4C20-AFD8-56FE2624C4B5"/>
-									    <input type="hidden" name="Iframe" value="false" />
-									    <input type="hidden" name="Signature" value="9a8a9caec37470574c784fc2f36332a022ccb5b83668afc2f124769a2100a2e0" />
-									    <input type="hidden" name="PaymentSuccessfulURL" value="" />
-
-									    <input type="hidden" name="ReferenceNumber" value="1" />
-									    <input type="hidden" name="TotalAmount" value="4500" />
-
-									    <input type='hidden' name='Items[0].ProductNo' value='1'/>
-									    <input type='hidden' name='Items[0].Name' value="PXT82"/>
-									    <input type='hidden' name='Items[0].UnitPrice' value="4500"/>
-									    <input type='hidden' name='Items[0].Amount' value="4500"/>
-									    <input type='hidden' name='Items[0].Quantity' value='1'/>
-
-									    <button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
-								</form> -->
 							</div>
 
 							<div class="text-center my-8" v-else>
@@ -120,7 +103,7 @@
 
 									<input name="reference" type="hidden" :value="this.sessionKey">
 									
-									<a :href="link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
+									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
 								</form>
 							</div>
 						</slot>
@@ -174,7 +157,7 @@
 			checkvaluemd5: function () {
 				return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
 			},
-			link: function () {
+			korta_link: function () {
 				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
 			}
 		},

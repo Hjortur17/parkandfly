@@ -2630,23 +2630,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2677,7 +2660,7 @@ __webpack_require__.r(__webpack_exports__);
     checkvaluemd5: function checkvaluemd5() {
       return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
     },
-    link: function link() {
+    korta_link: function korta_link() {
       return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
     }
   },
@@ -24137,7 +24120,7 @@ var render = function() {
                             {
                               staticClass:
                                 "bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full",
-                              attrs: { href: _vm.link }
+                              attrs: { href: _vm.korta_link }
                             },
                             [_vm._v("Borga")]
                           )
