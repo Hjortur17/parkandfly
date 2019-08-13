@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Booking;
 use App\Service;
 
+use Session;
+use Illuminate\Support\Facades\Hash;
+
 class ApiController extends Controller
 {
 	public function getServices()
@@ -15,6 +18,7 @@ class ApiController extends Controller
 
 		return $services;
 	}
+
 	public function getCarInfo(Request $request)
 	{
 		$content = utf8_encode(file_get_contents("https://rogg.is/bizServices/CarRegistry/XmlService/CarService/v0703/CarDataByNumber.aspx?user=parkandflyws&password=LeggiStaedi13X12&number=" . $request->carNumber));
@@ -28,74 +32,91 @@ class ApiController extends Controller
 		return $carNumberInfo;
 	}
 
+	public function addBookingToSession(Request $request)
+	{
+		$form = collect($request->all());
+
+		Session::put('form', $form);
+	}
+
+	public function getSessionData()
+	{
+		$form = collect($request->all());
+		Session::put('form', $form);
+
+		$randomString = Hash::make($randomString);
+		Session::put('key', $randomString);
+
+		if ($randomString == session('key')) {
+			return 'Amen!';
+		}
+	}
+
 	public function createBooking(Request $request)
 	{
-		request()->validate([
-			'carNumber' => 'required',
-			'carSize' => 'required',
-			'carMake' => 'required',
-			'carType' => 'required',
-			'carColor' => 'required',
+		if (request('form') == session('form', 'key')) {
+			request()->validate([
+				'carNumber' => 'required',
+				'carSize' => 'required',
+				'carMake' => 'required',
+				'carType' => 'required',
+				'carColor' => 'required',
 
-			'name' => 'required',
-			'socialId' => 'required',
-			'email' => 'required|email',
-			'phone' => 'required',
-			
-			'dropOffDate' => 'required',
-			'dropOffTime' => 'required',
-			'pickUpDate' => 'required',
-			'pickUpTime' => 'required',
+				'name' => 'required',
+				'socialId' => 'required',
+				'email' => 'required|email',
+				'phone' => 'required',
+				
+				'dropOffDate' => 'required',
+				'dropOffTime' => 'required',
+				'pickUpDate' => 'required',
+				'pickUpTime' => 'required',
 
-			'flightNumber' => 'required',
-			'flightTime' => 'required',
+				'flightNumber' => 'required',
 
-			'numberOfDays' => 'required',
-			'priceForDays' => 'required',
+				'numberOfDays' => 'required',
+				'priceForDays' => 'required',
 
-			'paidPrice' => 'required'
-		]);
+				'paidPrice' => 'required'
+			]);
 
-		$booking = Booking::create([
-			'carNumber' => request('carNumber'),
-			'carSize' => request('carSize'),
-			'carMake' => request('carMake'),
-			'carType' => request('carType'),
-			'carColor' => request('carColor'),
+			$booking = Booking::create([
+				'carNumber' => request('carNumber'),
+				'carSize' => request('carSize'),
+				'carMake' => request('carMake'),
+				'carType' => request('carType'),
+				'carColor' => request('carColor'),
 
-			'name' => request('name'),
-			'socialId' => request('socialId'),
-			'email' => request('email'),
-			'phone' => request('phone'),
+				'name' => request('name'),
+				'socialId' => request('socialId'),
+				'email' => request('email'),
+				'phone' => request('phone'),
 
-			'dropOffDate' => request('dropOffDate'),
-			'dropOffTime' => request('dropOffTime'),
-			'pickUpDate' => request('pickUpDate'),
-			'pickUpTime' => request('pickUpTime'),
+				'dropOffDate' => request('dropOffDate'),
+				'dropOffTime' => request('dropOffTime'),
+				'pickUpDate' => request('pickUpDate'),
+				'pickUpTime' => request('pickUpTime'),
 
-			'flightNumber' => request('flightNumber'),
-			'flightTime' => request('flightTime'),
+				'flightNumber' => request('flightNumber'),
+				'flightTime' => request('flightTime'),
 
-			'numberOfDays' => request('numberOfDays'),
-			'priceForDays' => request('priceForDays'),
+				'numberOfDays' => request('numberOfDays'),
+				'priceForDays' => request('priceForDays'),
 
-			'paidPrice' => request('paidPrice'),
+				'paidPrice' => request('paidPrice'),
 
-			'korta_authcode' => request('korta_authcode')
-		]);
+				'korta_authcode' => request('korta_authcode')
+			]);
 
-		$booking->services()->attach($request->services);
+			$booking->services()->attach($request->services);
 
-		\Mail::to($request->email)
-			->cc('bokanir@parkandfly.is')
-			->bcc('reynir@parkandfly.is')
-			->bcc('solveig@parkandfly.is')
-			->send(new BookingConfirmed($booking));
+			\Mail::to($request->email)
+				->cc('bokanir@parkandfly.is')
+				->bcc('reynir@parkandfly.is')
+				->bcc('solveig@parkandfly.is')
+				->send(new BookingConfirmed($booking));
 
-		// if (request()->wantsJson()) {
-		// 	return response($booking, 201);
-		// }
-
-		return redirect('/');
+			return redirect('/');
+		}
 	}
 }

@@ -2277,27 +2277,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2380,6 +2359,29 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.selectedServicesId.push(id);
       }
+    },
+    addBookingToSession: function addBookingToSession() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/booking', {
+        carNumber: this.booking.carNumber,
+        carSize: this.booking.carSize,
+        carMake: this.booking.carMake,
+        carType: this.booking.carType,
+        carColor: this.booking.carColor,
+        name: this.booking.name,
+        socialId: this.booking.socialId,
+        email: this.booking.email,
+        phone: this.booking.phone,
+        dropOffDate: this.dropOffDate,
+        dropOffTime: this.booking.dropOffTime,
+        pickUpDate: this.pickUpDate,
+        pickUpTime: this.booking.pickUpTime,
+        flightNumber: this.booking.flightNumber,
+        numberOfDays: this.numberOfDays,
+        priceForDays: this.priceForDays,
+        paidPrice: this.total,
+        selectedServicesId: this.selectedServicesId,
+        sessionKey: this.sessionKey
+      }).then(function (response) {})["catch"](function (error) {});
     }
   },
   computed: {
@@ -2405,6 +2407,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     priceForDays: function priceForDays() {
       return this.numberOfDays * 500;
+    },
+    sessionKey: function sessionKey() {
+      return Math.random().toString(29).substring(2, 15) + Math.random().toString(29).substring(2, 15);
     }
   },
   mounted: function mounted() {
@@ -2644,33 +2649,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['userAge', 'servicePrice', 'carNumber', 'carSize', 'carMake', 'carType', 'carColor', 'name', 'socialId', 'email', 'phone', 'dropOffDate', 'dropOffTime', 'pickUpDate', 'pickUpTime', 'flightNumber', 'numberOfDays', 'priceForDays', 'paidPrice', 'selectedServicesId'],
+  props: ['userAge', 'servicePrice', 'numberOfDays', 'priceForDays', 'paidPrice', 'sessionKey'],
   data: function data() {
     return {
       paymentPicked: null,
@@ -23556,7 +23538,8 @@ var render = function() {
                           on: {
                             click: function($event) {
                               $event.preventDefault()
-                              _vm.showPayment = true
+                              ;(_vm.showPayment = true),
+                                _vm.addBookingToSession()
                             }
                           }
                         },
@@ -23579,24 +23562,10 @@ var render = function() {
             attrs: {
               userAge: _vm.userAge,
               servicePrice: _vm.servicePrice,
-              carNumber: this.booking.carNumber,
-              carSize: this.booking.carSize,
-              carMake: this.booking.carMake,
-              carType: this.booking.carType,
-              carColor: this.booking.carColor,
-              name: this.booking.name,
-              socialId: this.booking.socialId,
-              email: this.booking.email,
-              phone: this.booking.phone,
-              dropOffDate: _vm.dropOffDate,
-              pickUpDate: _vm.pickUpDate,
-              dropOffTime: this.booking.dropOffTime,
-              pickUpTime: this.booking.pickUpTime,
-              flightNumber: this.booking.flightNumber,
               numberOfDays: _vm.numberOfDays,
               priceForDays: _vm.priceForDays,
               paidPrice: _vm.total,
-              selectedServicesId: this.selectedServicesId
+              sessionKey: _vm.sessionKey
             },
             on: { hide: _vm.hideModal }
           })
@@ -24155,7 +24124,7 @@ var render = function() {
                             attrs: {
                               name: "downloadurl",
                               type: "hidden",
-                              value: "http://booking.test/api/create"
+                              value: "https://parkandfly.is/api/booking/create"
                             }
                           }),
                           _vm._v(" "),
@@ -24177,45 +24146,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("input", {
                             attrs: { name: "reference", type: "hidden" },
-                            domProps: {
-                              value:
-                                "?carNumber=" +
-                                this.carNumber +
-                                "&carSize=" +
-                                this.carSize +
-                                "&carMake=" +
-                                this.carMake +
-                                "&carType=" +
-                                this.carType +
-                                "&carColor=" +
-                                this.carColor +
-                                "&name=" +
-                                this.name +
-                                "&socialId=" +
-                                this.socialId +
-                                "&email=" +
-                                this.email +
-                                "&phone=" +
-                                this.phone +
-                                "&dropOffDate=" +
-                                this.dropOffDate +
-                                "&dropOffTime=" +
-                                this.dropOffTime +
-                                "&pickUpDate=" +
-                                this.pickUpDate +
-                                "&pickUpTime=" +
-                                this.pickUpTime +
-                                "&flightNumber=" +
-                                this.flightNumber +
-                                "&numberOfDays=" +
-                                this.numberOfDays +
-                                "&priceForDays=" +
-                                this.priceForDays +
-                                "&paidPrice=" +
-                                this.amount +
-                                "&services=" +
-                                this.selectedServicesId
-                            }
+                            domProps: { value: this.sessionKey }
                           }),
                           _vm._v(" "),
                           _c(

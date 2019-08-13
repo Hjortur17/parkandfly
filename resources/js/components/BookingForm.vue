@@ -409,7 +409,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true, addBookingToSession()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
 								Klára Pöntun
 							</button>
 						</li>
@@ -419,35 +419,14 @@
 		</section>
 
 		<payment v-if="showPayment" 
-		@hide="hideModal" 
-		:userAge="userAge" 
-		:servicePrice="servicePrice" 
-
-		:carNumber="this.booking.carNumber"
-		:carSize="this.booking.carSize"
-		:carMake="this.booking.carMake"
-		:carType="this.booking.carType"
-		:carColor="this.booking.carColor"
-
-		:name="this.booking.name"
-		:socialId="this.booking.socialId"
-		:email="this.booking.email"
-		:phone="this.booking.phone"
-
-		:dropOffDate="dropOffDate"
-		:pickUpDate="pickUpDate"
-		:dropOffTime="this.booking.dropOffTime"
-		:pickUpTime="this.booking.pickUpTime"
-		:flightNumber="this.booking.flightNumber"
-
-		:numberOfDays="numberOfDays" 
-		:priceForDays="priceForDays"
-
-		:paidPrice="total"
-
-		:selectedServicesId="this.selectedServicesId"
-		>
-	</payment>
+			@hide="hideModal" 
+			:userAge="userAge" 
+			:servicePrice="servicePrice" 
+			:numberOfDays="numberOfDays" 
+			:priceForDays="priceForDays"
+			:paidPrice="total"
+			:sessionKey="sessionKey">
+		</payment>
 </div>
 </template>
 
@@ -545,6 +524,38 @@
 				} else {
 					this.selectedServicesId.push(id);
 				}	
+			},
+
+			addBookingToSession() {
+				axios.post('/api/session/add/booking', {
+					carNumber: this.booking.carNumber,
+					carSize: this.booking.carSize,
+					carMake: this.booking.carMake,
+					carType: this.booking.carType,
+					carColor: this.booking.carColor,
+
+					name: this.booking.name,
+					socialId: this.booking.socialId,
+					email: this.booking.email,
+					phone: this.booking.phone,
+
+					dropOffDate: this.dropOffDate,
+					dropOffTime: this.booking.dropOffTime,
+					pickUpDate: this.pickUpDate,
+					pickUpTime: this.booking.pickUpTime,
+					flightNumber: this.booking.flightNumber,
+
+					numberOfDays: this.numberOfDays,
+					priceForDays: this.priceForDays,
+
+					paidPrice: this.total,
+
+					selectedServicesId: this.selectedServicesId,
+
+					sessionKey: this.sessionKey
+				})
+				.then(function (response) {})
+				.catch(function (error) {});
 			}
 		},
 
@@ -569,6 +580,9 @@
 			},
 			priceForDays: function () {
 				return (this.numberOfDays * 500);
+			},
+			sessionKey: function () {
+				return Math.random().toString(29).substring(2, 15) + Math.random().toString(29).substring(2, 15);
 			}
 		},
 

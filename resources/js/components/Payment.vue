@@ -116,34 +116,11 @@
 									<input type="hidden" name="look" value="SIMPLE">
 									<input name="readonly" type="hidden" value="Y">
 
-									<input name="downloadurl" type="hidden" value="http://booking.test/api/create">
+									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 									<input name="refermethod" type="hidden" value="POST">
 									<input name="refertarget" type="hidden" value="_top">
 
-									<input 
-									name="reference" 
-									type="hidden" 
-									:value="
-									'?carNumber=' + this.carNumber + 
-									'&carSize=' + this.carSize + 
-									'&carMake=' + this.carMake + 
-									'&carType=' + this.carType + 
-									'&carColor=' + this.carColor + 
-									'&name=' + this.name + 
-									'&socialId=' + this.socialId + 
-									'&email=' + this.email + 
-									'&phone=' + this.phone + 
-									'&dropOffDate=' + this.dropOffDate + 
-									'&dropOffTime=' + this.dropOffTime + 
-									'&pickUpDate=' + this.pickUpDate + 
-									'&pickUpTime=' + this.pickUpTime + 
-									'&flightNumber=' + this.flightNumber + 
-									'&numberOfDays=' + this.numberOfDays + 
-									'&priceForDays=' + this.priceForDays + 
-									'&paidPrice=' + this.amount +
-									'&services=' + this.selectedServicesId
-									"
-									>
+									<input name="reference" type="hidden" :value="this.sessionKey">
 									
 									<a :href="link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
 								</form>
@@ -162,32 +139,12 @@
 
 	export default {
 		props: [
-		'userAge', 
-		'servicePrice', 
-
-		'carNumber',
-		'carSize',
-		'carMake',
-		'carType',
-		'carColor',
-
-		'name',
-		'socialId',
-		'email',
-		'phone',
-
-		'dropOffDate',
-		'dropOffTime',
-		'pickUpDate',
-		'pickUpTime',
-		'flightNumber',
-
-		'numberOfDays', 
-		'priceForDays', 
-
-		'paidPrice',
-
-		'selectedServicesId'
+			'userAge', 
+			'servicePrice', 
+			'numberOfDays', 
+			'priceForDays', 
+			'paidPrice',
+			'sessionKey'
 		],
 
 		data() {
@@ -232,58 +189,58 @@
 </script>
 
 <style>
-.modal-mask {
-	position: fixed;
-	z-index: 9998;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-color: rgba(0, 0, 0, .5);
-	display: table;
-	transition: opacity .3s ease;
-}
+	.modal-mask {
+		position: fixed;
+		z-index: 9998;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0, 0, 0, .5);
+		display: table;
+		transition: opacity .3s ease;
+	}
 
-.modal-wrapper {
-	display: table-cell;
-	vertical-align: middle;
-}
+	.modal-wrapper {
+		display: table-cell;
+		vertical-align: middle;
+	}
 
-.modal-container {
-	width: 500px;
-	margin: 0px auto;
-	padding: 20px 30px;
-	background-color: #fff;
-	border-radius: 2px;
-	box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-	transition: all .3s ease;
-}
+	.modal-container {
+		width: 500px;
+		margin: 0px auto;
+		padding: 20px 30px;
+		background-color: #fff;
+		border-radius: 2px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+		transition: all .3s ease;
+	}
 
-.modal-header h3 {
-	margin-top: 0;
-	color: #42b983;
-}
+	.modal-header h3 {
+		margin-top: 0;
+		color: #42b983;
+	}
 
-.modal-body {
-	margin: 20px 0;
-}
+	.modal-body {
+		margin: 20px 0;
+	}
 
-.modal-default-button {
-	float: right;
-}
+	.modal-default-button {
+		float: right;
+	}
 
 
-.modal-enter {
-	opacity: 0;
-}
+	.modal-enter {
+		opacity: 0;
+	}
 
-.modal-leave-active {
-	opacity: 0;
-}
+	.modal-leave-active {
+		opacity: 0;
+	}
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-	-webkit-transform: scale(1.1);
-	transform: scale(1.1);
-}
+	.modal-enter .modal-container,
+	.modal-leave-active .modal-container {
+		-webkit-transform: scale(1.1);
+		transform: scale(1.1);
+	}
 </style>
