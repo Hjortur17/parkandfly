@@ -66,25 +66,24 @@
 					<div class="modal-footer">
 						<slot name="footer">
 							<div class="text-center my-8" v-if="this.paymentPicked === 'Netgiro'">
-								<!-- <form method="post" action="https://test.netgiro.is/securepay">
-									<input type="hidden" name="ApplicationID" value="881E674F-7891-4C20-AFD8-56FE2624C4B5"/>
-									<input type="hidden" name="Iframe" value="false" />
-									<input type="hidden" name="Signature" :value="netgiro_signature" />
-									<input type="hidden" name="PaymentSuccessfulURL" value="" />
+								<form method="post" action="https://test.netgiro.is/securepay">
+									<input type="hidden" name="ApplicationID" :value="this.netgiroId">
+									<input type="hidden" name="Iframe" value="false">
+									<input type="hidden" name="Signature" :value="netgiro_signature">
+									<input type="hidden" name="PaymentSuccessfulURL" value="">
 
-									<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference" />
-									<input type="hidden" name="TotalAmount" :value="this.amount" />
+									<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference">
+									<input type="hidden" name="TotalAmount" :value="this.amount">
 
-
-									<input type='hidden' name='Items[0].ProductNo' value='1'/>
-									<input type='hidden' name='Items[0].Name' :value='this.carNumber'/>
-									<input type='hidden' name='Items[0].UnitPrice' :value='this.amount'/>
-									<input type='hidden' name='Items[0].Amount' :value='this.amount'/>
-									<input type='hidden' name='Items[0].Quantity' value='1'/>
+									<input type="hidden" name="Items[0].ProductNo" value='1'>
+									<input type="hidden" name="Items[0].Name" value="Bíl">
+									<input type="hidden" name="Items[0].UnitPrice" :value="this.amount">
+									<input type="hidden" name="Items[0].Amount" :value="this.amount">
+									<input type="hidden" name="Items[0].Quantity" value="1">
 
 									<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
-								</form> -->
-								<form method="post" action="https://test.netgiro.is/securepay">
+								</form>
+								<!-- <form method="post" action="https://test.netgiro.is/securepay">
 									    <input type="hidden" name="ApplicationID" value="881E674F-7891-4C20-AFD8-56FE2624C4B5"/>
 									    <input type="hidden" name="Iframe" value="false" />
 									    <input type="hidden" name="Signature" value="9a8a9caec37470574c784fc2f36332a022ccb5b83668afc2f124769a2100a2e0" />
@@ -93,7 +92,6 @@
 									    <input type="hidden" name="ReferenceNumber" value="1" />
 									    <input type="hidden" name="TotalAmount" value="4500" />
 
-									    <!-- Order items -->
 									    <input type='hidden' name='Items[0].ProductNo' value='1'/>
 									    <input type='hidden' name='Items[0].Name' value="PXT82"/>
 									    <input type='hidden' name='Items[0].UnitPrice' value="4500"/>
@@ -101,7 +99,7 @@
 									    <input type='hidden' name='Items[0].Quantity' value='1'/>
 
 									    <button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
-								</form>
+								</form> -->
 							</div>
 
 							<div class="text-center my-8" v-else>
@@ -153,6 +151,7 @@
 				netgiro_reference: 1,
 				couponInput: '',
 				amount: this.paidPrice,
+				netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5'
 			}
 		},
 
@@ -170,7 +169,7 @@
 
 		computed: {
 			netgiro_signature: function () {
-				return sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5");
+				return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
 			},
 			checkvaluemd5: function () {
 				return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");

@@ -2647,8 +2647,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2658,7 +2656,8 @@ __webpack_require__.r(__webpack_exports__);
       paymentPicked: null,
       netgiro_reference: 1,
       couponInput: '',
-      amount: this.paidPrice
+      amount: this.paidPrice,
+      netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5'
     };
   },
   methods: {
@@ -2673,13 +2672,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     netgiro_signature: function netgiro_signature() {
-      return sha256__WEBPACK_IMPORTED_MODULE_1___default()("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5");
+      return String(sha256__WEBPACK_IMPORTED_MODULE_1___default()("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
     },
     checkvaluemd5: function checkvaluemd5() {
       return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
     },
     link: function link() {
-      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&startnewpayment=y';
+      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
     }
   },
   mounted: function mounted() {
@@ -23952,11 +23951,8 @@ var render = function() {
                         },
                         [
                           _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "ApplicationID",
-                              value: "881E674F-7891-4C20-AFD8-56FE2624C4B5"
-                            }
+                            attrs: { type: "hidden", name: "ApplicationID" },
+                            domProps: { value: this.netgiroId }
                           }),
                           _vm._v(" "),
                           _c("input", {
@@ -23968,12 +23964,8 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "Signature",
-                              value:
-                                "9a8a9caec37470574c784fc2f36332a022ccb5b83668afc2f124769a2100a2e0"
-                            }
+                            attrs: { type: "hidden", name: "Signature" },
+                            domProps: { value: _vm.netgiro_signature }
                           }),
                           _vm._v(" "),
                           _c("input", {
@@ -23985,19 +23977,13 @@ var render = function() {
                           }),
                           _vm._v(" "),
                           _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "ReferenceNumber",
-                              value: "1"
-                            }
+                            attrs: { type: "hidden", name: "ReferenceNumber" },
+                            domProps: { value: this.netgiro_reference }
                           }),
                           _vm._v(" "),
                           _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "TotalAmount",
-                              value: "4500"
-                            }
+                            attrs: { type: "hidden", name: "TotalAmount" },
+                            domProps: { value: this.amount }
                           }),
                           _vm._v(" "),
                           _c("input", {
@@ -24012,24 +23998,21 @@ var render = function() {
                             attrs: {
                               type: "hidden",
                               name: "Items[0].Name",
-                              value: "PXT82"
+                              value: "Bíl"
                             }
                           }),
                           _vm._v(" "),
                           _c("input", {
                             attrs: {
                               type: "hidden",
-                              name: "Items[0].UnitPrice",
-                              value: "4500"
-                            }
+                              name: "Items[0].UnitPrice"
+                            },
+                            domProps: { value: this.amount }
                           }),
                           _vm._v(" "),
                           _c("input", {
-                            attrs: {
-                              type: "hidden",
-                              name: "Items[0].Amount",
-                              value: "4500"
-                            }
+                            attrs: { type: "hidden", name: "Items[0].Amount" },
+                            domProps: { value: this.amount }
                           }),
                           _vm._v(" "),
                           _c("input", {
@@ -36529,14 +36512,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************!*\
   !*** ./resources/js/components/Payment.vue ***!
   \*********************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Payment_vue_vue_type_template_id_7bace86b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Payment.vue?vue&type=template&id=7bace86b& */ "./resources/js/components/Payment.vue?vue&type=template&id=7bace86b&");
 /* harmony import */ var _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Payment.vue?vue&type=script&lang=js& */ "./resources/js/components/Payment.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Payment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Payment.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Payment.vue?vue&type=style&index=0&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Payment_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Payment_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Payment.vue?vue&type=style&index=0&lang=css& */ "./resources/js/components/Payment.vue?vue&type=style&index=0&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -36568,7 +36552,7 @@ component.options.__file = "resources/js/components/Payment.vue"
 /*!**********************************************************************!*\
   !*** ./resources/js/components/Payment.vue?vue&type=script&lang=js& ***!
   \**********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
