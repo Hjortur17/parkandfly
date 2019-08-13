@@ -99,8 +99,9 @@
 				is-expanded
 				v-model='selectedValue'
 				name="date"
-				:columns="$screens({ mobile: 1, laptop: 2 })"
+				:columns="$screens({ mobile: 1, table: 2, laptop: 2 })"
 				:is-expanded="true"
+				style="min-height: 100%"
 			/>
 
 			<div class="flex flex-wrap -mx-3 my-6">
@@ -593,3 +594,9 @@
 		}
 	}
 </script>
+
+<style type="text/css">
+	.vc-pane {
+		display: block;
+	}
+</style>
