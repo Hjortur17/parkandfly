@@ -2381,12 +2381,16 @@ __webpack_require__.r(__webpack_exports__);
         priceForDays: this.priceForDays,
         paidPrice: this.total,
         selectedServicesId: this.selectedServicesId
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {});
     },
     addSessionKeyToSession: function addSessionKeyToSession() {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
         sessionKey: this.sessionKey
-      }).then(function (response) {})["catch"](function (error) {});
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {});
     }
   },
   computed: {

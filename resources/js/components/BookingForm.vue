@@ -553,7 +553,9 @@
 
 					selectedServicesId: this.selectedServicesId,
 				})
-				.then(function (response) {})
+				.then(function (response) {
+					console.log(response)
+				})
 				.catch(function (error) {});
 			},
 
@@ -561,7 +563,9 @@
 				axios.post('/api/session/add/key', {
 					sessionKey: this.sessionKey
 				})
-				.then(function (response) {})
+				.then(function (response) {
+					console.log(response)
+				})
 				.catch(function (error) {});
 			}
 		},
