@@ -2382,14 +2382,14 @@ __webpack_require__.r(__webpack_exports__);
         paidPrice: this.total,
         selectedServicesId: this.selectedServicesId
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data.carNumber);
       })["catch"](function (error) {});
     },
     addSessionKeyToSession: function addSessionKeyToSession() {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
         sessionKey: this.sessionKey
       }).then(function (response) {
-        console.log(response);
+        console.log(response.data.sessionKey);
       })["catch"](function (error) {});
     }
   },

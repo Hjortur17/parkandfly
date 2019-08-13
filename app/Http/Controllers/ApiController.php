@@ -37,6 +37,8 @@ class ApiController extends Controller
 		$form = collect($request->all());
 
 		Session::put('form', $form);
+
+		return $form;
 	}
 
 	public function addKeyToSession(Request $request)
@@ -44,11 +46,14 @@ class ApiController extends Controller
 		$key = $request->all();
 
 		Session::put('key', $key);
+
+		return $key;
 	}
 
 	public function createBooking(Request $request)
 	{
-		if ($request->input('reference')== session('key')) {
+		dd(session());
+		if ($request->input('reference') === session('key')) {
 			dd('Amen!');
 
 			request()->validate([

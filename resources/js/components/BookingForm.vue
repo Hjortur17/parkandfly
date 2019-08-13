@@ -468,6 +468,7 @@
 					pickUpTime: "Hvenær viltu sækja bílinn?",
 					flightNumber: null,
 				},
+
 				showPayment: false,
 				price: 4500
 			}
@@ -554,7 +555,7 @@
 					selectedServicesId: this.selectedServicesId,
 				})
 				.then(function (response) {
-					console.log(response)
+					console.log(response.data.carNumber)
 				})
 				.catch(function (error) {});
 			},
@@ -564,7 +565,7 @@
 					sessionKey: this.sessionKey
 				})
 				.then(function (response) {
-					console.log(response)
+					console.log(response.data.sessionKey)
 				})
 				.catch(function (error) {});
 			}
