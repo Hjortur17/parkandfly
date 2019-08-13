@@ -15,8 +15,8 @@ class CreateBookingServiceTable extends Migration
     {
         Schema::create('booking_service', function (Blueprint $table) {
             $table->primary(['booking_id', 'service_id']);
-            $table->unsignedInteger('booking_id');
-            $table->unsignedInteger('service_id');
+            $table->integer('booking_id')->nullable();
+            $table->integer('service_id')->nullable();
             
             $table->timestamps();
         });
