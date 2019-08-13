@@ -17,9 +17,6 @@ class CreateBookingServiceTable extends Migration
             $table->primary(['booking_id', 'service_id']);
             $table->unsignedInteger('booking_id');
             $table->unsignedInteger('service_id');
-
-            $table->foreign('booking_id')->references('id')->on('booking')->onDelete('cascade');
-            $table->foreign('service_id')->references('id')->on('services')->onDelete('cascade');
             
             $table->timestamps();
         });
