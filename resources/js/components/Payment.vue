@@ -70,7 +70,7 @@
 									<input type="hidden" name="ApplicationID" :value="this.netgiroId">
 									<input type="hidden" name="Iframe" value="false">
 									<input type="hidden" name="Signature" :value="netgiro_signature">
-									<input type="hidden" name="PaymentSuccessfulURL" value="">
+									<input type="hidden" name="PaymentSuccessfulURL" :value="netgiro_link">
 
 									<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference">
 									<input type="hidden" name="TotalAmount" :value="this.amount">
@@ -159,6 +159,9 @@
 			},
 			korta_link: function () {
 				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&startnewpayment=y'; // &downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top
+			},
+			netgiro_link: function () {
+				return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
 			}
 		},
 
