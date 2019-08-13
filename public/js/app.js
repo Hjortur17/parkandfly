@@ -2389,7 +2389,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
         sessionKey: this.sessionKey
       }).then(function (response) {
-        console.log(response.data.key);
+        console.log(response.data.sessionKey);
       })["catch"](function (error) {});
     }
   },
