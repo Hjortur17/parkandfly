@@ -17,6 +17,7 @@ class Cors
 	{
 		return $next($request)
 			->header('Access-Control-Allow-Origin', 'origin')
-			->header('Access-Control-Allow-Headers', 'X-Requested-With');
+			->header('Access-Control-Allow-Headers', 'X-Requested-With')
+			->header('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
 	}
 }
