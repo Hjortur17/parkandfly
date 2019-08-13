@@ -49,6 +49,8 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{
 		if (request('reference') == session('key')) {
+			dd('Amen!');
+
 			request()->validate([
 				'carNumber' => 'required',
 				'carSize' => 'required',
@@ -111,6 +113,8 @@ class ApiController extends Controller
 				->send(new BookingConfirmed($booking));
 
 			return redirect('/');
+		} else {
+			dd($request->all());
 		}
 	}
 }

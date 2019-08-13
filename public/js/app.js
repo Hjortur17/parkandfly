@@ -24069,7 +24069,7 @@ var render = function() {
                         {
                           attrs: {
                             action: "https://netgreidslur.korta.is/testing/",
-                            method: "post"
+                            method: "POST"
                           }
                         },
                         [
@@ -24135,7 +24135,7 @@ var render = function() {
                             attrs: {
                               name: "refermethod",
                               type: "hidden",
-                              value: "post"
+                              value: "POST"
                             }
                           }),
                           _vm._v(" "),
