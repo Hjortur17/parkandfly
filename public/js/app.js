@@ -24065,7 +24065,7 @@ var render = function() {
                         {
                           attrs: {
                             action: "https://netgreidslur.korta.is/testing/",
-                            method: "POST"
+                            method: "post"
                           }
                         },
                         [
@@ -24102,7 +24102,7 @@ var render = function() {
                             attrs: {
                               name: "description",
                               type: "hidden",
-                              value: "Borga"
+                              value: "Park%20and%20fly"
                             }
                           }),
                           _vm._v(" "),
@@ -24113,8 +24113,8 @@ var render = function() {
                           _vm._v(" "),
                           _c("input", {
                             attrs: {
-                              type: "hidden",
                               name: "look",
+                              type: "hidden",
                               value: "SIMPLE"
                             }
                           }),
@@ -24131,7 +24131,7 @@ var render = function() {
                             attrs: {
                               name: "refermethod",
                               type: "hidden",
-                              value: "POST"
+                              value: "post"
                             }
                           }),
                           _vm._v(" "),

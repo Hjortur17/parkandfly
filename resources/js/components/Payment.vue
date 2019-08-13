@@ -86,18 +86,18 @@
 							</div>
 
 							<div class="text-center my-8" v-else>
-								<form action="https://netgreidslur.korta.is/testing/" method="POST">
+								<form action="https://netgreidslur.korta.is/testing/" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
 									<input name="merchant" type="hidden" value="8190094">
 									<input name="terminal" type="hidden" value="50719">
-									<input name="description" type="hidden" value="Borga">
+									<input name="description" type="hidden" value="Park%20and%20fly">
 									<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
 
-									<input type="hidden" name="look" value="SIMPLE">
+									<input name="look" type="hidden" value="SIMPLE">
 									<input name="readonly" type="hidden" value="Y">
 
-									<input name="refermethod" type="hidden" value="POST">
+									<input name="refermethod" type="hidden" value="post">
 									<input name="refertarget" type="hidden" value="_top">
 									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
