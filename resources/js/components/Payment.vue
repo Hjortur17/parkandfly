@@ -97,9 +97,9 @@
 									<input type="hidden" name="look" value="SIMPLE">
 									<input name="readonly" type="hidden" value="Y">
 
-									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 									<input name="refermethod" type="hidden" value="POST">
 									<input name="refertarget" type="hidden" value="_top">
+									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
 									<input name="reference" type="hidden" :value="this.sessionKey">
 									
@@ -158,7 +158,7 @@
 				return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
 			},
 			korta_link: function () {
-				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
+				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&startnewpayment=y'; // &downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top
 			}
 		},
 

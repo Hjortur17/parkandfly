@@ -2661,7 +2661,7 @@ __webpack_require__.r(__webpack_exports__);
       return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
     },
     korta_link: function korta_link() {
-      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
+      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly | Þjónusta&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&startnewpayment=y'; // &downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top
     }
   },
   mounted: function mounted() {
@@ -24088,14 +24088,6 @@ var render = function() {
                           _vm._v(" "),
                           _c("input", {
                             attrs: {
-                              name: "downloadurl",
-                              type: "hidden",
-                              value: "https://parkandfly.is/api/booking/create"
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("input", {
-                            attrs: {
                               name: "refermethod",
                               type: "hidden",
                               value: "POST"
@@ -24107,6 +24099,14 @@ var render = function() {
                               name: "refertarget",
                               type: "hidden",
                               value: "_top"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("input", {
+                            attrs: {
+                              name: "downloadurl",
+                              type: "hidden",
+                              value: "https://parkandfly.is/api/booking/create"
                             }
                           }),
                           _vm._v(" "),
