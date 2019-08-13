@@ -85,9 +85,9 @@
 		</section>
 
 		<section class="w-full my-8" id="arrival-form" v-if="step === 3">
-			<div class="w-full">
+			<!-- <div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12 pt-20">Hvenær er ferðin þín?</h2>
-			</div>
+			</div> -->
 
 			<vc-date-picker
 				mode="range"
@@ -100,10 +100,9 @@
 				v-model='selectedValue'
 				name="date"
 				:columns="$screens({ mobile: 1, table: 2, laptop: 2 })"
-				style="min-height: 100%"
 			/>
 
-			<div class="flex flex-wrap -mx-3 my-6">
+			<!-- <div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/3 px-3 mb-6 md:mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
 						<option selected disabled>Hvenær mættiru á Leifstöð</option>
@@ -378,7 +377,7 @@
 						</li>
 					</ul>
 				</div>
-			</div>
+			</div> -->
 		</section>
 
 		<section class="w-full my-8" id="service-form" v-if="step === 4">
@@ -593,3 +592,10 @@
 		}
 	}
 </script>
+
+<style type="text/css">
+	.vc-grid-container {
+		display: block;
+		height: 100%;
+	}
+</style>

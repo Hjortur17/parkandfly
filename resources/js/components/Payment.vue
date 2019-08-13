@@ -86,7 +86,7 @@
 							</div>
 
 							<div class="text-center my-8" v-else>
-								<form method="POST" action="https://korta-web-payment-site/">
+								<form action="https://netgreidslur.korta.is/testing/" method="POST">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
 									<input name="merchant" type="hidden" value="8190094">
