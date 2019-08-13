@@ -564,7 +564,7 @@
 					sessionKey: this.sessionKey
 				})
 				.then(function (response) {
-					console.log(response.data.sessionKey)
+					console.log(response)
 				})
 				.catch(function (error) {});
 			}
