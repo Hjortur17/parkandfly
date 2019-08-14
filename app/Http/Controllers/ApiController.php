@@ -70,9 +70,7 @@ class ApiController extends Controller
 				'korta_authcode' => $request->input('authcode')
 			]);
 
-			dd($booking);
-
-			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
+			// $booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
 			\Mail::to($request->session()->get('form.email'))
 				->cc('bokanir@parkandfly.is')
