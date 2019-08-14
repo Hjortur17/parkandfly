@@ -43,7 +43,6 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{	
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
-			dd($request->session()->get('form'));
 			
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
@@ -72,9 +71,7 @@ class ApiController extends Controller
 				'korta_authcode' => $request->input('authcode')
 			]);
 
-			dd($booking);
-
-			// $booking->services()->attach($request->session()->get('form.services'));
+			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
 			\Mail::to($request->session()->get('form.email'))
 				->cc('bokanir@parkandfly.is')
