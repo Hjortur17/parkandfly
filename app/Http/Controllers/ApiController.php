@@ -55,12 +55,19 @@ class ApiController extends Controller
 
 		Session::put('nextId', $nextId);
 
-		return $nextId;
+		if (request()->wantsJson()) {
+			return $nextId;
+		}
+
 	}
 
 	public function getBookingId(Request $request)
 	{
 		$nextId = Booking::max('id') + 1;
+
+		if () {
+			# code...
+		}
 
 		return $nextId;
 	}
@@ -127,10 +134,10 @@ class ApiController extends Controller
 			$booking->services()->attach($request->services);
 
 			\Mail::to($request->email)
-				->cc('bokanir@parkandfly.is')
-				->bcc('reynir@parkandfly.is')
-				->bcc('solveig@parkandfly.is')
-				->send(new BookingConfirmed($booking));
+			->cc('bokanir@parkandfly.is')
+			->bcc('reynir@parkandfly.is')
+			->bcc('solveig@parkandfly.is')
+			->send(new BookingConfirmed($booking));
 
 			return redirect('/');
 		} else {
