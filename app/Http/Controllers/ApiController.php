@@ -43,59 +43,56 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{	
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
-			dd('Amen!');
+			// request()->validate([
+			// 	'carNumber' => 'required',
+			// 	'carSize' => 'required',
+			// 	'carMake' => 'required',
+			// 	'carType' => 'required',
+			// 	'carColor' => 'required',
 
-			request()->validate([
-				'carNumber' => 'required',
-				'carSize' => 'required',
-				'carMake' => 'required',
-				'carType' => 'required',
-				'carColor' => 'required',
-
-				'name' => 'required',
-				'socialId' => 'required',
-				'email' => 'required|email',
-				'phone' => 'required',
+			// 	'name' => 'required',
+			// 	'socialId' => 'required',
+			// 	'email' => 'required|email',
+			// 	'phone' => 'required',
 				
-				'dropOffDate' => 'required',
-				'dropOffTime' => 'required',
-				'pickUpDate' => 'required',
-				'pickUpTime' => 'required',
+			// 	'dropOffDate' => 'required',
+			// 	'dropOffTime' => 'required',
+			// 	'pickUpDate' => 'required',
+			// 	'pickUpTime' => 'required',
 
-				'flightNumber' => 'required',
+			// 	'flightNumber' => 'required',
 
-				'numberOfDays' => 'required',
-				'priceForDays' => 'required',
+			// 	'numberOfDays' => 'required',
+			// 	'priceForDays' => 'required',
 
-				'paidPrice' => 'required'
-			]);
+			// 	'paidPrice' => 'required'
+			// ]);
 
 			$booking = Booking::create([
-				'carNumber' => request('carNumber'),
-				'carSize' => request('carSize'),
-				'carMake' => request('carMake'),
-				'carType' => request('carType'),
-				'carColor' => request('carColor'),
+				'carNumber' => $request->session()->get('form.carNumber'),
+				'carSize' => $request->session()->get('form.carSize'),
+				'carMake' => $request->session()->get('form.carMake'),
+				'carType' => $request->session()->get('form.carType'),
+				'carColor' => $request->session()->get('form.carColor'),
 
-				'name' => request('name'),
-				'socialId' => request('socialId'),
-				'email' => request('email'),
-				'phone' => request('phone'),
+				'name' => $request->session()->get('form.name'),
+				'socialId' => $request->session()->get('form.socialId'),
+				'email' => $request->session()->get('form.email'),
+				'phone' => $request->session()->get('form.phone'),
 
-				'dropOffDate' => request('dropOffDate'),
-				'dropOffTime' => request('dropOffTime'),
-				'pickUpDate' => request('pickUpDate'),
-				'pickUpTime' => request('pickUpTime'),
+				'dropOffDate' => $request->session()->get('form.dropOffDate'),
+				'dropOffTime' => $request->session()->get('form.dropOffTime'),
+				'pickUpDate' => $request->session()->get('form.pickUpDate'),
+				'pickUpTime' => $request->session()->get('form.pickUpTime'),
 
-				'flightNumber' => request('flightNumber'),
-				'flightTime' => request('flightTime'),
+				'flightNumber' => $request->session()->get('form.flightNumber'),
 
-				'numberOfDays' => request('numberOfDays'),
-				'priceForDays' => request('priceForDays'),
+				'numberOfDays' => $request->session()->get('form.numberOfDays'),
+				'priceForDays' => $request->session()->get('form.priceForDays'),
 
-				'paidPrice' => request('paidPrice'),
+				'paidPrice' => $request->session()->get('form.paidPrice'),
 
-				'korta_authcode' => request('authcode')
+				'korta_authcode' => $request->input('authcode')
 			]);
 
 			$booking->services()->attach($request->services);
