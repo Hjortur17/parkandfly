@@ -1,5 +1,5 @@
 
-// require('./bootstrap');
+require('./bootstrap');
 
 window.Vue = require('vue');
 
@@ -19,8 +19,5 @@ Vue.component('booking-form', require('./components/BookingForm.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 
 const app = new Vue({
-	el: '#app',
-	data: () => ({
-		csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-	}),        
+	el: '#app',     
 });

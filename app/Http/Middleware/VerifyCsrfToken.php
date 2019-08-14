@@ -18,5 +18,7 @@ class VerifyCsrfToken extends Middleware
      *
      * @var array
      */
-    protected $except = [];
+    protected $except = [
+        'https://parkandfly.is/api/booking/create',
+    ];
 }
