@@ -42,11 +42,11 @@ class ApiController extends Controller
 
 	public function addKeyToSession(Request $request)
 	{
-		$key = $request->all();
+		$sessionKey = $request->all();
 
-		Session::put('key', $key);
+		Session::put('sessionKey', $sessionKey);
 
-		return $key;
+		return $sessionKey;
 	}
 
 	public function getBookingId(Request $request)
