@@ -41,11 +41,8 @@ class ApiController extends Controller
 	}
 
 	public function createBooking(Request $request)
-	{
-		// dd($request->input('reference'));
-		dd($request->session()->get('form.sessionKey'));
-		
-		if ($request->input('reference') === session('key')) {
+	{	
+		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 			dd('Amen!');
 
 			request()->validate([
