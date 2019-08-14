@@ -43,33 +43,8 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{	
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
-
 			dd($request->session()->get('form'));
-			// request()->validate([
-			// 	'carNumber' => 'required',
-			// 	'carSize' => 'required',
-			// 	'carMake' => 'required',
-			// 	'carType' => 'required',
-			// 	'carColor' => 'required',
-
-			// 	'name' => 'required',
-			// 	'socialId' => 'required',
-			// 	'email' => 'required|email',
-			// 	'phone' => 'required',
-				
-			// 	'dropOffDate' => 'required',
-			// 	'dropOffTime' => 'required',
-			// 	'pickUpDate' => 'required',
-			// 	'pickUpTime' => 'required',
-
-			// 	'flightNumber' => 'required',
-
-			// 	'numberOfDays' => 'required',
-			// 	'priceForDays' => 'required',
-
-			// 	'paidPrice' => 'required'
-			// ]);
-
+			
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
 				'carSize' => $request->session()->get('form.carSize'),
@@ -101,7 +76,7 @@ class ApiController extends Controller
 
 			// $booking->services()->attach($request->session()->get('form.services'));
 
-			\Mail::to($request->session()->get('form.email')
+			\Mail::to($request->session()->get('form.email'))
 				->cc('bokanir@parkandfly.is')
 				->bcc('reynir@parkandfly.is')
 				->bcc('solveig@parkandfly.is')
