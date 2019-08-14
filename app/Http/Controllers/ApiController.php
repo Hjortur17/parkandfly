@@ -62,17 +62,13 @@ class ApiController extends Controller
 	{
 		$nextId = Booking::max('id') + 1;
 
-		if (request()->wantsJson()) {
-			return $nextId;
-		}
-
 		return $nextId;
 	}
 
 	public function createBooking(Request $request)
 	{
 		dd(session()->get('nextId'));
-		if (request()->cookie('laravel_session') === request()->session()->get('key');) {
+		if (request()->cookie('laravel_session') === request()->session()->get('key')) {
 			dd('Amen!');
 
 			request()->validate([
