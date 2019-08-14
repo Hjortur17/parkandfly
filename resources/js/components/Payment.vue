@@ -125,7 +125,7 @@
 			'numberOfDays', 
 			'priceForDays', 
 			'paidPrice',
-			'sessionKey'
+			'bookingId'
 		],
 
 		data() {

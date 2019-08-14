@@ -2294,6 +2294,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedServicesPrices: [],
       selectedValue: null,
       step: 1,
+      nextId: null,
       booking: {
         carNumber: null,
         carSize: "Bíltegund",
@@ -2382,15 +2383,29 @@ __webpack_require__.r(__webpack_exports__);
         paidPrice: this.total,
         selectedServicesId: this.selectedServicesId
       }).then(function (response) {
-        console.log(response.data.carNumber);
+        console.log(response);
       })["catch"](function (error) {});
     },
-    addSessionKeyToSession: function addSessionKeyToSession() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
-        sessionKey: this.sessionKey
-      }).then(function (response) {
-        console.log(response.data.sessionKey);
-      })["catch"](function (error) {});
+    // addSessionKeyToSession() {
+    // 	axios.post('/api/session/add/key', {
+    // 		sessionKey: this.sessionKey
+    // 	})
+    // 	.then(function (response) {
+    // 		console.log(response.data.sessionKey)
+    // 	})
+    // 	.catch(function (error) {});
+    // },
+    getNextId: function getNextId() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/booking/get/id').then(function (response) {
+        _this3.nextId = response.data;
+      });
+    },
+    addNextIdToSession: function addNextIdToSession() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/id', {
+        nextId: this.nextId
+      }).then(function (response) {})["catch"](function (error) {});
     }
   },
   computed: {
@@ -2642,7 +2657,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['userAge', 'servicePrice', 'numberOfDays', 'priceForDays', 'paidPrice', 'sessionKey'],
+  props: ['userAge', 'servicePrice', 'numberOfDays', 'priceForDays', 'paidPrice', 'bookingId'],
   data: function data() {
     return {
       paymentPicked: null,
@@ -23585,7 +23600,7 @@ var render = function() {
                               $event.preventDefault()
                               ;(_vm.showPayment = true),
                                 _vm.addBookingToSession(),
-                                _vm.addSessionKeyToSession()
+                                _vm.getNextId()
                             }
                           }
                         },
@@ -23611,7 +23626,7 @@ var render = function() {
               numberOfDays: _vm.numberOfDays,
               priceForDays: _vm.priceForDays,
               paidPrice: _vm.total,
-              sessionKey: _vm.sessionKey
+              bookingId: this.nextId
             },
             on: { hide: _vm.hideModal }
           })

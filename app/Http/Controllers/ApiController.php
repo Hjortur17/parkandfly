@@ -8,7 +8,6 @@ use App\Booking;
 use App\Service;
 
 use Session;
-use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
@@ -48,6 +47,22 @@ class ApiController extends Controller
 		Session::put('key', $key);
 
 		return $key;
+	}
+
+	public function addNextIdToSession(Request $request)
+	{
+		$nextId = $request->all();
+
+		Session::put('nextId', $nextId);
+
+		return $nextId;
+	}
+
+	public function getBookingId(Request $request)
+	{
+		$nextId = Booking::max('id') + 1;
+
+		return $nextId;
 	}
 
 	public function createBooking(Request $request)
