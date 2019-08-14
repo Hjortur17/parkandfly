@@ -40,26 +40,10 @@ class ApiController extends Controller
 		return $form;
 	}
 
-	public function addKeyToSession(Request $request)
-	{
-		$sessionKey = $request->all();
-
-		Session::put('sessionKey', $sessionKey);
-
-		return $sessionKey;
-	}
-
-	public function getBookingId(Request $request)
-	{
-		$nextId = Booking::max('id') + 1;
-
-		return $nextId;
-	}
-
 	public function createBooking(Request $request)
 	{
 		// dd($request->input('reference'));
-		dd($request->session()->all());
+		dd($request->session()->get('form.sessionKey'));
 		
 		if ($request->input('reference') === session('key')) {
 			dd('Amen!');

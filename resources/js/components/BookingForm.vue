@@ -552,13 +552,7 @@
 					paidPrice: this.total,
 
 					selectedServicesId: this.selectedServicesId,
-				})
-				.then(function (response) {})
-				.catch(function (error) {});
-			},
 
-			addSessionKeyToSession() {
-				axios.post('/api/session/add/key', {
 					sessionKey: this.sessionKey
 				})
 				.then(function (response) {})

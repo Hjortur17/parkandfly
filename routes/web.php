@@ -13,8 +13,6 @@ Route::prefix('api')->group(function () {
 	
 	Route::post('booking/create', 'ApiController@createBooking');
 	Route::post('session/add/booking', 'ApiController@addBookingToSession');
-	Route::post('session/add/id', 'ApiController@addNextIdToSession');
-	// Route::post('session/add/key', 'ApiController@addKeyToSession');
 });
 
 
