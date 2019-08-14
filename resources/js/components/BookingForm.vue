@@ -410,7 +410,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true, addBookingToSession(), getNextId()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true, addBookingToSession()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
 								Klára Pöntun
 							</button>
 						</li>
@@ -426,7 +426,7 @@
 			:numberOfDays="numberOfDays" 
 			:priceForDays="priceForDays"
 			:paidPrice="total"
-			:bookingId="this.nextId">
+			:sessionKey="sessionKey">
 		</payment>
 </div>
 </template>
@@ -450,7 +450,6 @@
 
 				selectedValue: null,
 				step: 1,
-				nextId: null,
 				booking: {
 					carNumber: null,
 					carSize: "Bíltegund",
@@ -469,7 +468,6 @@
 					pickUpTime: "Hvenær viltu sækja bílinn?",
 					flightNumber: null,
 				},
-
 				showPayment: false,
 				price: 4500
 			}
@@ -555,32 +553,13 @@
 
 					selectedServicesId: this.selectedServicesId,
 				})
-				.then(function (response) {
-					console.log(response)
-				})
+				.then(function (response) {})
 				.catch(function (error) {});
 			},
 
-			// addSessionKeyToSession() {
-			// 	axios.post('/api/session/add/key', {
-			// 		sessionKey: this.sessionKey
-			// 	})
-			// 	.then(function (response) {
-			// 		console.log(response.data.sessionKey)
-			// 	})
-			// 	.catch(function (error) {});
-			// },
-
-			getNextId() {
-				axios.get('/api/booking/get/id')
-				.then(response => {
-					this.nextId = response.data;
-				});
-			},
-
-			addNextIdToSession() {
-				axios.post('/api/session/add/id', {
-					nextId: this.nextId
+			addSessionKeyToSession() {
+				axios.post('/api/session/add/key', {
+					sessionKey: this.sessionKey
 				})
 				.then(function (response) {})
 				.catch(function (error) {});

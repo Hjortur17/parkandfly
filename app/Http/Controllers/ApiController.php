@@ -49,15 +49,6 @@ class ApiController extends Controller
 		return $key;
 	}
 
-	public function addNextIdToSession(Request $request)
-	{
-		$nextId = $request->all();
-
-		Session::put('nextId', $nextId);
-
-		return $nextId;
-	}
-
 	public function getBookingId(Request $request)
 	{
 		$nextId = Booking::max('id') + 1;
@@ -67,8 +58,8 @@ class ApiController extends Controller
 
 	public function createBooking(Request $request)
 	{
-		dd(session()->get('nextId'));
-		if (request()->cookie('laravel_session') === request()->session()->get('key')) {
+		dd(session()->get('key'));
+		if ($request->input('reference') === session('key')) {
 			dd('Amen!');
 
 			request()->validate([

@@ -2294,7 +2294,6 @@ __webpack_require__.r(__webpack_exports__);
       selectedServicesPrices: [],
       selectedValue: null,
       step: 1,
-      nextId: null,
       booking: {
         carNumber: null,
         carSize: "Bíltegund",
@@ -2382,29 +2381,11 @@ __webpack_require__.r(__webpack_exports__);
         priceForDays: this.priceForDays,
         paidPrice: this.total,
         selectedServicesId: this.selectedServicesId
-      }).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {});
+      }).then(function (response) {})["catch"](function (error) {});
     },
-    // addSessionKeyToSession() {
-    // 	axios.post('/api/session/add/key', {
-    // 		sessionKey: this.sessionKey
-    // 	})
-    // 	.then(function (response) {
-    // 		console.log(response.data.sessionKey)
-    // 	})
-    // 	.catch(function (error) {});
-    // },
-    getNextId: function getNextId() {
-      var _this3 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/booking/get/id').then(function (response) {
-        _this3.nextId = response.data;
-      });
-    },
-    addNextIdToSession: function addNextIdToSession() {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/id', {
-        nextId: this.nextId
+    addSessionKeyToSession: function addSessionKeyToSession() {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/key', {
+        sessionKey: this.sessionKey
       }).then(function (response) {})["catch"](function (error) {});
     }
   },
@@ -2657,7 +2638,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['userAge', 'servicePrice', 'numberOfDays', 'priceForDays', 'paidPrice', 'bookingId'],
+  props: ['userAge', 'servicePrice', 'numberOfDays', 'priceForDays', 'paidPrice', 'sessionKey'],
   data: function data() {
     return {
       paymentPicked: null,
@@ -2685,10 +2666,10 @@ __webpack_require__.r(__webpack_exports__);
       return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
     },
     korta_link: function korta_link() {
-      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.bookingId + '&startnewpayment=y';
+      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&startnewpayment=y';
     },
     netgiro_link: function netgiro_link() {
-      return 'https://parkandfly.is/api/booking/create?bookingId=' + this.bookingId;
+      return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
     }
   },
   mounted: function mounted() {
@@ -23599,8 +23580,7 @@ var render = function() {
                             click: function($event) {
                               $event.preventDefault()
                               ;(_vm.showPayment = true),
-                                _vm.addBookingToSession(),
-                                _vm.getNextId()
+                                _vm.addBookingToSession()
                             }
                           }
                         },
@@ -23626,7 +23606,7 @@ var render = function() {
               numberOfDays: _vm.numberOfDays,
               priceForDays: _vm.priceForDays,
               paidPrice: _vm.total,
-              bookingId: this.nextId
+              sessionKey: _vm.sessionKey
             },
             on: { hide: _vm.hideModal }
           })
@@ -24089,7 +24069,7 @@ var render = function() {
                         {
                           attrs: {
                             action: "https://netgreidslur.korta.is/testing/",
-                            method: "POST"
+                            method: "post"
                           }
                         },
                         [
@@ -24155,7 +24135,7 @@ var render = function() {
                             attrs: {
                               name: "refermethod",
                               type: "hidden",
-                              value: "POST"
+                              value: "post"
                             }
                           }),
                           _vm._v(" "),
@@ -24177,7 +24157,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("input", {
                             attrs: { name: "reference", type: "hidden" },
-                            domProps: { value: this.bookingId }
+                            domProps: { value: this.sessionKey }
                           }),
                           _vm._v(" "),
                           _c(
