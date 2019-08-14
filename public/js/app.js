@@ -2688,7 +2688,7 @@ __webpack_require__.r(__webpack_exports__);
       return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.bookingId + '&startnewpayment=y';
     },
     netgiro_link: function netgiro_link() {
-      return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
+      return 'https://parkandfly.is/api/booking/create?bookingId=' + this.bookingId;
     }
   },
   mounted: function mounted() {
@@ -24177,7 +24177,7 @@ var render = function() {
                           _vm._v(" "),
                           _c("input", {
                             attrs: { name: "reference", type: "hidden" },
-                            domProps: { value: this.sessionKey }
+                            domProps: { value: this.bookingId }
                           }),
                           _vm._v(" "),
                           _c(

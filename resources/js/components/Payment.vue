@@ -101,7 +101,7 @@
 									<input name="refertarget" type="hidden" value="_top">
 									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
-									<input name="reference" type="hidden" :value="this.sessionKey">
+									<input name="reference" type="hidden" :value="this.bookingId">
 									
 									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
 								</form>
@@ -161,7 +161,7 @@
 				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.bookingId + '&startnewpayment=y';
 			},
 			netgiro_link: function () {
-				return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
+				return 'https://parkandfly.is/api/booking/create?bookingId=' + this.bookingId;
 			}
 		},
 
