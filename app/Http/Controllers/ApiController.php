@@ -43,7 +43,6 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{	
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
-			
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
 				'carSize' => $request->session()->get('form.carSize'),
@@ -70,6 +69,8 @@ class ApiController extends Controller
 
 				'korta_authcode' => $request->input('authcode')
 			]);
+
+			dd($booking);
 
 			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
