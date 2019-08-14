@@ -72,11 +72,11 @@ class ApiController extends Controller
 
 			// $booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
-			\Mail::to($request->session()->get('form.email'))
-				->cc('bokanir@parkandfly.is')
-				->bcc('reynir@parkandfly.is')
-				->bcc('solveig@parkandfly.is')
-				->send(new BookingConfirmed($booking));
+			// \Mail::to($request->session()->get('form.email'))
+			// 	->cc('bokanir@parkandfly.is')
+			// 	->bcc('reynir@parkandfly.is')
+			// 	->bcc('solveig@parkandfly.is')
+			// 	->send(new BookingConfirmed($booking));
 
 			return redirect('/');
 		} else {
