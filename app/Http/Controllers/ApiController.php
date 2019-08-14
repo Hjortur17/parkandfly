@@ -55,18 +55,15 @@ class ApiController extends Controller
 
 		Session::put('nextId', $nextId);
 
-		if (request()->wantsJson()) {
-			return $nextId;
-		}
-
+		return $nextId;
 	}
 
 	public function getBookingId(Request $request)
 	{
 		$nextId = Booking::max('id') + 1;
 
-		if () {
-			# code...
+		if (request()->wantsJson()) {
+			return $nextId;
 		}
 
 		return $nextId;
@@ -75,7 +72,7 @@ class ApiController extends Controller
 	public function createBooking(Request $request)
 	{
 		dd(session()->get('nextId'));
-		if ($request->input('reference') === session('nextId')) {
+		if (request()->cookie('laravel_session') === request()->session()->get('key');) {
 			dd('Amen!');
 
 			request()->validate([
@@ -134,10 +131,10 @@ class ApiController extends Controller
 			$booking->services()->attach($request->services);
 
 			\Mail::to($request->email)
-			->cc('bokanir@parkandfly.is')
-			->bcc('reynir@parkandfly.is')
-			->bcc('solveig@parkandfly.is')
-			->send(new BookingConfirmed($booking));
+				->cc('bokanir@parkandfly.is')
+				->bcc('reynir@parkandfly.is')
+				->bcc('solveig@parkandfly.is')
+				->send(new BookingConfirmed($booking));
 
 			return redirect('/');
 		} else {
