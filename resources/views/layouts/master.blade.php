@@ -10,6 +10,7 @@
 	{{-- <meta name="Description" content="Web Developer with a passion for designing beautiful and functional user experiences."> --}}
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+	@yield ('head')
 </head>
 <body>
 	@yield ('header')

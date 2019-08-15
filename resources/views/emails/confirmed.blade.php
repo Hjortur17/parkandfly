@@ -88,7 +88,7 @@
 		<div class="px-6 mb-8">
 			<div class="flex">
 				<div class="w-60">
-					<img src="{{ asset('/images/invoice_logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
+					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
 				<div class="flex-1 self-center text-right">
 					<h2 class="header">#{{ $booking->id }}</h2>

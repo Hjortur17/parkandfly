@@ -2659,10 +2659,10 @@ __webpack_require__.r(__webpack_exports__);
       return String(sha256__WEBPACK_IMPORTED_MODULE_1___default()("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
     },
     checkvaluemd5: function checkvaluemd5() {
-      return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
+      return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTX4NAIp5kHXI8J8AG");
     },
     korta_link: function korta_link() {
-      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
+      return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
     },
     netgiro_link: function netgiro_link() {
       return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
@@ -24064,7 +24064,7 @@ var render = function() {
                         "form",
                         {
                           attrs: {
-                            action: "https://netgreidslur.korta.is/testing/",
+                            action: "https://netgreidslur.korta.is",
                             method: "post"
                           }
                         },
@@ -24086,7 +24086,7 @@ var render = function() {
                             attrs: {
                               name: "merchant",
                               type: "hidden",
-                              value: "8190094"
+                              value: "8190444"
                             }
                           }),
                           _vm._v(" "),
@@ -24094,7 +24094,7 @@ var render = function() {
                             attrs: {
                               name: "terminal",
                               type: "hidden",
-                              value: "50719"
+                              value: "52176"
                             }
                           }),
                           _vm._v(" "),
