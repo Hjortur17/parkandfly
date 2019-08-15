@@ -86,11 +86,11 @@
 							</div>
 
 							<div class="text-center my-8" v-else>
-								<form action="https://netgreidslur.korta.is/testing/" method="post">
+								<form action="https://netgreidslur.korta.is" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
-									<input name="merchant" type="hidden" value="8190094">
-									<input name="terminal" type="hidden" value="50719">
+									<input name="merchant" type="hidden" value="8190444">
+									<input name="terminal" type="hidden" value="52176">
 									<input name="description" type="hidden" value="Park%20and%20fly">
 									<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
 
@@ -155,10 +155,10 @@
 				return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
 			},
 			checkvaluemd5: function () {
-				return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST");
+				return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTX4NAIp5kHXI8J8AG");
 			},
 			korta_link: function () {
-				return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
+				return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
 			},
 			netgiro_link: function () {
 				return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
