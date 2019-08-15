@@ -1,6 +1,6 @@
 <?php
 
-Auth::routes(['register' => false]);
+Auth::routes(); //['register' => false]);
 
 Route::get('/', function () {
 	return view('welcome');
