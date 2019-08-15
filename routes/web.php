@@ -2,9 +2,12 @@
 
 Auth::routes();
 
-Route::get('/', 'MainController@index');
+Route::get('/', function () {
+	return view('welcome');
+});
 
-Route::get('/stjornbord', 'DashboardController@index');
+Route::get('/testing', 'MainController@index')->middleware('auth');;
+Route::get('/stjornbord', 'DashboardController@index')->middleware('auth');;
 
 Route::prefix('api')->group(function () {
 	Route::get('services/get', 'ApiController@getServices');
