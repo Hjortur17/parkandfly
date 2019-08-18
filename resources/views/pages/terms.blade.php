@@ -35,6 +35,9 @@
 
                         Ákvæði og skilmálar þessir ber að túlka í samræmi við íslensk lög.  Komi upp ágreiningur eða telji einhver að hann eigi kröfu á hendur Park And Fly ehf. á grundvelli þessara ákvæða og skilmála verður slíkum ágreiningi eða kröfu vísað til meðferðar hjá íslenskum dómstólum.
                     </p>
+
+                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
+                        <strong class="font-bold mb-1">Athuga þegar greitt er fyrir þjónustu hjá okkur er greitt 500kr minna en upplagt verð fyrir útgöngumiða á bílastæði Isavia. </strong><br>
                 </div>
             </div>
         </div>

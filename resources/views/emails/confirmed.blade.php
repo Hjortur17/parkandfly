@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Booking Confirmed | #{{ $booking->id}}</title>
+	<title>Bókun Staðfest | #{{ $booking->id}}</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap" rel="stylesheet">
 
@@ -141,7 +141,7 @@
                     <strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
                     @foreach ($booking->services as $service)
-                        <li>{{ $service->description }}</li>
+                        <li>{{ $service->pivot->description }}</li>
                     @endforeach
                 </ul>
             </div>
