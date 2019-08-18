@@ -25,10 +25,10 @@
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Geymslugjald</td>
 
-                                    <td class="py-4 px-6 border-b border-grey-light">500kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">500kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">500kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">500kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">500kr (á dag)</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">500kr (á dag)</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">500kr (á dag)</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">500kr (á dag)</td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Rúðuvökvi</td>
@@ -72,7 +72,7 @@
                                 </tr>
 
                                 <tr class="hover:bg-grey-lighter">
-                                    <td class="py-4 px-6 border-b border-grey-light font-bold">Olískipti</td>
+                                    <td class="py-4 px-6 border-b border-grey-light font-bold">Olíuskipti</td>
 
                                     <td class="py-4 px-6 border-b border-grey-light">16.900kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">18.900kr</td>

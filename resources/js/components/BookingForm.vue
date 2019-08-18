@@ -7,7 +7,7 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
                     <li v-for="error in errors">{{ error }}</li>
@@ -57,7 +57,7 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
                     <li v-for="error in errors">{{ error }}</li>
@@ -106,7 +106,7 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
                     <li v-for="error in errors">{{ error }}</li>
@@ -574,7 +574,7 @@
                     this.errors.push('Vantar nafn!');
                 }
                 if (!this.booking.socialId) {
-                    this.errors.push('Vandar kennitölu!');
+                    this.errors.push('Vantar kennitölu!');
                 }
                 if (!this.booking.email) {
                     this.errors.push('Vantar netfang!');
@@ -601,7 +601,7 @@
                     this.errors.push('Vantar brottfarardag!');
                 }
                 if (!this.booking.dropOffTime) {
-                    this.errors.push('Vandar brottfarartíma!');
+                    this.errors.push('Vantar brottfarartíma!');
                 }
                 if (!this.booking.pickUpDate) {
                     this.errors.push('Vantar komudag!');
