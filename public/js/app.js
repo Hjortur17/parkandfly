@@ -2300,6 +2300,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2422,7 +2430,7 @@ __webpack_require__.r(__webpack_exports__);
 
       e.preventDefault();
     },
-    checkDateForm: function checkDateForm() {
+    checkDateForm: function checkDateForm(e) {
       if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
         return true;
       }
@@ -2433,21 +2441,23 @@ __webpack_require__.r(__webpack_exports__);
         this.errors.push('Vantar brottfarardag!');
       }
 
-      if (!this.booking.socialId) {
+      if (!this.booking.dropOffTime) {
         this.errors.push('Vandar brottfarartíma!');
       }
 
-      if (!this.booking.email) {
+      if (!this.booking.pickUpDate) {
         this.errors.push('Vantar komudag!');
       }
 
-      if (!this.booking.phone) {
+      if (!this.booking.pickUpTime) {
         this.errors.push('Vantar komutíma!');
       }
 
-      if (!this.booking.phone) {
+      if (!this.booking.flightNumber) {
         this.errors.push('Vantar flugnúmer!');
       }
+
+      e.preventDefault();
     },
     prev: function prev() {
       this.step--;
@@ -39181,6 +39191,22 @@ var render = function() {
             { staticClass: "w-full my-8", attrs: { id: "arrival-form" } },
             [
               _vm._m(2),
+              _vm._v(" "),
+              _vm.errors.length
+                ? _c("p", { staticClass: "text-white mb-6" }, [
+                    _c("strong", { staticClass: "font-bold" }, [
+                      _vm._v("Úpps! Einhvað fór úrskeiðis:")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errors, function(error) {
+                        return _c("li", [_vm._v(_vm._s(error))])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
               _vm._v(" "),
               _c("div", { staticClass: "flex flex-wrap -mx-3 my-6" }, [
                 _c(

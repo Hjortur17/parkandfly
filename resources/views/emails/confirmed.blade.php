@@ -12,7 +12,6 @@
 			font-family: 'Rubik', sans-serif;
 			font-weight: 400;
 			font-size: 16px;
-			background: #edf2f7;
 		}
 
 		strong {

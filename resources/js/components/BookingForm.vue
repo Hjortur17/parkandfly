@@ -105,6 +105,14 @@
 				<h2 class="font-bold text-white text-4xl text-center mb-12 pt-20">Hvenær er ferðin þín?</h2>
 			</div>
 
+            <p v-if="errors.length" class="text-white mb-6">
+                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
+
             <div class="flex flex-wrap -mx-3 my-6">
                 <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
@@ -582,7 +590,7 @@
                 e.preventDefault();
             },
 
-            checkDateForm() {
+            checkDateForm(e) {
                 if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
                     return true;
                 }
@@ -592,18 +600,20 @@
                 if (!this.booking.dropOffDate) {
                     this.errors.push('Vantar brottfarardag!');
                 }
-                if (!this.booking.socialId) {
+                if (!this.booking.dropOffTime) {
                     this.errors.push('Vandar brottfarartíma!');
                 }
-                if (!this.booking.email) {
+                if (!this.booking.pickUpDate) {
                     this.errors.push('Vantar komudag!');
                 }
-                if (!this.booking.phone) {
+                if (!this.booking.pickUpTime) {
                     this.errors.push('Vantar komutíma!');
                 }
-                if (!this.booking.phone) {
+                if (!this.booking.flightNumber) {
                     this.errors.push('Vantar flugnúmer!');
                 }
+
+                e.preventDefault();
             },
 
 			prev() {

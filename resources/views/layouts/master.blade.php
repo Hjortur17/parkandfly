@@ -10,7 +10,18 @@
 	<meta name="Description" content="Tryggðu þér öruggt bílastæði meðan þú ferðast. ">
 
 	<link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
-	@yield ('head')
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145924221-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-145924221-1');
+    </script>
+
+    @yield ('head')
 </head>
 <body>
 	@yield ('header')
