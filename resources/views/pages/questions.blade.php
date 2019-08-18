@@ -1,52 +1,52 @@
 @extends ('layouts.master')
 
 @section ('main')
-    <section id="home" class="relative h-full md:h-screen w-full background">
+    <section id="home" class="relative h-auto w-full background">
         <navbar></navbar>
 
-        <div class="container max-w-4xl mx-auto px-6 pt-0 md:pt-8 md:mt-0 pb-24 md:pb-0">
+        <div class="container max-w-4xl mx-auto px-6 py-24">
             <div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center md:items-center">
 
                 <div class="flex flex-col">
                     <h1 class="text-left text-5xl text-white font-bold mb-6">Algengar spurningar</h1>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Hvernig virkar Park And Fly? </strong><br>
 
                         Viðskiptavinir bóka bílastæði ásamt þjónustu sem þeir óska eftir inn á www.parkandfly.is eða á appi fyrirtækisins. Við sendum þér svo smáskilaboð (sms) um klukkutíma áður en þú kemur upp á Leifsstöð og biðjum við þig að senda okkur smáskilaboð (sms) í síma 680-0000 þegar það eru 15 mín. áður en þú mætir fyrir utan Brottfarir í Leifsstöð. Þar tekur svo starfsmaður við bílnum þínum og kemur honum á öruggan stað. Á heimleið mun starfsmaður bíða við komusal þangað til þú mætir. með lyklana að bifreið þinni sem stendur fyrir utan komusal Leifsstöð.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Hversu langt er farið með bíllinn minn? </strong><br>
 
                         Bílastæðalóð okkar ásamt bónstöðinni eru staðsettar aðeins 5.5 kílómetrum frá Leifsstöð. En ef keypt er aukaþjónusta eins smurning, dekkjaskipti eða bifreiðaskoðun, þurfum við að koma bílnum á þær þjónustustöðvar sem eru í um 5 km fjarlægð frá geymslusvæði okkar.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Þarf að panta bílastæði og þjónustu sem í boði er hjá ykkur með löngum fyrirvara?</strong><br>
 
                         Nei, þú getur pantað þjónustu okkar samdægurs bæði á heimasíðu okkar og á app-inu. Best er hins vegar að hringja ef bókað er bílastæði með minna en átta tíma fyrirvara.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Á hvernig svæði er bílnum mínum lagt?</strong><br>
 
                         Við bjóðum upp á inni og úti svæði. Öll svæðin eru vöktuð, upplýst og afgirt ásamt góðu myndavélakerfi.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Eruð þið tryggðir fyrir bílnum mínum á meðan hann er í ykkar umsjá?</strong><br>
 
                         Bíllinn þinn er fulltryggður í okkar vörslu sem og í akstri á meðan hann er í okkar umsjá. Við tökum einnig myndir af öllum bílum sem við tökum á móti þegar þeir eru komnir inn á okkar geymslusvæði.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Hvað þarf ég að bíða lengi fyrir utan brottfarir eða komusal eftir starfsmanni ykkar?</strong><br>
 
                         Okkar markmið er að þú þurfir EKKI að bíða meira en 60 sekúndur.
                     </p>
 
-                    <p class="text-left text-white leading-normal mb-3">
+                    <p class="text-left text-white leading-normal mb-6">
                         <strong class="font-bold mb-1 text-lg">Spurningar varðandi bón og aukaþjónustu</strong><br>
 
                         Við rekum okkar eigin bónstöð til að hámarka gæði þjónustunnar. Við erum í góðu samstarfi við önnur fyrirtæki sem sérhæfa sig í þeirri þjónustu sem við bjóðum upp á, en sjáum ekki sjálf um þjónustu eins og skoðun, olíuskipti og dekkjaskipti.
