@@ -135,7 +135,7 @@
                 <strong style="font-size: 20px;">Keypt þjónusta:</strong>
 
                 @forelse($booking->services as $service)
-                    <li style="padding-top: 1.5rem;">{{ service->description }}</li>
+                    <li style="padding-top: 1.5rem;">{{ service->pivot->description }}</li>
                 @empty
                     <p>Enginn þjónusta keypt!</p>
                 @endforelse
