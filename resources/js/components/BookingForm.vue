@@ -473,9 +473,6 @@
                 selectedDeliveryDay: "Brottfaradagur",
                 selectedPickUpDay: "Komudagur",
 
-                dropOff: null,
-                pickUp: null,
-
                 numberOfDaysData: null,
 
 				step: 1,
@@ -550,9 +547,6 @@
                 }
                 if (!this.booking.carColor) {
                     this.errors.push('Vantar lit bíls!');
-                }
-                if (this.booking.carSize != "Fólksbíll" || this.booking.carSize != "Jepplingur" || this.booking.carSize != "Jeppi" || this.booking.carSize != "Yfirstærð") {
-                    this.errors.push('Veldu stærð!');
                 }
 
                 e.preventDefault();
@@ -649,9 +643,9 @@
 					email: this.booking.email,
 					phone: this.booking.phone,
 
-					dropOffDate: this.dropOff,
+					dropOffDate: this.moment(this.selectedDeliveryDay),
 					dropOffTime: this.booking.dropOffTime,
-					pickUpDate: this.pickUp,
+					pickUpDate: this.moment(this.selectedPickUpDay),
 					pickUpTime: this.booking.pickUpTime,
 					flightNumber: this.booking.flightNumber,
 

@@ -98,21 +98,23 @@
 								<form action="https://netgreidslur.korta.is" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
-									<input name="merchant" type="hidden" value="8190444">
-									<input name="terminal" type="hidden" value="52176">
-									<input name="description" type="hidden" value="Park and fly">
-									<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
+                                    <!-- <input name="merchant" type="hidden" value="8190444">
+                                    <input name="terminal" type="hidden" value="52176"> -->
 
-									<input name="look" type="hidden" value="SIMPLE">
-									<input name="readonly" type="hidden" value="Y">
+                                    <input name="merchant" type="hidden" value="8190094">
+                                    <input name="terminal" type="hidden" value="50719">
+                                    <input name="description" type="hidden" value="Park and fly">
+                                    <input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
 
-									<input name="refermethod" type="hidden" value="post">
-									<input name="refertarget" type="hidden" value="_top">
-									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
+                                    <input name="look" type="hidden" value="SIMPLE">
+                                    <input name="readonly" type="hidden" value="Y">
 
-									<input name="reference" type="hidden" :value="this.sessionKey">
+                                    <input name="refermethod" type="hidden" value="post">
+                                    <input name="refertarget" type="hidden" value="_top">
+                                    <input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
-								</form>
+                                    <input name="reference" type="hidden" :value="this.sessionKey">
+                                </form>
 
                                 <p class="mt-8 mb-6 text-sm">
                                     <input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
@@ -120,47 +122,48 @@
 
                                 <a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm">Borga</a>
                             </div>
-						</slot>
-					</div>
-				</div>
-			</div>
-		</div>
-	</transition>
+                        </slot>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </transition>
 </template>
 
 <script>
-	import md5 from 'md5';
-	import sha256 from 'sha256';
+    import md5 from 'md5';
+    import sha256 from 'sha256';
 
-	export default {
-		props: [
-			'userAge',
-			'servicePrice',
-			'numberOfDays',
-			'priceForDays',
-			'paidPrice',
-			'sessionKey'
-		],
+    export default {
+        props: [
+            'userAge',
+            'servicePrice',
+            'numberOfDays',
+            'priceForDays',
+            'paidPrice',
+            'sessionKey'
+        ],
 
-		data() {
-			return {
-				netgiro_reference: 1,
-				couponInput: '',
-				amount: this.paidPrice,
-				netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5'
-			}
-		},
+        data() {
+            return {
+                netgiro_reference: 1,
+                couponInput: '',
+                amount: this.paidPrice,
+                netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
+                termsChecked: false
+            }
+        },
 
-		methods: {
-			hideModal() {
-				this.$emit('hide');
-			},
+        methods: {
+            hideModal() {
+                this.$emit('hide');
+            },
 
-			couponApplied() {
-				if (this.couponInput === 'reynir1980') {
-					return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-				}
-			},
+            couponApplied() {
+                if (this.couponInput.toLowerCase().trim() === 'reynir1980') {
+                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
+                }
+            },
 
             checkPaymentForm: function (e) {
                 if (this.termsChecked) {
@@ -171,90 +174,96 @@
 
                 e.preventDefault();
             },
-		},
+        },
 
-		computed: {
-			netgiro_signature: function () {
-				return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
-			},
-			checkvaluemd5: function () {
-				return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
-			},
-			korta_link: function () {
-				return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
-			},
-			netgiro_link: function () {
-				return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
-			}
-		},
+        computed: {
+            netgiro_signature: function () {
+                return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
+            },
+            checkvaluemd5: function () {
+                return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
+                // return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
+            },
+            korta_link: function () {
+                return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y'; // TEST
+                // return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
+            },
+            netgiro_link: function () {
+                return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
+            }
+        },
 
-		mounted() {
-			if (this.userAge >= 65) {
-				return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
-			}
-		}
-	}
+        mounted() {
+            if (this.userAge >= 65) {
+                return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
+            }
+        }
+    }
 </script>
 
 <style>
-	.modal-mask {
-		position: fixed;
-		z-index: 9998;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, .5);
-		display: table;
-		transition: opacity .3s ease;
-	}
+    .modal-mask {
+        position: fixed;
+        z-index: 9998;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5);
+        display: table;
+        transition: opacity .3s ease;
+    }
 
-	.modal-wrapper {
-		display: table-cell;
-		vertical-align: middle;
-	}
+    .modal-wrapper {
+        display: table-cell;
+        vertical-align: middle;
+    }
 
-	.modal-container {
-		width: 500px;
-		margin: 0px auto;
-		padding: 20px 30px;
-		background-color: #fff;
-		border-radius: 2px;
-		box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-		transition: all .3s ease;
-	}
+    .modal-container {
+        width: 500px;
+        margin: 0px auto;
+        padding: 20px 30px;
+        background-color: #fff;
+        border-radius: 2px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+        transition: all .3s ease;
+    }
 
-	.modal-header h3 {
-		margin-top: 0;
-		color: #42b983;
-	}
+    .modal-header h3 {
+        margin-top: 0;
+        color: #42b983;
+    }
 
-	.modal-body {
-		margin: 20px 0;
-	}
+    .modal-body {
+        margin: 20px 0;
+    }
 
-	.modal-default-button {
-		float: right;
-	}
+    .modal-default-button {
+        float: right;
+    }
 
 
-	.modal-enter {
-		opacity: 0;
-	}
+    .modal-enter {
+        opacity: 0;
+    }
 
-	.modal-leave-active {
-		opacity: 0;
-	}
+    .modal-leave-active {
+        opacity: 0;
+    }
 
-	.modal-enter .modal-container,
-	.modal-leave-active .modal-container {
-		-webkit-transform: scale(1.1);
-		transform: scale(1.1);
-	}
+    .modal-enter .modal-container,
+    .modal-leave-active .modal-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
+    }
 
     @media only screen and (max-width: 600px) {
         .modal-container {
-            width: 350px;
+            width: 325px;
+        }
+
+        .modal-mask {
+            height: 100vh;
         }
     }
 </style>

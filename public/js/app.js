@@ -2316,8 +2316,6 @@ __webpack_require__.r(__webpack_exports__);
       selectedServicesPrices: [],
       selectedDeliveryDay: "Brottfaradagur",
       selectedPickUpDay: "Komudagur",
-      dropOff: null,
-      pickUp: null,
       numberOfDaysData: null,
       step: 1,
       booking: {
@@ -2389,10 +2387,6 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.booking.carColor) {
         this.errors.push('Vantar lit bíls!');
-      }
-
-      if (this.booking.carSize != "Fólksbíll" || this.booking.carSize != "Jepplingur" || this.booking.carSize != "Jeppi" || this.booking.carSize != "Yfirstærð") {
-        this.errors.push('Veldu stærð!');
       }
 
       e.preventDefault();
@@ -2487,9 +2481,9 @@ __webpack_require__.r(__webpack_exports__);
         socialId: this.booking.socialId,
         email: this.booking.email,
         phone: this.booking.phone,
-        dropOffDate: this.dropOff,
+        dropOffDate: this.moment(this.selectedDeliveryDay),
         dropOffTime: this.booking.dropOffTime,
-        pickUpDate: this.pickUp,
+        pickUpDate: this.moment(this.selectedPickUpDay),
         pickUpTime: this.booking.pickUpTime,
         flightNumber: this.booking.flightNumber,
         numberOfDays: this.numberOfDaysData,
@@ -2814,6 +2808,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2823,7 +2819,8 @@ __webpack_require__.r(__webpack_exports__);
       netgiro_reference: 1,
       couponInput: '',
       amount: this.paidPrice,
-      netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5'
+      netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
+      termsChecked: false
     };
   },
   methods: {
@@ -2831,7 +2828,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('hide');
     },
     couponApplied: function couponApplied() {
-      if (this.couponInput === 'reynir1980') {
+      if (this.couponInput.toLowerCase().trim() === 'reynir1980') {
         return this.amount = this.paidPrice - this.paidPrice * 20 / 100;
       }
     },
@@ -2850,10 +2847,12 @@ __webpack_require__.r(__webpack_exports__);
       return String(sha256__WEBPACK_IMPORTED_MODULE_1___default()("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
     },
     checkvaluemd5: function checkvaluemd5() {
-      return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
+      return md5__WEBPACK_IMPORTED_MODULE_0___default()(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
+      // return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
     },
     korta_link: function korta_link() {
-      return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
+      return 'https://netgreidslur.korta.is/testing/?amount=' + this.amount + '&currency=ISK&merchant=8190094&terminal=50719&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y'; // TEST
+      // return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
     },
     netgiro_link: function netgiro_link() {
       return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
@@ -3184,7 +3183,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 500px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n\t.modal-leave-active .modal-container {\n  transform: scale(1.1);\n}\n@media only screen and (max-width: 600px) {\n.modal-container {\n    width: 350px;\n}\n}\n", ""]);
+exports.push([module.i, ".modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 500px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  transform: scale(1.1);\n}\n@media only screen and (max-width: 600px) {\n.modal-container {\n    width: 325px;\n}\n.modal-mask {\n    height: 100vh;\n}\n}\n", ""]);
 
 // exports
 
@@ -40684,7 +40683,7 @@ var render = function() {
                         attrs: {
                           name: "merchant",
                           type: "hidden",
-                          value: "8190444"
+                          value: "8190094"
                         }
                       }),
                       _vm._v(" "),
@@ -40692,7 +40691,7 @@ var render = function() {
                         attrs: {
                           name: "terminal",
                           type: "hidden",
-                          value: "52176"
+                          value: "50719"
                         }
                       }),
                       _vm._v(" "),
