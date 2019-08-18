@@ -5,10 +5,9 @@ window.Vue = require('vue');
 
 import 'vue-datetime/dist/vue-datetime.css'
 import { Datetime } from 'vue-datetime';
-import { Settings } from 'luxon';
 import dt from 'luxon/src/datetime.js';
 
-dt.local();
+dt.local().toISO();
 
 Vue.component('datetime', Datetime);
 

@@ -1,9 +1,9 @@
 <template>
-	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
+	<div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
 		<section class="w-full my-8 mt-40 md:mt-0" id="car-form" v-if="step === 1">
 
             <div class="w-full">
-				<h2 class="font-bold text-white text-4xl text-center mb-12">Segðu okkur nú aðeins um bílinn þinn</h2>
+				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um bílinn</h2>
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
@@ -18,7 +18,7 @@
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="carNumber" placeholder="Bílnúmer" required v-model="booking.carNumber" @blur="getCarInfo()">
 				</div>
-				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
+				<div class="inline-block relative w-full md:w-1/2 px-3 mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize">
 						<option selected disabled>Bíltegund</option>
 						<option value="Fólksbíll">Fólksbíll</option>
@@ -54,7 +54,7 @@
 
 		<section class="w-full my-8" id="about-form" v-if="step === 2">
 			<div class="w-full">
-				<h2 class="font-bold text-white text-4xl text-center mb-12">Hver ertu?</h2>
+				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um eiganda eða notanda bílsins</h2>
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
@@ -108,17 +108,17 @@
 
             <div class="flex flex-wrap -mx-3 my-6">
                 <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <datetime type="date" v-model="selectedDeliveryDay" title="Brottfaradagur" format="E/M/y" min-datetime="01/09/2019" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></datetime>
+                    <datetime type="date" v-model="selectedDeliveryDay" title="Brottfaradagur" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }"></datetime>
                 </div>
                 <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <datetime type="date" v-model="selectedPickUpDay" title="Komudagur" format="E/M/y" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></datetime>
+                    <datetime type="date" v-model="selectedPickUpDay" title="Komudagur" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }"></datetime>
                 </div>
             </div>
 
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
-						<option selected disabled>Hvenær mættiru á Leifstöð</option>
+					<select @click="dropOffDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
+						<option selected disabled>Áætlaður komutími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
 						<option>00:30</option>
@@ -244,8 +244,8 @@
 					</div>
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
-						<option selected disabled>Hvenær viltu sækja bílinn?</option>
+					<select @click="pickUpDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
+						<option selected disabled>Áætlaður lendingartími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
 						<option>00:30</option>
@@ -375,6 +375,12 @@
 				</div> -->
 			</div>
 
+            <div class="flex flex-wrap -mx-3 my-6">
+                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
+                </div>
+            </div>
+
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0">
 					<ul class="flex float-right">
@@ -384,7 +390,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="checkDateForm(), next()">
+							<button @click.prevent="checkDateForm(), numberOfDays(), next()">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 							</button>
 						</li>
@@ -436,7 +442,7 @@
 			@hide="hideModal"
 			:userAge="userAge"
 			:servicePrice="servicePrice"
-			:numberOfDays="numberOfDays"
+			:numberOfDays="dataNumberOfDays"
 			:priceForDays="priceForDays"
 			:paidPrice="total"
 			:sessionKey="sessionKey">
@@ -461,8 +467,13 @@
 				selectedServicesId: [],
 				selectedServicesPrices: [],
 
-                selectedDeliveryDay: null,
+                selectedDeliveryDay: "Brottfaradagur",
                 selectedPickUpDay: "Hvenær kemuru heim?",
+
+                dropOff: null,
+                pickUp: null,
+
+                numberOfDaysData: null,
 
 				step: 1,
 				booking: {
@@ -484,7 +495,7 @@
 					flightNumber: null,
 				},
 				showPayment: false,
-				price: 4500
+				price: 4000
 			}
 		},
 
@@ -512,7 +523,7 @@
 				return this.showPayment = false;
 			},
 
-            checkCarForm: function (e) {
+            checkCarForm(e) {
                 if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.carColor) {
                     return true;
                 }
@@ -538,7 +549,7 @@
                 e.preventDefault();
             },
 
-            checkUserForm: function (e) {
+            checkUserForm(e) {
                 if (this.booking.name && this.booking.socialId && this.booking.email && this.booking.phone) {
                     return true;
                 }
@@ -565,7 +576,7 @@
                 e.preventDefault();
             },
 
-            checkDateForm: function (e) {
+            checkDateForm() {
                 if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
                     return true;
                 }
@@ -579,7 +590,7 @@
                     this.errors.push('Vandar brottfarartíma!');
                 }
                 if (!this.booking.email) {
-                    this.errors.push('Vantar komudag !');
+                    this.errors.push('Vantar komudag!');
                 }
                 if (!this.booking.phone) {
                     this.errors.push('Vantar komutíma!');
@@ -587,8 +598,6 @@
                 if (!this.booking.phone) {
                     this.errors.push('Vantar flugnúmer!');
                 }
-
-                e.preventDefault();
             },
 
 			prev() {
@@ -621,13 +630,13 @@
 					email: this.booking.email,
 					phone: this.booking.phone,
 
-					dropOffDate: this.dropOffDate,
+					dropOffDate: this.dropOff,
 					dropOffTime: this.booking.dropOffTime,
-					pickUpDate: this.pickUpDate,
+					pickUpDate: this.pickUp,
 					pickUpTime: this.booking.pickUpTime,
 					flightNumber: this.booking.flightNumber,
 
-					numberOfDays: this.numberOfDays,
+					numberOfDays: this.dataNumberOfDays,
 					priceForDays: this.priceForDays,
 
 					paidPrice: this.total,
@@ -638,34 +647,34 @@
 				})
 				.then(function (response) {})
 				.catch(function (error) {});
-			}
+			},
+            dropOffDate: function () {
+                return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
+            },
+            pickUpDate: function () {
+                return this.pickUp = moment(this.selectedPickUpDay).format('DD/MM/YYYY');
+            },
+            numberOfDays: function () {
+                return this.numberOfDaysData = Math.abs(moment(this.selectedDeliveryDay).diff(moment(this.selectedPickUpDay), 'days'));
+            },
 		},
 
 		computed: {
 			total: function() {
-				return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price-500));
+				return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price));
 			},
-			dropOffDate: function () {
-				return this.dropOffDate = moment(this.selectedDeliveryDay.value).format('DD/MM/YYYY');
-			},
-			pickUpDate: function () {
-				return moment(this.selectedPickUpDay.value).format('DD/MM/YYYY')
-			},
-			servicePrice: function () {
+            servicePrice: function () {
 				return (this.total - this.price) - this.priceForDays;
 			},
-			userAge: function() {
+            userAge: function() {
 				return kennitala.info(this.booking.socialId).age;
 			},
-			numberOfDays: function () {
-				return Math.abs(moment(this.selectedDeliveryDay.value).diff(moment(this.selectedPickUpDay.value), 'days'))
+            priceForDays: function () {
+				return (this.numberOfDaysData * 500);
 			},
-			priceForDays: function () {
-				return (this.numberOfDays * 500);
+            sessionKey: function () {
+				return Math.random().toString(30).substring(2, 15) + Math.random().toString(30).substring(2, 15);
 			},
-			sessionKey: function () {
-				return Math.random().toString(29).substring(2, 15) + Math.random().toString(29).substring(2, 15);
-			}
 		},
 
 		mounted() {

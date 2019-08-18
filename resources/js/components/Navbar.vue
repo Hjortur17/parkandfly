@@ -1,10 +1,11 @@
 <template>
-	<nav class="absolute inset-x-0 top-0 container max-w-4xl mx-auto mt-10 px-6">
+	<nav class="md:absolute inset-x-0 top-0 container max-w-4xl mx-auto pt-10 px-6">
 		<ul class="flex justify-between">
 			<li>
 				<a href="/">
 					<h1>
-						<img src="/images/logo.png" width="200px">
+						<img src="/images/logo.png" width="200px" title="Park and fly" alt="Park and fly | Logo">
+                        <span class="text-sm text-white mt-1">Tryggðu þér öruggt bílastæði meðan þú ferðast. </span>
 					</h1>
 				</a>
 			</li>
