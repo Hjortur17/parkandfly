@@ -46,9 +46,8 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
-	    // dd($request->session()->get('form.sessionKey'));
+	    dd($request->session()->get('form.selectedServicesId'));
 
-	    dd($request->session()->all());
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 
 			$booking = Booking::create([
@@ -87,6 +86,10 @@ class ApiController extends Controller
 			    ->send(new BookingConfirmed($booking));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
-		}
+		} else {
+            $request->session()->flush();
+
+            return redirect('/');
+        }
 	}
 }
