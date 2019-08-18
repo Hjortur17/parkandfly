@@ -475,6 +475,9 @@
 
                 numberOfDaysData: null,
 
+                dropOff: null,
+                pickUp: null,
+
 				step: 1,
 				booking: {
 					carNumber: null,
@@ -488,8 +491,8 @@
 					email: null,
 					phone: null,
 
-					dropOffDate: this.dropOffDate,
-					pickUpDate: this.pickUpDate,
+					dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
+					pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
 					dropOffTime: "Áætlaður komutími á Leifsstöð?",
 					pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
 					flightNumber: null,
@@ -643,9 +646,9 @@
 					email: this.booking.email,
 					phone: this.booking.phone,
 
-					dropOffDate: this.moment(this.selectedDeliveryDay),
+					dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
 					dropOffTime: this.booking.dropOffTime,
-					pickUpDate: this.moment(this.selectedPickUpDay),
+					pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
 					pickUpTime: this.booking.pickUpTime,
 					flightNumber: this.booking.flightNumber,
 
@@ -687,7 +690,7 @@
 			},
             sessionKey: function () {
 				return Math.random().toString(30).substring(2, 15) + Math.random().toString(30).substring(2, 15);
-			},
+			}
 		},
 
 		mounted() {

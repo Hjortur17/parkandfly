@@ -37,12 +37,18 @@ class ApiController extends Controller
 
 		Session::put('form', $form);
 
+        if (request()->wantsJson()) {
+            return $form;
+        }
+
 		return $form;
 	}
 
 	public function createBooking (Request $request)
 	{
-	    dd($request->session()->get('form.sessionKey'));
+	    // dd($request->session()->get('form.sessionKey'));
+
+	    dd($request->session()->all());
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 
 			$booking = Booking::create([
