@@ -5,7 +5,7 @@
 				<a href="/">
 					<h1>
 						<img src="/images/logo.png" width="200px" title="Park and fly" alt="Park and fly | Logo">
-                        <span class="text-sm text-white mt-1">Tryggðu þér öruggt bílastæði meðan þú ferðast. </span>
+                        <span class="text-xs md:text-sm text-white mt-1">Tryggðu þér öruggt bílastæði meðan þú ferðast. </span>
 					</h1>
 				</a>
 			</li>
@@ -245,5 +245,11 @@
 		opacity: 1;
 		left: 0;
 	}
+}
+
+@media only screen and (max-width: 600px) {
+    .overlay-menu {
+        font-size: 20px;
+    }
 }
 </style>

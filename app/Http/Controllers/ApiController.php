@@ -78,7 +78,7 @@ class ApiController extends Controller
 			    ->bcc('solveig@parkandfly.is')
 			    ->send(new BookingConfirmed($booking));
 
-			return redirect('/');
+			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 		} else {
 			dd($request->all());
 		}

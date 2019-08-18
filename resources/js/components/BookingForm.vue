@@ -1,6 +1,6 @@
 <template>
-	<div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
-		<section class="w-full my-8 mt-40 md:mt-0" id="car-form" v-if="step === 1">
+	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
+		<section class="w-full my-8" id="car-form" v-if="step === 1">
 
             <div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um bílinn</h2>
@@ -20,8 +20,7 @@
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize">
-						<option selected disabled>Bíltegund</option>
-						<option value="Fólksbíll">Fólksbíll</option>
+						<option selected value="Fólksbíll">Fólksbíll</option>
 						<option value="Jepplingur">Jepplingur</option>
 						<option value="Jeppi">Jeppi</option>
 						<option value="Yfirstærð">Yfirstærð</option>
@@ -69,7 +68,7 @@
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Kennitala" name="socialId" required v-model="booking.socialId">
 				</div>
-				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+				<div class="w-full md:w-1/2 px-3">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Nafn" name="name" required v-model="booking.name">
 				</div>
 			</div>
@@ -108,10 +107,10 @@
 
             <div class="flex flex-wrap -mx-3 my-6">
                 <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <datetime type="date" v-model="selectedDeliveryDay" title="Brottfaradagur" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }"></datetime>
+                    <datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
                 </div>
-                <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <datetime type="date" v-model="selectedPickUpDay" title="Komudagur" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }"></datetime>
+                <div class="inline-block relative w-full md:w-1/2 px-3">
+                    <datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
                 </div>
             </div>
 
@@ -243,7 +242,7 @@
 						<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 					</div>
 				</div>
-				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
+				<div class="inline-block relative w-full md:w-1/2 px-3">
 					<select @click="pickUpDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
 						<option selected disabled>Áætlaður lendingartími á Leifsstöð?</option>
 						<option>00:00</option>
@@ -405,7 +404,7 @@
 			<div class="flex flex-wrap -mx-3 my-12">
 				<div v-for="service in services">
 					<div v-if="service.carMake === booking.carSize">
-                            <div class="flex pr-6 mb-6 md:mb-2">
+                            <div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
                                 <div class="w-4 self-center">
                                     <input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id">
                                 </div>
@@ -472,7 +471,7 @@
 				selectedServicesPrices: [],
 
                 selectedDeliveryDay: "Brottfaradagur",
-                selectedPickUpDay: "Hvenær kemuru heim?",
+                selectedPickUpDay: "Komudagur",
 
                 dropOff: null,
                 pickUp: null,
@@ -482,7 +481,7 @@
 				step: 1,
 				booking: {
 					carNumber: null,
-					carSize: "Bíltegund",
+					carSize: "Fólksbíll",
 					carMake: null,
 					carType: null,
 					carColor: null,
@@ -499,21 +498,24 @@
 					flightNumber: null,
 				},
 				showPayment: false,
-				price: 4000
+				price: 4000,
 			}
 		},
 
 		methods: {
 			getCarInfo() {
-				axios.get('/api/car/info/get?carNumber=' + this.booking.carNumber)
-				.then(response => {
-					this.booking.carMake = response.data.make;
-					this.booking.carType = response.data.vehcom;
-					this.booking.carColor = response.data.color;
-				})
-				.catch(function (error) {
-					console.log(error);
-				});
+			    if (this.booking.carNumber === null) {
+                } else {
+                    axios.get('/api/car/info/get?carNumber=' + this.booking.carNumber)
+                    .then(response => {
+                        this.booking.carMake = response.data.make;
+                        this.booking.carType = response.data.vehcom;
+                        this.booking.carColor = response.data.color;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+                }
 			},
 
 			getServices() {
@@ -548,6 +550,9 @@
                 }
                 if (!this.booking.carColor) {
                     this.errors.push('Vantar lit bíls!');
+                }
+                if (this.booking.carSize != "Fólksbíll" || this.booking.carSize != "Jepplingur" || this.booking.carSize != "Jeppi" || this.booking.carSize != "Yfirstærð") {
+                    this.errors.push('Veldu stærð!');
                 }
 
                 e.preventDefault();

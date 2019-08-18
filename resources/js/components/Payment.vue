@@ -19,26 +19,26 @@
 
 							<div>
 								<div class="block flex justify-between mb-4">
-									<div class="flex-1 text-left">Grunngjald</div>
-									<div class="flex-1 text-right">4500kr</div>
+									<div class="flex-1 text-left text-sm md:text-base">Grunngjald</div>
+									<div class="flex-1 text-right text-sm md:text-base">4500kr</div>
 								</div>
 								<div class="block flex justify-between mb-4">
-									<div class="flex-1 text-left">Geymsla (<span v-text="numberOfDays"></span> dagar)</div>
-									<div class="flex-1 text-right"><span v-text="priceForDays + 'kr'"></span></div>
+									<div class="flex-1 text-left text-sm md:text-base">Geymsla (<span v-text="numberOfDays"></span> dagar)</div>
+									<div class="flex-1 text-right text-sm md:text-base"><span v-text="priceForDays + 'kr'"></span></div>
 								</div>
 								<div class="block flex justify-between mb-4">
-									<div class="flex-1 text-left">Þjónusta</div>
-									<div class="flex-1 text-right"><span v-text="servicePrice + 'kr'"></span></div>
+									<div class="flex-1 text-left text-sm md:text-base">Þjónusta</div>
+									<div class="flex-1 text-right text-sm md:text-base"><span v-text="servicePrice + 'kr'"></span></div>
 								</div>
 
 								<div class="block flex justify-between mb-8">
-									<div class="flex-1 text-left"><strong class="font-bold">Lokaverð</strong></div>
-									<div class="flex-1 text-right"><strong class="font-bold" v-text="amount + 'kr'"></strong></div>
+									<div class="flex-1 text-left text-sm md:text-base"><strong class="font-bold">Lokaverð</strong></div>
+									<div class="flex-1 text-right text-sm md:text-base"><strong class="font-bold" v-text="amount + 'kr'"></strong></div>
 								</div>
 
 								<div class="block flex justify-between mb-8">
-									<div class="flex-1 text-left"><strong class="font-normal">Afsláttarkóði</strong></div>
-									<div class="flex-1 text-right">
+									<div class="w-0 md:flex-1 text-left text-xs md:text-base self-center invisible md:visible"><strong class="font-normal">Afsláttarkóði</strong></div>
+									<div class="flex-1 text-right text-sm md:text-base">
                                         <form class="w-full">
                                             <div class="flex items-center border-b border-b-2 border-orange-500 py-2">
                                                 <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Afsláttarkóði" v-model="couponInput">
@@ -251,4 +251,10 @@
 		-webkit-transform: scale(1.1);
 		transform: scale(1.1);
 	}
+
+    @media only screen and (max-width: 600px) {
+        .modal-container {
+            width: 350px;
+        }
+    }
 </style>

@@ -2300,7 +2300,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -2316,14 +2315,14 @@ __webpack_require__.r(__webpack_exports__);
       selectedServicesId: [],
       selectedServicesPrices: [],
       selectedDeliveryDay: "Brottfaradagur",
-      selectedPickUpDay: "Hvenær kemuru heim?",
+      selectedPickUpDay: "Komudagur",
       dropOff: null,
       pickUp: null,
       numberOfDaysData: null,
       step: 1,
       booking: {
         carNumber: null,
-        carSize: "Bíltegund",
+        carSize: "Fólksbíll",
         carMake: null,
         carType: null,
         carColor: null,
@@ -2345,13 +2344,15 @@ __webpack_require__.r(__webpack_exports__);
     getCarInfo: function getCarInfo() {
       var _this = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/car/info/get?carNumber=' + this.booking.carNumber).then(function (response) {
-        _this.booking.carMake = response.data.make;
-        _this.booking.carType = response.data.vehcom;
-        _this.booking.carColor = response.data.color;
-      })["catch"](function (error) {
-        console.log(error);
-      });
+      if (this.booking.carNumber === null) {} else {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/api/car/info/get?carNumber=' + this.booking.carNumber).then(function (response) {
+          _this.booking.carMake = response.data.make;
+          _this.booking.carType = response.data.vehcom;
+          _this.booking.carColor = response.data.color;
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
     getServices: function getServices() {
       var _this2 = this;
@@ -2388,6 +2389,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (!this.booking.carColor) {
         this.errors.push('Vantar lit bíls!');
+      }
+
+      if (this.booking.carSize != "Fólksbíll" || this.booking.carSize != "Jepplingur" || this.booking.carSize != "Jeppi" || this.booking.carSize != "Yfirstærð") {
+        this.errors.push('Veldu stærð!');
       }
 
       e.preventDefault();
@@ -2525,6 +2530,59 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     this.getServices();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Flash.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Flash.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['message'],
+  data: function data() {
+    return {
+      body: '',
+      show: false
+    };
+  },
+  created: function created() {
+    var _this = this;
+
+    if (this.message) {
+      this.flash(this.message);
+    }
+
+    window.events.$on('flash', function (message) {
+      _this.flash(message);
+    });
+  },
+  methods: {
+    flash: function flash(message) {
+      this.body = message;
+      this.show = true;
+      this.hide();
+    },
+    hide: function hide() {
+      var _this2 = this;
+
+      setTimeout(function () {
+        _this2.show = false;
+      }, 3000);
+    }
   }
 });
 
@@ -3107,7 +3165,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".button_container {\n  position: relative;\n  height: 27px;\n  width: 35px;\n  cursor: pointer;\n  z-index: 100;\n  transition: opacity .25s ease;\n}\n.active .top {\n  transform: translateY(10px) translateX(0) rotate(45deg);\n  background: #fff;\n}\n.active .middle {\n  opacity: 0;\n  background: #fff;\n}\n.active .bottom {\n  transform: translateY(-10px) translateX(0) rotate(-45deg);\n  background: #fff;\n}\n.button_container span {\n  background: #fff;\n  border: none;\n  height: 5px;\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0;\n  transition:  all .35s ease;\n  cursor: pointer;\n}\n.button_container span:nth-of-type(2) {\n  top: 10px;\n}\n.button_container span:nth-of-type(3) {\n  top: 20px;\n}\n.overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 1;\n  visibility: hidden;\n  transition: opacity .35s, visibility .35s, width .35s;\n  z-index: 50;\n}\n.overlay:before {\n  content: '';\n  background: #4299e1;\n  left: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: left .35s ease;\n}\n.overlay:after {\n  content: '';\n  background: #4299e1;\n  right: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: all .35s ease;\n}\n.open {\n  opacity: .9;\n  visibility: visible;\n  height: 100%;\n}\n.open:before {\n  left: 0;\n}\n.open:after {\n  right: 0;\n}\n.overlay-menu ul li {\n  -webkit-animation: fadeInRight .5s ease forwards;\n          animation: fadeInRight .5s ease forwards;\n  -webkit-animation-delay: .35s;\n          animation-delay: .35s;\n}\n.overlay-menu ul li:nth-of-type(2) {\n  -webkit-animation-delay: .45s;\n          animation-delay: .45s;\n}\n.overlay-menu ul li:nth-of-type(3) {\n  -webkit-animation-delay: .55s;\n          animation-delay: .55s;\n}\n.overlay-menu ul li:nth-of-type(4) {\n  -webkit-animation-delay: .65s;\n          animation-delay: .65s;\n}\n.overlay-menu {\n  position: relative;\n  height: 80%;\n  top: 50%;\n  transform: translateY(-50%);\n  font-size: 35px;\n  font-weight: 400;\n  text-align: center;\n  z-index: 100;\n}\n.overlay-menu ul {\n  list-style: none;\n  padding: 0;\n  margin: 0 auto;\n  display: inline-block;\n  position: relative;\n  height: 100%;\n}\n.overlay-menu ul li {\n  display: block;\n  margin-bottom: 50px;\n  position: relative;\n  opacity: 1;\n}\n.overlay-menu ul li a {\n  display: block;\n  position: relative;\n  color: #fff;\n  text-decoration: none;\n  overflow: hidden;\n}\n.overlay-menu ul li a:hover:after,\n.overlay-menu ul li a:focus:after,\n.overlay-menu ul li a:active:after {\n  width: 100%;\n}\n.overlay-menu ul li a:after {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  width: 0%;\n  transform: translateX(-50%);\n  height: 3px;\n  background: #fff;\n  transition: .35s;\n}\n@-webkit-keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n@keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n", ""]);
+exports.push([module.i, ".button_container {\n  position: relative;\n  height: 27px;\n  width: 35px;\n  cursor: pointer;\n  z-index: 100;\n  transition: opacity .25s ease;\n}\n.active .top {\n  transform: translateY(10px) translateX(0) rotate(45deg);\n  background: #fff;\n}\n.active .middle {\n  opacity: 0;\n  background: #fff;\n}\n.active .bottom {\n  transform: translateY(-10px) translateX(0) rotate(-45deg);\n  background: #fff;\n}\n.button_container span {\n  background: #fff;\n  border: none;\n  height: 5px;\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0;\n  transition:  all .35s ease;\n  cursor: pointer;\n}\n.button_container span:nth-of-type(2) {\n  top: 10px;\n}\n.button_container span:nth-of-type(3) {\n  top: 20px;\n}\n.overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 1;\n  visibility: hidden;\n  transition: opacity .35s, visibility .35s, width .35s;\n  z-index: 50;\n}\n.overlay:before {\n  content: '';\n  background: #4299e1;\n  left: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: left .35s ease;\n}\n.overlay:after {\n  content: '';\n  background: #4299e1;\n  right: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: all .35s ease;\n}\n.open {\n  opacity: .9;\n  visibility: visible;\n  height: 100%;\n}\n.open:before {\n  left: 0;\n}\n.open:after {\n  right: 0;\n}\n.overlay-menu ul li {\n  -webkit-animation: fadeInRight .5s ease forwards;\n          animation: fadeInRight .5s ease forwards;\n  -webkit-animation-delay: .35s;\n          animation-delay: .35s;\n}\n.overlay-menu ul li:nth-of-type(2) {\n  -webkit-animation-delay: .45s;\n          animation-delay: .45s;\n}\n.overlay-menu ul li:nth-of-type(3) {\n  -webkit-animation-delay: .55s;\n          animation-delay: .55s;\n}\n.overlay-menu ul li:nth-of-type(4) {\n  -webkit-animation-delay: .65s;\n          animation-delay: .65s;\n}\n.overlay-menu {\n  position: relative;\n  height: 80%;\n  top: 50%;\n  transform: translateY(-50%);\n  font-size: 35px;\n  font-weight: 400;\n  text-align: center;\n  z-index: 100;\n}\n.overlay-menu ul {\n  list-style: none;\n  padding: 0;\n  margin: 0 auto;\n  display: inline-block;\n  position: relative;\n  height: 100%;\n}\n.overlay-menu ul li {\n  display: block;\n  margin-bottom: 50px;\n  position: relative;\n  opacity: 1;\n}\n.overlay-menu ul li a {\n  display: block;\n  position: relative;\n  color: #fff;\n  text-decoration: none;\n  overflow: hidden;\n}\n.overlay-menu ul li a:hover:after,\n.overlay-menu ul li a:focus:after,\n.overlay-menu ul li a:active:after {\n  width: 100%;\n}\n.overlay-menu ul li a:after {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  width: 0%;\n  transform: translateX(-50%);\n  height: 3px;\n  background: #fff;\n  transition: .35s;\n}\n@-webkit-keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n@keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n@media only screen and (max-width: 600px) {\n.overlay-menu {\n    font-size: 20px;\n}\n}\n", ""]);
 
 // exports
 
@@ -3126,7 +3184,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 500px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n.modal-leave-active .modal-container {\n  transform: scale(1.1);\n}\n", ""]);
+exports.push([module.i, ".modal-mask {\n  position: fixed;\n  z-index: 9998;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  background-color: rgba(0, 0, 0, .5);\n  display: table;\n  transition: opacity .3s ease;\n}\n.modal-wrapper {\n  display: table-cell;\n  vertical-align: middle;\n}\n.modal-container {\n  width: 500px;\n  margin: 0px auto;\n  padding: 20px 30px;\n  background-color: #fff;\n  border-radius: 2px;\n  box-shadow: 0 2px 8px rgba(0, 0, 0, .33);\n  transition: all .3s ease;\n}\n.modal-header h3 {\n  margin-top: 0;\n  color: #42b983;\n}\n.modal-body {\n  margin: 20px 0;\n}\n.modal-default-button {\n  float: right;\n}\n.modal-enter {\n  opacity: 0;\n}\n.modal-leave-active {\n  opacity: 0;\n}\n.modal-enter .modal-container,\n\t.modal-leave-active .modal-container {\n  transform: scale(1.1);\n}\n@media only screen and (max-width: 600px) {\n.modal-container {\n    width: 350px;\n}\n}\n", ""]);
 
 // exports
 
@@ -38565,16 +38623,13 @@ var render = function() {
     "div",
     {
       staticClass:
-        "md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center"
+        "min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center"
     },
     [
       _vm.step === 1
         ? _c(
             "section",
-            {
-              staticClass: "w-full my-8 mt-40 md:mt-0",
-              attrs: { id: "car-form" }
-            },
+            { staticClass: "w-full my-8", attrs: { id: "car-form" } },
             [
               _vm._m(0),
               _vm._v(" "),
@@ -38680,13 +38735,9 @@ var render = function() {
                       [
                         _c(
                           "option",
-                          { attrs: { selected: "", disabled: "" } },
-                          [_vm._v("Bíltegund")]
+                          { attrs: { selected: "", value: "Fólksbíll" } },
+                          [_vm._v("Fólksbíll")]
                         ),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Fólksbíll" } }, [
-                          _vm._v("Fólksbíll")
-                        ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "Jepplingur" } }, [
                           _vm._v("Jepplingur")
@@ -38941,39 +38992,35 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _c(
-                  "div",
-                  { staticClass: "w-full md:w-1/2 px-3 mb-6 md:mb-0" },
-                  [
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.booking.name,
-                          expression: "booking.name"
-                        }
-                      ],
-                      staticClass:
-                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                      attrs: {
-                        type: "text",
-                        placeholder: "Nafn",
-                        name: "name",
-                        required: ""
-                      },
-                      domProps: { value: _vm.booking.name },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.booking, "name", $event.target.value)
-                        }
+                _c("div", { staticClass: "w-full md:w-1/2 px-3" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.booking.name,
+                        expression: "booking.name"
                       }
-                    })
-                  ]
-                )
+                    ],
+                    staticClass:
+                      "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                    attrs: {
+                      type: "text",
+                      placeholder: "Nafn",
+                      name: "name",
+                      required: ""
+                    },
+                    domProps: { value: _vm.booking.name },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.booking, "name", $event.target.value)
+                      }
+                    }
+                  })
+                ])
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
@@ -39146,14 +39193,15 @@ var render = function() {
                       staticClass: "theme-orange",
                       attrs: {
                         type: "date",
-                        title: "Brottfaradagur",
+                        "min-datetime": "2019-09-01T00:00:00.000Z",
                         "input-class":
                           "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
                         format: {
                           year: "numeric",
                           month: "numeric",
                           day: "numeric"
-                        }
+                        },
+                        placeholder: "Brottfaradagur"
                       },
                       model: {
                         value: _vm.selectedDeliveryDay,
@@ -39169,23 +39217,21 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  {
-                    staticClass:
-                      "inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0"
-                  },
+                  { staticClass: "inline-block relative w-full md:w-1/2 px-3" },
                   [
                     _c("datetime", {
                       staticClass: "theme-orange",
                       attrs: {
                         type: "date",
-                        title: "Komudagur",
+                        "min-datetime": "2019-09-01T00:00:00.000Z",
                         "input-class":
                           "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
                         format: {
                           year: "numeric",
                           month: "numeric",
                           day: "numeric"
-                        }
+                        },
+                        placeholder: "Komudagur"
                       },
                       model: {
                         value: _vm.selectedPickUpDay,
@@ -39477,10 +39523,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "div",
-                  {
-                    staticClass:
-                      "inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0"
-                  },
+                  { staticClass: "inline-block relative w-full md:w-1/2 px-3" },
                   [
                     _c(
                       "select",
@@ -39886,81 +39929,88 @@ var render = function() {
                   return _c("div", [
                     service.carMake === _vm.booking.carSize
                       ? _c("div", [
-                          _c("div", { staticClass: "flex pr-6 mb-6 md:mb-2" }, [
-                            _c("div", { staticClass: "w-4 self-center" }, [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.selectedServicesPrices,
-                                    expression: "selectedServicesPrices"
-                                  }
-                                ],
-                                staticClass: "leading-tight",
-                                attrs: { type: "checkbox", id: service.id },
-                                domProps: {
-                                  value: service.price,
-                                  checked: Array.isArray(
-                                    _vm.selectedServicesPrices
-                                  )
-                                    ? _vm._i(
-                                        _vm.selectedServicesPrices,
-                                        service.price
-                                      ) > -1
-                                    : _vm.selectedServicesPrices
-                                },
-                                on: {
-                                  click: function($event) {
-                                    _vm.addToArray(service.id),
-                                      _vm.changePrice(service)
+                          _c(
+                            "div",
+                            {
+                              staticClass:
+                                "flex flex-col md:flex-row pr-8 mb-6 md:mb-2"
+                            },
+                            [
+                              _c("div", { staticClass: "w-4 self-center" }, [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.selectedServicesPrices,
+                                      expression: "selectedServicesPrices"
+                                    }
+                                  ],
+                                  staticClass: "leading-tight",
+                                  attrs: { type: "checkbox", id: service.id },
+                                  domProps: {
+                                    value: service.price,
+                                    checked: Array.isArray(
+                                      _vm.selectedServicesPrices
+                                    )
+                                      ? _vm._i(
+                                          _vm.selectedServicesPrices,
+                                          service.price
+                                        ) > -1
+                                      : _vm.selectedServicesPrices
                                   },
-                                  change: function($event) {
-                                    var $$a = _vm.selectedServicesPrices,
-                                      $$el = $event.target,
-                                      $$c = $$el.checked ? true : false
-                                    if (Array.isArray($$a)) {
-                                      var $$v = service.price,
-                                        $$i = _vm._i($$a, $$v)
-                                      if ($$el.checked) {
-                                        $$i < 0 &&
-                                          (_vm.selectedServicesPrices = $$a.concat(
-                                            [$$v]
-                                          ))
+                                  on: {
+                                    click: function($event) {
+                                      _vm.addToArray(service.id),
+                                        _vm.changePrice(service)
+                                    },
+                                    change: function($event) {
+                                      var $$a = _vm.selectedServicesPrices,
+                                        $$el = $event.target,
+                                        $$c = $$el.checked ? true : false
+                                      if (Array.isArray($$a)) {
+                                        var $$v = service.price,
+                                          $$i = _vm._i($$a, $$v)
+                                        if ($$el.checked) {
+                                          $$i < 0 &&
+                                            (_vm.selectedServicesPrices = $$a.concat(
+                                              [$$v]
+                                            ))
+                                        } else {
+                                          $$i > -1 &&
+                                            (_vm.selectedServicesPrices = $$a
+                                              .slice(0, $$i)
+                                              .concat($$a.slice($$i + 1)))
+                                        }
                                       } else {
-                                        $$i > -1 &&
-                                          (_vm.selectedServicesPrices = $$a
-                                            .slice(0, $$i)
-                                            .concat($$a.slice($$i + 1)))
+                                        _vm.selectedServicesPrices = $$c
                                       }
-                                    } else {
-                                      _vm.selectedServicesPrices = $$c
                                     }
                                   }
-                                }
-                              })
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "flex-1 pl-3" }, [
-                              _c("label", [
-                                _c("span", {
-                                  staticClass: "font-normal text-white",
-                                  domProps: {
-                                    textContent: _vm._s(service.description)
-                                  }
-                                }),
-                                _vm._v(" "),
-                                _c("br"),
-                                _vm._v(" "),
-                                _c("span", {
-                                  staticClass: "text-sm text-white",
-                                  domProps: {
-                                    textContent: _vm._s(service.price + "kr")
-                                  }
                                 })
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "flex-1 pl-3" }, [
+                                _c("label", [
+                                  _c("span", {
+                                    staticClass: "font-normal text-white",
+                                    domProps: {
+                                      textContent: _vm._s(service.description)
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("br"),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "text-sm text-white",
+                                    domProps: {
+                                      textContent: _vm._s(service.price + "kr")
+                                    }
+                                  })
+                                ])
                               ])
-                            ])
-                          ])
+                            ]
+                          )
                         ])
                       : _vm._e()
                   ])
@@ -40130,6 +40180,48 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      directives: [
+        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+      ],
+      staticClass:
+        "w-1/4 bg-green-100 border-l-4 border-green-500 text-green-700 p-4 fixed bottom-0 right-0 rounded-l",
+      staticStyle: { bottom: "40px" },
+      attrs: { role: "alert" }
+    },
+    [
+      _c("p", { staticClass: "font-bold" }, [
+        _vm._v("Takk fyrir að velja Park and fly!")
+      ]),
+      _vm._v(" "),
+      _c("p", [_vm._v(_vm._s(_vm.body))])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Navbar.vue?vue&type=template&id=6dde423b&":
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Navbar.vue?vue&type=template&id=6dde423b& ***!
@@ -40204,7 +40296,7 @@ var staticRenderFns = [
             }
           }),
           _vm._v(" "),
-          _c("span", { staticClass: "text-sm text-white mt-1" }, [
+          _c("span", { staticClass: "text-xs md:text-sm text-white mt-1" }, [
             _vm._v("Tryggðu þér öruggt bílastæði meðan þú ferðast.\u2028")
           ])
         ])
@@ -40361,13 +40453,21 @@ var render = function() {
                     "div",
                     { staticClass: "block flex justify-between mb-4" },
                     [
-                      _c("div", { staticClass: "flex-1 text-left" }, [
-                        _vm._v("Grunngjald")
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-left text-sm md:text-base"
+                        },
+                        [_vm._v("Grunngjald")]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex-1 text-right" }, [
-                        _vm._v("4500kr")
-                      ])
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-right text-sm md:text-base"
+                        },
+                        [_vm._v("4500kr")]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -40375,21 +40475,33 @@ var render = function() {
                     "div",
                     { staticClass: "block flex justify-between mb-4" },
                     [
-                      _c("div", { staticClass: "flex-1 text-left" }, [
-                        _vm._v("Geymsla ("),
-                        _c("span", {
-                          domProps: { textContent: _vm._s(_vm.numberOfDays) }
-                        }),
-                        _vm._v(" dagar)")
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-left text-sm md:text-base"
+                        },
+                        [
+                          _vm._v("Geymsla ("),
+                          _c("span", {
+                            domProps: { textContent: _vm._s(_vm.numberOfDays) }
+                          }),
+                          _vm._v(" dagar)")
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex-1 text-right" }, [
-                        _c("span", {
-                          domProps: {
-                            textContent: _vm._s(_vm.priceForDays + "kr")
-                          }
-                        })
-                      ])
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-right text-sm md:text-base"
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.priceForDays + "kr")
+                            }
+                          })
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -40397,17 +40509,27 @@ var render = function() {
                     "div",
                     { staticClass: "block flex justify-between mb-4" },
                     [
-                      _c("div", { staticClass: "flex-1 text-left" }, [
-                        _vm._v("Þjónusta")
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-left text-sm md:text-base"
+                        },
+                        [_vm._v("Þjónusta")]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex-1 text-right" }, [
-                        _c("span", {
-                          domProps: {
-                            textContent: _vm._s(_vm.servicePrice + "kr")
-                          }
-                        })
-                      ])
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-right text-sm md:text-base"
+                        },
+                        [
+                          _c("span", {
+                            domProps: {
+                              textContent: _vm._s(_vm.servicePrice + "kr")
+                            }
+                          })
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -40415,18 +40537,30 @@ var render = function() {
                     "div",
                     { staticClass: "block flex justify-between mb-8" },
                     [
-                      _c("div", { staticClass: "flex-1 text-left" }, [
-                        _c("strong", { staticClass: "font-bold" }, [
-                          _vm._v("Lokaverð")
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-left text-sm md:text-base"
+                        },
+                        [
+                          _c("strong", { staticClass: "font-bold" }, [
+                            _vm._v("Lokaverð")
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex-1 text-right" }, [
-                        _c("strong", {
-                          staticClass: "font-bold",
-                          domProps: { textContent: _vm._s(_vm.amount + "kr") }
-                        })
-                      ])
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-right text-sm md:text-base"
+                        },
+                        [
+                          _c("strong", {
+                            staticClass: "font-bold",
+                            domProps: { textContent: _vm._s(_vm.amount + "kr") }
+                          })
+                        ]
+                      )
                     ]
                   ),
                   _vm._v(" "),
@@ -40434,69 +40568,82 @@ var render = function() {
                     "div",
                     { staticClass: "block flex justify-between mb-8" },
                     [
-                      _c("div", { staticClass: "flex-1 text-left" }, [
-                        _c("strong", { staticClass: "font-normal" }, [
-                          _vm._v("Afsláttarkóði")
-                        ])
-                      ]),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "w-0 md:flex-1 text-left text-xs md:text-base self-center invisible md:visible"
+                        },
+                        [
+                          _c("strong", { staticClass: "font-normal" }, [
+                            _vm._v("Afsláttarkóði")
+                          ])
+                        ]
+                      ),
                       _vm._v(" "),
-                      _c("div", { staticClass: "flex-1 text-right" }, [
-                        _c("form", { staticClass: "w-full" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass:
-                                "flex items-center border-b border-b-2 border-orange-500 py-2"
-                            },
-                            [
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.couponInput,
-                                    expression: "couponInput"
-                                  }
-                                ],
+                      _c(
+                        "div",
+                        {
+                          staticClass: "flex-1 text-right text-sm md:text-base"
+                        },
+                        [
+                          _c("form", { staticClass: "w-full" }, [
+                            _c(
+                              "div",
+                              {
                                 staticClass:
-                                  "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
-                                attrs: {
-                                  type: "text",
-                                  placeholder: "Afsláttarkóði"
-                                },
-                                domProps: { value: _vm.couponInput },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
+                                  "flex items-center border-b border-b-2 border-orange-500 py-2"
+                              },
+                              [
+                                _c("input", {
+                                  directives: [
+                                    {
+                                      name: "model",
+                                      rawName: "v-model",
+                                      value: _vm.couponInput,
+                                      expression: "couponInput"
                                     }
-                                    _vm.couponInput = $event.target.value
-                                  }
-                                }
-                              }),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
+                                  ],
                                   staticClass:
-                                    "flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none",
-                                  attrs: { type: "button" },
+                                    "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+                                  attrs: {
+                                    type: "text",
+                                    placeholder: "Afsláttarkóði"
+                                  },
+                                  domProps: { value: _vm.couponInput },
                                   on: {
-                                    click: function($event) {
-                                      return _vm.couponApplied()
+                                    input: function($event) {
+                                      if ($event.target.composing) {
+                                        return
+                                      }
+                                      _vm.couponInput = $event.target.value
                                     }
                                   }
-                                },
-                                [
-                                  _vm._v(
-                                    "\n                                                    Nota\n                                                "
-                                  )
-                                ]
-                              )
-                            ]
-                          )
-                        ])
-                      ])
+                                }),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none",
+                                    attrs: { type: "button" },
+                                    on: {
+                                      click: function($event) {
+                                        return _vm.couponApplied()
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                    Nota\n                                                "
+                                    )
+                                  ]
+                                )
+                              ]
+                            )
+                          ])
+                        ]
+                      )
                     ]
                   )
                 ])
@@ -53261,6 +53408,13 @@ luxon_src_datetime_js__WEBPACK_IMPORTED_MODULE_2__["default"].local().toISO();
 Vue.component('datetime', vue_datetime__WEBPACK_IMPORTED_MODULE_1__["Datetime"]);
 Vue.component('booking-form', __webpack_require__(/*! ./components/BookingForm.vue */ "./resources/js/components/BookingForm.vue")["default"]);
 Vue.component('navbar', __webpack_require__(/*! ./components/Navbar.vue */ "./resources/js/components/Navbar.vue")["default"]);
+Vue.component('flash', __webpack_require__(/*! ./components/Flash.vue */ "./resources/js/components/Flash.vue")["default"]);
+window.events = new Vue();
+
+window.flash = function (message) {
+  window.events.$emit('flash', message);
+};
+
 var app = new Vue({
   el: '#app'
 });
@@ -53379,6 +53533,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingForm_vue_vue_type_template_id_9a61edbc___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookingForm_vue_vue_type_template_id_9a61edbc___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Flash.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Flash.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Flash.vue?vue&type=template&id=e4161ed6& */ "./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6&");
+/* harmony import */ var _Flash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Flash.vue?vue&type=script&lang=js& */ "./resources/js/components/Flash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Flash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Flash.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Flash.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Flash.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Flash.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Flash.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Flash.vue?vue&type=template&id=e4161ed6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Flash.vue?vue&type=template&id=e4161ed6&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Flash_vue_vue_type_template_id_e4161ed6___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
