@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
 
 use App\Booking;
 use App\Service;
 
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class ApiController extends Controller
@@ -46,9 +48,7 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
-	    dd($request->session()->get('form.selectedServicesId'));
-
-		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
+	    if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
@@ -79,7 +79,7 @@ class ApiController extends Controller
 
 			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
-			\Mail::to($request->session()->get('form.email'))
+            Mail::to($request->session()->get('form.email'))
                 ->cc('bokanir@parkandfly.is')
 			    ->bcc('reynir@parkandfly.is')
 			    ->bcc('solveig@parkandfly.is')
