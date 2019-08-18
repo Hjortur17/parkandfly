@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+require('laravel-mix-purgecss');
 
 /*
  |--------------------------------------------------------------------------
@@ -18,4 +19,5 @@ mix
 	])
 	.browserSync({
 		proxy: 'booking.test',
-	});
+	})
+    .purgeCss();
