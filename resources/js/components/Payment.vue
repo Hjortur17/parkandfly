@@ -100,9 +100,6 @@
 									<input name="currency" type="hidden" value="ISK">
                                     <input name="merchant" type="hidden" value="8190444">
                                     <input name="terminal" type="hidden" value="52176">
-
-                                    <!--<input name="merchant" type="hidden" value="8190094">
-                                    <input name="terminal" type="hidden" value="50719"> TESTING-->
                                     <input name="description" type="hidden" value="Park and fly">
                                     <input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
 
