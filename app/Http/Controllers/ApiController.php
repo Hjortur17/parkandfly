@@ -84,8 +84,6 @@ class ApiController extends Controller
 			    ->send(new BookingConfirmed($booking));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
-		} else {
-			return redirect(/);
 		}
 	}
 }
