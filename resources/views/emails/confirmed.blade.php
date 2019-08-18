@@ -85,7 +85,7 @@
 </head>
 <body>
 	<header>
-		<div class="px-6 mb-8">
+		<div class="px-6 py-8">
 			<div class="flex">
 				<div class="w-60">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
@@ -112,8 +112,8 @@
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um bílinn þinn:</strong>
 				<li style="padding-top: 1.5rem;">{{ $booking->carNumber }} | {{ $booking->carSize }}</li>
+				<li>{{ $booking->carMake }}</li>
 				<li>{{ $booking->carType }}</li>
-				<li>{{ $booking->carSubtype }}</li>
 				<li>{{ $booking->carColor }}</li>
 			</ul>
 		</div>
@@ -123,18 +123,31 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um flugið þitt:</strong>
-				<li style="padding-top: 1.5rem;">Áætlaður tíma á Leifstöð - {{ $booking->dropOffDate }} {{ $booking->dropOffTime }}</li>
-				<li>Áætlaður kominn út úr Leifstöð - {{ $booking->pickUpDate }} {{ $booking->pickUpTime }}</li>
+				<li style="padding-top: 1.5rem;">Áætlaður komutími á Leifsstöð - {{ $booking->dropOffDate }} {{ $booking->dropOffTime }}</li>
+				<li>Áætlaður lendingartími á Leifsstöð - {{ $booking->pickUpDate }} {{ $booking->pickUpTime }}</li>
 				<li>Flugnúmer - {{ $booking->flightNumber }}</li>
 			</ul>
 		</div>
 
 		<hr class="my-6">
 
+        <div class="px-6">
+            <ul class="list-none">
+                <strong style="font-size: 20px;">Keypt þjónusta:</strong>
+
+                @forelse($booking->services as $service)
+                    <li style="padding-top: 1.5rem;">{{ service->description }}</li>
+                @empty
+                    <p>Enginn þjónusta keypt!</p>
+                @endforelse
+            </ul>
+        </div>
+
+        <hr class="my-6">
+
 		<div class="px-6">
 			<ul class="list-none">
-				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $booking->totalprice }}kr.</li>
-				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Lokaverð:</strong> {{ $booking->finalPrice }}kr.</li>
+				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $booking->paidPrice }}kr.</li>
 			</ul>
 		</div>
 	</header>
