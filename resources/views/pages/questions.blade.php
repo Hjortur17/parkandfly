@@ -37,6 +37,12 @@
                     <p class="text-left text-white leading-normal mb-3">
                         <strong class="font-bold mb-1 text-lg">Eruð þið tryggðir fyrir bílnum mínum á meðan hann er í ykkar umsjá?</strong><br>
 
+                        Bíllinn þinn er fulltryggður í okkar vörslu sem og í akstri á meðan hann er í okkar umsjá. Við tökum einnig myndir af öllum bílum sem við tökum á móti þegar þeir eru komnir inn á okkar geymslusvæði.
+                    </p>
+
+                    <p class="text-left text-white leading-normal mb-3">
+                        <strong class="font-bold mb-1 text-lg">Hvað þarf ég að bíða lengi fyrir utan brottfarir eða komusal eftir starfsmanni ykkar?</strong><br>
+
                         Okkar markmið er að þú þurfir EKKI að bíða meira en 60 sekúndur.
                     </p>
 
