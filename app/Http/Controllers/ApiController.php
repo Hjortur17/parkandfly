@@ -42,8 +42,8 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
+	    dd($request->all());
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
-		    dd(response());
 
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
