@@ -128,20 +128,6 @@
 			</ul>
 		</div>
 
-		<hr class="my-6">
-
-        <div class="px-6">
-            <ul class="list-none">
-                <strong style="font-size: 20px;">Keypt þjónusta:</strong>
-
-                @forelse($booking->services as $service)
-                    <li style="padding-top: 1.5rem;">{{ service->pivot->description }}</li>
-                @empty
-                    <p>Enginn þjónusta keypt!</p>
-                @endforelse
-            </ul>
-        </div>
-
         <hr class="my-6">
 
 		<div class="px-6">
