@@ -57,7 +57,7 @@
 		}
 
 		.w-60 {
-			width: 40%;
+			width: 50%;
 		}
 
 		.header {
@@ -80,13 +80,17 @@
 		li {
 			margin-bottom: 0.5rem;
 		}
+
+        .mt-10 {
+            margin-top: 50px;
+        }
 	</style>
 </head>
 <body>
 	<header>
 		<div class="px-6 py-8">
 			<div class="flex">
-				<div class="w-60">
+				<div class="w-60 mt-10">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
 				<div class="flex-1 self-center text-right">
@@ -127,6 +131,21 @@
 				<li>Flugnúmer - {{ $booking->flightNumber }}</li>
 			</ul>
 		</div>
+
+
+        @if (!empty($booking->services))
+            <hr class="my-6">
+
+            <div class="px-6">
+                <ul class="list-none">
+                    <strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
+
+                    @foreach ($booking->services as $service)
+                        <li>{{ $service->pivot->description }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
         <hr class="my-6">
 
