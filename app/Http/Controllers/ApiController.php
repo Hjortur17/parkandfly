@@ -81,8 +81,6 @@ class ApiController extends Controller
 
             Mail::to($request->session()->get('form.email'))
                 ->cc('bokanir@parkandfly.is')
-			    ->bcc('reynir@parkandfly.is')
-			    ->bcc('solveig@parkandfly.is')
 			    ->send(new BookingConfirmed($booking));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
