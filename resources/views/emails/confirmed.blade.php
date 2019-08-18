@@ -133,6 +133,7 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $booking->paidPrice }}kr.</li>
+				<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
 			</ul>
 		</div>
 	</header>
