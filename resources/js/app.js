@@ -3,21 +3,18 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-import VCalendar from 'v-calendar';
+import 'vue-datetime/dist/vue-datetime.css'
+import { Datetime } from 'vue-datetime';
+import { Settings } from 'luxon';
+import dt from 'luxon/src/datetime.js';
 
-Vue.use(VCalendar, { 
-	componentPrefix: 'vc',
-	screens: {
-		mobile: '640px',
-		tablet: '768px',
-		laptop: '1024px',
-		desktop: '1280px'
-	},
-});
+dt.local();
+
+Vue.component('datetime', Datetime);
 
 Vue.component('booking-form', require('./components/BookingForm.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
 
 const app = new Vue({
-	el: '#app',     
+	el: '#app',
 });

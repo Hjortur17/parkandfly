@@ -40,8 +40,8 @@ class ApiController extends Controller
 		return $form;
 	}
 
-	public function createBooking(Request $request)
-	{	
+	public function createBooking (Request $request)
+	{
 		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
@@ -70,13 +70,13 @@ class ApiController extends Controller
 				'korta_authcode' => $request->input('authcode')
 			]);
 
-			// $booking->services()->attach($request->session()->get('form.selectedServicesId'));
+			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
-			// \Mail::to($request->session()->get('form.email'))
-			// 	->cc('bokanir@parkandfly.is')
-			// 	->bcc('reynir@parkandfly.is')
-			// 	->bcc('solveig@parkandfly.is')
-			// 	->send(new BookingConfirmed($booking));
+			\Mail::to($request->session()->get('form.email'))
+                ->cc('bokanir@parkandfly.is')
+			    ->bcc('reynir@parkandfly.is')
+			    ->bcc('solveig@parkandfly.is')
+			    ->send(new BookingConfirmed($booking));
 
 			return redirect('/');
 		} else {

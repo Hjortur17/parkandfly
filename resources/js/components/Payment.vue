@@ -30,7 +30,7 @@
 									<div class="flex-1 text-left">Þjónusta</div>
 									<div class="flex-1 text-right"><span v-text="servicePrice + 'kr'"></span></div>
 								</div>
-								
+
 								<div class="block flex justify-between mb-8">
 									<div class="flex-1 text-left"><strong class="font-bold">Lokaverð</strong></div>
 									<div class="flex-1 text-right"><strong class="font-bold" v-text="amount + 'kr'"></strong></div>
@@ -44,7 +44,7 @@
 						</slot>
 					</div>
 
-					<div class="modal-body">
+					<!-- <div class="modal-body">
 						<div class="flex px-12">
 							<div class="flex-1 px-2">
 								<div class="flex">
@@ -55,17 +55,17 @@
 										<img src="/images/netgiro.png">
 									</div>
 								</div>
-							</div>	
+							</div>
 							<div class="flex-1 px-2 self-center">
 								<input type="radio" id="two" value="Korta" v-model="paymentPicked">
 								<label for="two">Kort</label>
 							</div>
 						</div>
-					</div>
+					</div> -->
 
 					<div class="modal-footer">
 						<slot name="footer">
-							<div class="text-center my-8" v-if="this.paymentPicked === 'Netgiro'">
+							<!-- <div class="text-center my-8" v-if="this.paymentPicked === 'Netgiro'">
 								<form method="post" action="https://test.netgiro.is/securepay">
 									<input type="hidden" name="ApplicationID" :value="this.netgiroId">
 									<input type="hidden" name="Iframe" value="false">
@@ -83,9 +83,9 @@
 
 									<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
 								</form>
-							</div>
+							</div> -->
 
-							<div class="text-center my-8" v-else>
+							<div class="text-center mt-8">
 								<form action="https://netgreidslur.korta.is" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
@@ -102,10 +102,15 @@
 									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
 									<input name="reference" type="hidden" :value="this.sessionKey">
-									
-									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
+
 								</form>
-							</div>
+
+                                <p class="mt-8 mb-6 text-sm">
+                                    <input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+                                </p>
+
+                                <a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm">Borga</a>
+                            </div>
 						</slot>
 					</div>
 				</div>
@@ -120,17 +125,16 @@
 
 	export default {
 		props: [
-			'userAge', 
-			'servicePrice', 
-			'numberOfDays', 
-			'priceForDays', 
+			'userAge',
+			'servicePrice',
+			'numberOfDays',
+			'priceForDays',
 			'paidPrice',
 			'sessionKey'
 		],
 
 		data() {
 			return {
-				paymentPicked: null,
 				netgiro_reference: 1,
 				couponInput: '',
 				amount: this.paidPrice,
@@ -147,7 +151,17 @@
 				if (this.couponInput === 'reynir1980') {
 					return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
 				}
-			}
+			},
+
+            checkPaymentForm: function (e) {
+                if (this.termsChecked) {
+                    return true;
+                } else {
+                    alert('Upps! Þú þarft að samþykkja skilmálana!');
+                }
+
+                e.preventDefault();
+            },
 		},
 
 		computed: {

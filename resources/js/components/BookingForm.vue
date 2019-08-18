@@ -1,9 +1,18 @@
 <template>
 	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
 		<section class="w-full my-8 mt-40 md:mt-0" id="car-form" v-if="step === 1">
-			<div class="w-full">
+
+            <div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Segðu okkur nú aðeins um bílinn þinn</h2>
 			</div>
+
+            <p v-if="errors.length" class="text-white mb-6">
+                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -36,21 +45,29 @@
 
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0 float-right">
-					<button @click.prevent="next()"  class="float-right">
+					<button @click.prevent="checkCarForm(), next()"  class="float-right">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 					</button>
 				</div>
 			</div>
 		</section>
-		
+
 		<section class="w-full my-8" id="about-form" v-if="step === 2">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Hver ertu?</h2>
 			</div>
 
+            <p v-if="errors.length" class="text-white mb-6">
+                <strong class="font-bold">Úpps! Einhvað fór úrskeiðis:</strong>
+
+                <ul>
+                    <li v-for="error in errors">{{ error }}</li>
+                </ul>
+            </p>
+
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Kennitala" name="socialId" required v-model="booking.socialId" @blur="checkIfSocialIdIsValid()">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Kennitala" name="socialId" required v-model="booking.socialId">
 				</div>
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Nafn" name="name" required v-model="booking.name">
@@ -75,7 +92,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="next()">
+							<button @click.prevent="checkUserForm(), next()">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 							</button>
 						</li>
@@ -85,25 +102,21 @@
 		</section>
 
 		<section class="w-full my-8" id="arrival-form" v-if="step === 3">
-			<!-- <div class="w-full">
+			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12 pt-20">Hvenær er ferðin þín?</h2>
-			</div> -->
+			</div>
 
-			<vc-date-picker
-				mode="range"
-				:value="null"
-				:min-date='new Date()'
-				color="orange"
-				is-required
-				is-inline
-				is-expanded
-				v-model='selectedValue'
-				name="date"
-				:columns="$screens({ mobile: 1, table: 2, laptop: 2 })"
-			/>
+            <div class="flex flex-wrap -mx-3 my-6">
+                <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <datetime type="date" v-model="selectedDeliveryDay" title="Brottfaradagur" format="E/M/y" min-datetime="01/09/2019" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></datetime>
+                </div>
+                <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <datetime type="date" v-model="selectedPickUpDay" title="Komudagur" format="E/M/y" class="theme-orange" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"></datetime>
+                </div>
+            </div>
 
 			<div class="flex flex-wrap -mx-3 my-6">
-				<div class="inline-block relative w-full md:w-1/3 px-3 mb-6 md:mb-0">
+				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
 						<option selected disabled>Hvenær mættiru á Leifstöð</option>
 						<option>00:00</option>
@@ -230,7 +243,7 @@
 						<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 					</div>
 				</div>
-				<div class="inline-block relative w-full md:w-1/3 px-3 mb-6 md:mb-0">
+				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
 						<option selected disabled>Hvenær viltu sækja bílinn?</option>
 						<option>00:00</option>
@@ -357,9 +370,9 @@
 						<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 					</div>
 				</div>
-				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+				<!-- <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
-				</div>
+				</div> -->
 			</div>
 
 			<div class="flex flex-wrap -mx-3">
@@ -371,7 +384,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="next()">
+							<button @click.prevent="checkDateForm(), next()">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 							</button>
 						</li>
@@ -389,8 +402,8 @@
 			<div class="flex flex-wrap -mx-3 my-12">
 				<div v-for="service in services">
 					<div v-if="service.carMake === 'Fólksbíll'">
-						<label class="px-3 mb-6 md:mb-2 pr-8 block">
 							<input class="mr-2 leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id)" :id="service.id">
+						<label class="px-3 mb-6 md:mb-2 pr-8 block">
 
 							<span class="font-normal text-white" v-text="service.description"></span>
 						</label>
@@ -419,11 +432,11 @@
 			</div>
 		</section>
 
-		<payment v-if="showPayment" 
-			@hide="hideModal" 
-			:userAge="userAge" 
-			:servicePrice="servicePrice" 
-			:numberOfDays="numberOfDays" 
+		<payment v-if="showPayment"
+			@hide="hideModal"
+			:userAge="userAge"
+			:servicePrice="servicePrice"
+			:numberOfDays="numberOfDays"
 			:priceForDays="priceForDays"
 			:paidPrice="total"
 			:sessionKey="sessionKey">
@@ -448,7 +461,9 @@
 				selectedServicesId: [],
 				selectedServicesPrices: [],
 
-				selectedValue: null,
+                selectedDeliveryDay: null,
+                selectedPickUpDay: "Hvenær kemuru heim?",
+
 				step: 1,
 				booking: {
 					carNumber: null,
@@ -485,7 +500,7 @@
 					console.log(error);
 				});
 			},
-			
+
 			getServices() {
 				axios.get('/api/services/get')
 				.then(response => {
@@ -493,29 +508,95 @@
 				})
 			},
 
-			carFormValidation() {
-				if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.color === '') {
-					return true;
-				} else {
-					return false;
-				}
-			},
-
-			checkIfSocialIdIsValid() {
-				if (!kennitala.isPerson(this.booking.socialId)) {
-					this.errors.push('Kennitala er ekki lögleg');
-				}
-			},
-
 			hideModal () {
 				return this.showPayment = false;
 			},
+
+            checkCarForm: function (e) {
+                if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.carColor) {
+                    return true;
+                }
+
+                this.errors = [];
+
+                if (!this.booking.carNumber) {
+                    this.errors.push('Vantar bílnúmer!');
+                }
+                if (!this.booking.carSize) {
+                    this.errors.push('Veldu stærð!');
+                }
+                if (!this.booking.carMake) {
+                    this.errors.push('Vantar tegund bíls!');
+                }
+                if (!this.booking.carType) {
+                    this.errors.push('Vantar undirtegund bíls!');
+                }
+                if (!this.booking.carColor) {
+                    this.errors.push('Vantar lit bíls!');
+                }
+
+                e.preventDefault();
+            },
+
+            checkUserForm: function (e) {
+                if (this.booking.name && this.booking.socialId && this.booking.email && this.booking.phone) {
+                    return true;
+                }
+
+                this.errors = [];
+
+                if (!this.booking.name) {
+                    this.errors.push('Vantar nafn!');
+                }
+                if (!this.booking.socialId) {
+                    this.errors.push('Vandar kennitölu!');
+                }
+                if (!this.booking.email) {
+                    this.errors.push('Vantar netfang!');
+                }
+                if (!this.booking.phone) {
+                    this.errors.push('Vantar símanúmer!');
+                }
+
+                if (!kennitala.isPerson(this.booking.socialId)) {
+                    this.errors.push('Kennitala er ekki lögleg');
+                }
+
+                e.preventDefault();
+            },
+
+            checkDateForm: function (e) {
+                if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
+                    return true;
+                }
+
+                this.errors = [];
+
+                if (!this.booking.dropOffDate) {
+                    this.errors.push('Vantar brottfarardag!');
+                }
+                if (!this.booking.socialId) {
+                    this.errors.push('Vandar brottfarartíma!');
+                }
+                if (!this.booking.email) {
+                    this.errors.push('Vantar komudag !');
+                }
+                if (!this.booking.phone) {
+                    this.errors.push('Vantar komutíma!');
+                }
+                if (!this.booking.phone) {
+                    this.errors.push('Vantar flugnúmer!');
+                }
+
+                e.preventDefault();
+            },
 
 			prev() {
 				this.step--;
 			},
 
 			next() {
+                this.errors = [];
 				this.step++;
 			},
 
@@ -524,7 +605,7 @@
 					this.selectedServicesId.splice(this.selectedServicesId.indexOf(id), 1)
 				} else {
 					this.selectedServicesId.push(id);
-				}	
+				}
 			},
 
 			addBookingToSession() {
@@ -565,10 +646,10 @@
 				return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price-500));
 			},
 			dropOffDate: function () {
-				return moment(this.selectedValue.start).format('DD/MM/YYYY');
+				return this.dropOffDate = moment(this.selectedDeliveryDay.value).format('DD/MM/YYYY');
 			},
 			pickUpDate: function () {
-				return moment(this.selectedValue.end).format('DD/MM/YYYY')
+				return moment(this.selectedPickUpDay.value).format('DD/MM/YYYY')
 			},
 			servicePrice: function () {
 				return (this.total - this.price) - this.priceForDays;
@@ -577,7 +658,7 @@
 				return kennitala.info(this.booking.socialId).age;
 			},
 			numberOfDays: function () {
-				return Math.abs(moment(this.selectedValue.start).diff(moment(this.selectedValue.end), 'days'))
+				return Math.abs(moment(this.selectedDeliveryDay.value).diff(moment(this.selectedPickUpDay.value), 'days'))
 			},
 			priceForDays: function () {
 				return (this.numberOfDays * 500);
@@ -593,9 +674,17 @@
 	}
 </script>
 
-<style type="text/css">
-	.vc-grid-container {
-		display: block;
-		height: 100%;
-	}
+
+<style>
+    .theme-orange .vdatetime-popup__header,
+    .theme-orange .vdatetime-calendar__month__day--selected > span > span,
+    .theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {
+        background: #FF9800;
+    }
+
+    .theme-orange .vdatetime-year-picker__item--selected,
+    .theme-orange .vdatetime-time-picker__item--selected,
+    .theme-orange .vdatetime-popup__actions__button {
+        color: #ff9800;
+    }
 </style>

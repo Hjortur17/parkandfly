@@ -8,7 +8,7 @@
 					</h1>
 				</a>
 			</li>
-			<!-- <li class="self-center">
+			<li class="self-center">
 				<div class="button_container" id="toggle" :class="{'active': isActive}" @click="toggleMenu">
 					<span class="top"></span>
 					<span class="middle"></span>
@@ -19,39 +19,39 @@
 					<nav class="overlay-menu">
 						<ul>
 							<li>
-								<a href="#" class="cursor-pointer">
+								<a href="/" class="cursor-pointer">
 									Bóka
 								</a>
 							</li>
 							<li>
-								<a href="#" class="cursor-pointer">
-									Þjónustuferlið
+								<a href="/hvernig-virkar-park-and-fly" class="cursor-pointer">
+									Hvernig virkar Park and fly?
 								</a>
 							</li>
 							<li>
-								<a href="#" class="cursor-pointer">
+								<a href="/algengar-spurningar" class="cursor-pointer">
 									Algengar Spurningar
 								</a>
 							</li>
 							<li>
-								<a href="#" class="cursor-pointer">
+								<a href="/verdskra" class="cursor-pointer">
 									Verðskrá
 								</a>
 							</li>
 							<li>
-								<a href="#" class="cursor-pointer">
+								<a href="/um-okkur" class="cursor-pointer">
 									Um Okkur
 								</a>
 							</li>
 							<li>
-								<a href="#" class="cursor-pointer">
+								<a href="/skilmalar" class="cursor-pointer">
 									Skilmálar
 								</a>
 							</li>
 						</ul>
 					</nav>
 				</div>
-			</li> -->
+			</li>
 		</ul>
 	</nav>
 </template>
@@ -187,7 +187,7 @@
 	height: 70%;
 	top: 50%;
 	transform: translateY(-50%);
-	font-size: 50px;
+	font-size: 40px;
 	font-weight: 400;
 	text-align: center;
 	z-index: 100;
@@ -199,7 +199,7 @@
 	margin: 0 auto;
 	display: inline-block;
 	position: relative;
-	height: 100%; 
+	height: 100%;
 }
 
 .overlay-menu ul li {
