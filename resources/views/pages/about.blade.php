@@ -6,7 +6,6 @@
 
         <div class="container max-w-4xl mx-auto px-6 mt-16 md:mt-0 pb-24 md:pb-0">
             <div class="md:min-h-screen p-0 flex flex-col flex-no-wrap md:justify-center md:items-center">
-
                 <div class="flex flex-col">
                     <h1 class="text-left text-5xl text-white font-bold mb-6">Um Okkur</h1>
 
@@ -20,6 +19,28 @@
 
                     <p class="text-left text-lg text-white text-lg leading-normal">
                         Tilgangur fyrirtækisins er að veita viðskiptavinum hágæða þjónustu við vörslu á bílum þeirra á meðan þeir ferðast erlendis. Aðeins er boðið upp á lokuð, varinn og upplýst svæði!
+                    </p>
+
+                    <p class="text-left text-lg text-white text-lg leading-normal mt-10">
+                        Park And Fly ehf.
+                    </p>
+                    <p class="text-left text-lg text-white text-lg leading-normal">
+                         Helgurvíkurvegi 5
+                    </p> 
+
+                    <p class="text-left text-lg text-white text-lg leading-normal">251 Suðurnesjabær </p>
+
+                    <p><a href="mailto:parkandfly@parkandfly.is" class="text-left text-white text-lg leading-normal hover:bg-orange-400">parkandfly@parkandfly.is</a></p>
+
+                    <p><a href="tel:+3546800000" class="text-left text-white text-lg leading-normal hover:bg-orange-400"> 680-0000 </a></p>
+
+                    <p class="text-left text-lg text-white text-lg leading-normal my-4">
+                        Kt. 650119-1340
+                        Vsk.nr 135267
+                    </p>
+
+                    <p class="text-left text-lg text-white text-lg leading-normal">
+                        Opið allan sólahringinn allt árið um kring.
                     </p>
                 </div>
             </div>
