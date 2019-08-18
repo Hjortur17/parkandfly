@@ -32,6 +32,6 @@ class BookingConfirmed extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.confirmed');
+        return $this->subject('Bókun staðfest!')->view('emails.confirmed');
     }
 }

@@ -99,6 +99,8 @@
 			</div>
 		</div>
 
+        <hr class="my-6">
+
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um þig:</strong>
