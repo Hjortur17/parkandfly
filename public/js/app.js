@@ -2297,6 +2297,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -2329,8 +2333,8 @@ __webpack_require__.r(__webpack_exports__);
         phone: null,
         dropOffDate: this.dropOffDate,
         pickUpDate: this.pickUpDate,
-        dropOffTime: "Hvenær mættiru á Leifstöð",
-        pickUpTime: "Hvenær viltu sækja bílinn?",
+        dropOffTime: "Áætlaður komutími á Leifsstöð?",
+        pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
         flightNumber: null
       },
       showPayment: false,
@@ -2458,6 +2462,15 @@ __webpack_require__.r(__webpack_exports__);
         this.selectedServicesId.push(id);
       }
     },
+    changePrice: function changePrice(service) {
+      if (service.id === 7 || service.id === 14 || service.id === 21 || service.id === 28) {
+        if (this.selectedServicesId.includes(service.id)) {
+          return this.price = this.numberOfDaysData * 1290 + this.price - 1290;
+        } else {
+          return this.price -= (this.numberOfDaysData - 1) * 1290;
+        }
+      }
+    },
     addBookingToSession: function addBookingToSession() {
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('/api/session/add/booking', {
         carNumber: this.booking.carNumber,
@@ -2474,7 +2487,7 @@ __webpack_require__.r(__webpack_exports__);
         pickUpDate: this.pickUp,
         pickUpTime: this.booking.pickUpTime,
         flightNumber: this.booking.flightNumber,
-        numberOfDays: this.dataNumberOfDays,
+        numberOfDays: this.numberOfDaysData,
         priceForDays: this.priceForDays,
         paidPrice: this.total,
         selectedServicesId: this.selectedServicesId,
@@ -2613,6 +2626,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var md5__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(md5__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var sha256__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sha256 */ "./node_modules/sha256/lib/sha256.js");
 /* harmony import */ var sha256__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sha256__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -3085,7 +3107,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".button_container {\n  position: relative;\n  height: 27px;\n  width: 35px;\n  cursor: pointer;\n  z-index: 100;\n  transition: opacity .25s ease;\n}\n.active .top {\n  transform: translateY(10px) translateX(0) rotate(45deg);\n  background: #fff;\n}\n.active .middle {\n  opacity: 0;\n  background: #fff;\n}\n.active .bottom {\n  transform: translateY(-10px) translateX(0) rotate(-45deg);\n  background: #fff;\n}\n.button_container span {\n  background: #fff;\n  border: none;\n  height: 5px;\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0;\n  transition:  all .35s ease;\n  cursor: pointer;\n}\n.button_container span:nth-of-type(2) {\n  top: 10px;\n}\n.button_container span:nth-of-type(3) {\n  top: 20px;\n}\n.overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 1;\n  visibility: hidden;\n  transition: opacity .35s, visibility .35s, width .35s;\n  z-index: 50;\n}\n.overlay:before {\n  content: '';\n  background: #4299e1;\n  left: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: left .35s ease;\n}\n.overlay:after {\n  content: '';\n  background: #4299e1;\n  right: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: all .35s ease;\n}\n.open {\n  opacity: .9;\n  visibility: visible;\n  height: 100%;\n}\n.open:before {\n  left: 0;\n}\n.open:after {\n  right: 0;\n}\n.overlay-menu ul li {\n  -webkit-animation: fadeInRight .5s ease forwards;\n          animation: fadeInRight .5s ease forwards;\n  -webkit-animation-delay: .35s;\n          animation-delay: .35s;\n}\n.overlay-menu ul li:nth-of-type(2) {\n  -webkit-animation-delay: .45s;\n          animation-delay: .45s;\n}\n.overlay-menu ul li:nth-of-type(3) {\n  -webkit-animation-delay: .55s;\n          animation-delay: .55s;\n}\n.overlay-menu ul li:nth-of-type(4) {\n  -webkit-animation-delay: .65s;\n          animation-delay: .65s;\n}\n.overlay-menu {\n  position: relative;\n  height: 70%;\n  top: 50%;\n  transform: translateY(-50%);\n  font-size: 40px;\n  font-weight: 400;\n  text-align: center;\n  z-index: 100;\n}\n.overlay-menu ul {\n  list-style: none;\n  padding: 0;\n  margin: 0 auto;\n  display: inline-block;\n  position: relative;\n  height: 100%;\n}\n.overlay-menu ul li {\n  display: block;\n  margin-bottom: 50px;\n  position: relative;\n  opacity: 1;\n}\n.overlay-menu ul li a {\n  display: block;\n  position: relative;\n  color: #fff;\n  text-decoration: none;\n  overflow: hidden;\n}\n.overlay-menu ul li a:hover:after,\n.overlay-menu ul li a:focus:after,\n.overlay-menu ul li a:active:after {\n  width: 100%;\n}\n.overlay-menu ul li a:after {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  width: 0%;\n  transform: translateX(-50%);\n  height: 3px;\n  background: #fff;\n  transition: .35s;\n}\n@-webkit-keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n@keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n", ""]);
+exports.push([module.i, ".button_container {\n  position: relative;\n  height: 27px;\n  width: 35px;\n  cursor: pointer;\n  z-index: 100;\n  transition: opacity .25s ease;\n}\n.active .top {\n  transform: translateY(10px) translateX(0) rotate(45deg);\n  background: #fff;\n}\n.active .middle {\n  opacity: 0;\n  background: #fff;\n}\n.active .bottom {\n  transform: translateY(-10px) translateX(0) rotate(-45deg);\n  background: #fff;\n}\n.button_container span {\n  background: #fff;\n  border: none;\n  height: 5px;\n  width: 100%;\n  position: absolute;\n  top: 0px;\n  left: 0;\n  transition:  all .35s ease;\n  cursor: pointer;\n}\n.button_container span:nth-of-type(2) {\n  top: 10px;\n}\n.button_container span:nth-of-type(3) {\n  top: 20px;\n}\n.overlay {\n  position: fixed;\n  top: 0;\n  left: 0;\n  width: 100%;\n  height: 100%;\n  opacity: 1;\n  visibility: hidden;\n  transition: opacity .35s, visibility .35s, width .35s;\n  z-index: 50;\n}\n.overlay:before {\n  content: '';\n  background: #4299e1;\n  left: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: left .35s ease;\n}\n.overlay:after {\n  content: '';\n  background: #4299e1;\n  right: -55%;\n  top: 0;\n  width: 50%;\n  height: 100%;\n  position: absolute;\n  transition: all .35s ease;\n}\n.open {\n  opacity: .9;\n  visibility: visible;\n  height: 100%;\n}\n.open:before {\n  left: 0;\n}\n.open:after {\n  right: 0;\n}\n.overlay-menu ul li {\n  -webkit-animation: fadeInRight .5s ease forwards;\n          animation: fadeInRight .5s ease forwards;\n  -webkit-animation-delay: .35s;\n          animation-delay: .35s;\n}\n.overlay-menu ul li:nth-of-type(2) {\n  -webkit-animation-delay: .45s;\n          animation-delay: .45s;\n}\n.overlay-menu ul li:nth-of-type(3) {\n  -webkit-animation-delay: .55s;\n          animation-delay: .55s;\n}\n.overlay-menu ul li:nth-of-type(4) {\n  -webkit-animation-delay: .65s;\n          animation-delay: .65s;\n}\n.overlay-menu {\n  position: relative;\n  height: 80%;\n  top: 50%;\n  transform: translateY(-50%);\n  font-size: 35px;\n  font-weight: 400;\n  text-align: center;\n  z-index: 100;\n}\n.overlay-menu ul {\n  list-style: none;\n  padding: 0;\n  margin: 0 auto;\n  display: inline-block;\n  position: relative;\n  height: 100%;\n}\n.overlay-menu ul li {\n  display: block;\n  margin-bottom: 50px;\n  position: relative;\n  opacity: 1;\n}\n.overlay-menu ul li a {\n  display: block;\n  position: relative;\n  color: #fff;\n  text-decoration: none;\n  overflow: hidden;\n}\n.overlay-menu ul li a:hover:after,\n.overlay-menu ul li a:focus:after,\n.overlay-menu ul li a:active:after {\n  width: 100%;\n}\n.overlay-menu ul li a:after {\n  content: '';\n  position: absolute;\n  bottom: 0;\n  left: 50%;\n  width: 0%;\n  transform: translateX(-50%);\n  height: 3px;\n  background: #fff;\n  transition: .35s;\n}\n@-webkit-keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n@keyframes fadeInRight {\n0% {\n    opacity: 0;\n    left: 20%;\n}\n100% {\n    opacity: 1;\n    left: 0;\n}\n}\n", ""]);
 
 // exports
 
@@ -39731,7 +39753,7 @@ var render = function() {
               _c("div", { staticClass: "flex flex-wrap -mx-3 my-6" }, [
                 _c(
                   "div",
-                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  { staticClass: "w-full md:w-1/2 px-3 mb-6 md:mb-0" },
                   [
                     _c("input", {
                       directives: [
@@ -39862,69 +39884,83 @@ var render = function() {
                 { staticClass: "flex flex-wrap -mx-3 my-12" },
                 _vm._l(_vm.services, function(service) {
                   return _c("div", [
-                    service.carMake === "Fólksbíll"
+                    service.carMake === _vm.booking.carSize
                       ? _c("div", [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.selectedServicesPrices,
-                                expression: "selectedServicesPrices"
-                              }
-                            ],
-                            staticClass: "mr-2 leading-tight",
-                            attrs: { type: "checkbox", id: service.id },
-                            domProps: {
-                              value: service.price,
-                              checked: Array.isArray(_vm.selectedServicesPrices)
-                                ? _vm._i(
-                                    _vm.selectedServicesPrices,
-                                    service.price
-                                  ) > -1
-                                : _vm.selectedServicesPrices
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.addToArray(service.id)
-                              },
-                              change: function($event) {
-                                var $$a = _vm.selectedServicesPrices,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = service.price,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.selectedServicesPrices = $$a.concat([
-                                        $$v
-                                      ]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.selectedServicesPrices = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
+                          _c("div", { staticClass: "flex pr-6 mb-6 md:mb-2" }, [
+                            _c("div", { staticClass: "w-4 self-center" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.selectedServicesPrices,
+                                    expression: "selectedServicesPrices"
                                   }
-                                } else {
-                                  _vm.selectedServicesPrices = $$c
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c(
-                            "label",
-                            { staticClass: "px-3 mb-6 md:mb-2 pr-8 block" },
-                            [
-                              _c("span", {
-                                staticClass: "font-normal text-white",
+                                ],
+                                staticClass: "leading-tight",
+                                attrs: { type: "checkbox", id: service.id },
                                 domProps: {
-                                  textContent: _vm._s(service.description)
+                                  value: service.price,
+                                  checked: Array.isArray(
+                                    _vm.selectedServicesPrices
+                                  )
+                                    ? _vm._i(
+                                        _vm.selectedServicesPrices,
+                                        service.price
+                                      ) > -1
+                                    : _vm.selectedServicesPrices
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.addToArray(service.id),
+                                      _vm.changePrice(service)
+                                  },
+                                  change: function($event) {
+                                    var $$a = _vm.selectedServicesPrices,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = service.price,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.selectedServicesPrices = $$a.concat(
+                                            [$$v]
+                                          ))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.selectedServicesPrices = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
+                                      }
+                                    } else {
+                                      _vm.selectedServicesPrices = $$c
+                                    }
+                                  }
                                 }
                               })
-                            ]
-                          )
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "flex-1 pl-3" }, [
+                              _c("label", [
+                                _c("span", {
+                                  staticClass: "font-normal text-white",
+                                  domProps: {
+                                    textContent: _vm._s(service.description)
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("br"),
+                                _vm._v(" "),
+                                _c("span", {
+                                  staticClass: "text-sm text-white",
+                                  domProps: {
+                                    textContent: _vm._s(service.price + "kr")
+                                  }
+                                })
+                              ])
+                            ])
+                          ])
                         ])
                       : _vm._e()
                   ])
@@ -40020,7 +40056,7 @@ var render = function() {
             attrs: {
               userAge: _vm.userAge,
               servicePrice: _vm.servicePrice,
-              numberOfDays: _vm.dataNumberOfDays,
+              numberOfDays: _vm.numberOfDaysData,
               priceForDays: _vm.priceForDays,
               paidPrice: _vm.total,
               sessionKey: _vm.sessionKey
@@ -40405,35 +40441,61 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "flex-1 text-right" }, [
-                        _c("input", {
-                          directives: [
+                        _c("form", { staticClass: "w-full" }, [
+                          _c(
+                            "div",
                             {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.couponInput,
-                              expression: "couponInput"
-                            }
-                          ],
-                          staticClass:
-                            "w-full border-b border-orange-500 px-3 py-1 outline-none font-light",
-                          attrs: {
-                            type: "text",
-                            name: "coupon",
-                            placeholder: "Afsláttarkóði"
-                          },
-                          domProps: { value: _vm.couponInput },
-                          on: {
-                            blur: function($event) {
-                              return _vm.couponApplied()
+                              staticClass:
+                                "flex items-center border-b border-b-2 border-orange-500 py-2"
                             },
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.couponInput = $event.target.value
-                            }
-                          }
-                        })
+                            [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.couponInput,
+                                    expression: "couponInput"
+                                  }
+                                ],
+                                staticClass:
+                                  "appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none",
+                                attrs: {
+                                  type: "text",
+                                  placeholder: "Afsláttarkóði"
+                                },
+                                domProps: { value: _vm.couponInput },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.couponInput = $event.target.value
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "button",
+                                {
+                                  staticClass:
+                                    "flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none",
+                                  attrs: { type: "button" },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.couponApplied()
+                                    }
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                                    Nota\n                                                "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
+                        ])
                       ])
                     ]
                   )

@@ -370,13 +370,10 @@
 						<svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
 					</div>
 				</div>
-				<!-- <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
-				</div> -->
 			</div>
 
             <div class="flex flex-wrap -mx-3 my-6">
-                <div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
                 </div>
             </div>
@@ -407,12 +404,19 @@
 
 			<div class="flex flex-wrap -mx-3 my-12">
 				<div v-for="service in services">
-					<div v-if="service.carMake === 'Fólksbíll'">
-							<input class="mr-2 leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id)" :id="service.id">
-						<label class="px-3 mb-6 md:mb-2 pr-8 block">
-
-							<span class="font-normal text-white" v-text="service.description"></span>
-						</label>
+					<div v-if="service.carMake === booking.carSize">
+                            <div class="flex pr-6 mb-6 md:mb-2">
+                                <div class="w-4 self-center">
+                                    <input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id">
+                                </div>
+                                <div class="flex-1 pl-3">
+                                    <label>
+                                        <span class="font-normal text-white" v-text="service.description"></span>
+                                        <br>
+                                        <span class="text-sm text-white" v-text="service.price + 'kr'"></span>
+                                    </label>
+                                </div>
+                            </div>
 					</div>
 				</div>
 			</div>
@@ -442,7 +446,7 @@
 			@hide="hideModal"
 			:userAge="userAge"
 			:servicePrice="servicePrice"
-			:numberOfDays="dataNumberOfDays"
+			:numberOfDays="numberOfDaysData"
 			:priceForDays="priceForDays"
 			:paidPrice="total"
 			:sessionKey="sessionKey">
@@ -490,8 +494,8 @@
 
 					dropOffDate: this.dropOffDate,
 					pickUpDate: this.pickUpDate,
-					dropOffTime: "Hvenær mættiru á Leifstöð",
-					pickUpTime: "Hvenær viltu sækja bílinn?",
+					dropOffTime: "Áætlaður komutími á Leifsstöð?",
+					pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
 					flightNumber: null,
 				},
 				showPayment: false,
@@ -617,6 +621,16 @@
 				}
 			},
 
+            changePrice(service) {
+			    if (service.id === 7 || service.id === 14 || service.id === 21 || service.id === 28) {
+                    if (this.selectedServicesId.includes(service.id)) {
+                        return this.price = (((this.numberOfDaysData)*1290)+this.price)-1290;
+                    } else {
+                        return this.price -= ((this.numberOfDaysData-1)*1290);
+                    }
+                }
+            },
+
 			addBookingToSession() {
 				axios.post('/api/session/add/booking', {
 					carNumber: this.booking.carNumber,
@@ -636,7 +650,7 @@
 					pickUpTime: this.booking.pickUpTime,
 					flightNumber: this.booking.flightNumber,
 
-					numberOfDays: this.dataNumberOfDays,
+					numberOfDays: this.numberOfDaysData,
 					priceForDays: this.priceForDays,
 
 					paidPrice: this.total,

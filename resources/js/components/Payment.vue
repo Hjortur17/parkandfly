@@ -38,7 +38,16 @@
 
 								<div class="block flex justify-between mb-8">
 									<div class="flex-1 text-left"><strong class="font-normal">Afsláttarkóði</strong></div>
-									<div class="flex-1 text-right"><input type="text" name="coupon" class="w-full border-b border-orange-500 px-3 py-1 outline-none font-light" placeholder="Afsláttarkóði" @blur="couponApplied()" v-model="couponInput"></div>
+									<div class="flex-1 text-right">
+                                        <form class="w-full">
+                                            <div class="flex items-center border-b border-b-2 border-orange-500 py-2">
+                                                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Afsláttarkóði" v-model="couponInput">
+                                                <button class="flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none" type="button" @click="couponApplied()">
+                                                    Nota
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
 								</div>
 							</div>
 						</slot>

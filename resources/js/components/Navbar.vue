@@ -185,10 +185,10 @@
 
 .overlay-menu {
 	position: relative;
-	height: 70%;
+	height: 80%;
 	top: 50%;
 	transform: translateY(-50%);
-	font-size: 40px;
+	font-size: 35px;
 	font-weight: 400;
 	text-align: center;
 	z-index: 100;
