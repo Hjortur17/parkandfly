@@ -141,7 +141,7 @@
                     <strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
                     @foreach ($booking->services as $service)
-                        <li>{{ $service->pivot->description }}</li>
+                        <li>{{ $service->description }}</li>
                     @endforeach
                 </ul>
             </div>
