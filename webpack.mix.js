@@ -20,4 +20,6 @@ mix
 	.browserSync({
 		proxy: 'booking.test',
 	})
-    .purgeCss();
+    .purgeCss({
+        enabled: true
+    });

@@ -25,7 +25,7 @@
                         Park And Fly ehf.
                     </p>
                     <p class="text-left text-lg text-white text-lg leading-normal">
-                         Helgurvíkurvegi 5
+                         Helguvíkurvegi 5
                     </p> 
 
                     <p class="text-left text-lg text-white text-lg leading-normal">251 Suðurnesjabær </p>

@@ -57,7 +57,7 @@
 		}
 
 		.w-60 {
-			width: 50%;
+			width: 45%;
 		}
 
 		.header {

@@ -41,26 +41,26 @@
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Alþrif & Bón</td>
 
-                                    <td class="py-4 px-6 border-b border-grey-light">15.500kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">14.500kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">16.500kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">17.500kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">18.500kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">23.500kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">22.500kr</td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Þrif að utan & Bón</td>
 
-                                    <td class="py-4 px-6 border-b border-grey-light">9.900kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">8.900kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">10.900kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">11.900kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">12.900kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">17.900kr</td>
+                                    <td class="py-4 px-6 border-b border-grey-light">16.900kr</td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Þrif að innan</td>
 
+                                    <td class="py-4 px-6 border-b border-grey-light">5.900kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">6.900kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">7.900kr</td>
                                     <td class="py-4 px-6 border-b border-grey-light">8.900kr</td>
-                                    <td class="py-4 px-6 border-b border-grey-light">9.900kr</td>
                                 </tr>
                                 <tr class="hover:bg-grey-lighter">
                                     <td class="py-4 px-6 border-b border-grey-light font-bold">Vélarþvottur</td>
