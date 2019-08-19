@@ -20,7 +20,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
+
+        // $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
+
+        // $today = date("d/m/Y");
+
+        $date = date_create("2019-09-06");
+        $today = date_format($date, "d/m/Y");
+
+        $bookings = Booking::where('dropOffDate', $today)->orderBy('flightTime', 'asc')->get();
 
         return view('dashboard.index', compact('bookings'));
     }

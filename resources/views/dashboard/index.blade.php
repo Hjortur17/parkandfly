@@ -16,27 +16,22 @@
 								<a href="#">Stillingar</a>
 							</li>
 							<li>
-								<a href="#">Útskrá</a>
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Útskrá') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
 							</li>
-						</ul>			
+						</ul>
 					</div>
 				</div>
 			</nav>
 		</div>
 	</header>
 @endsection
-
-{{-- <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-	<a class="dropdown-item" href="{{ route('logout') }}"
-		onclick="event.preventDefault();
-		document.getElementById('logout-form').submit();">
-		{{ __('Logout') }}
-	</a>
-
-	<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-		@csrf
-	</form>
-</div> --}}
 
 @section ('main')
 	<section>
@@ -76,7 +71,7 @@
 						<div class="w-full rounded shadow px-8 py-12 border-t-8 border-green-400 bg-white m-2 hover:shadow-md transition">
 							<div class="flex">
 								<div class="flex-1">
-									<h1 class="font-bold text-4xl text-grey-900">{{ $booking->carNumber }}</h1>
+									<h1 class="font-bold text-4xl text-grey-900">{{ strtoupper($booking->carNumber) }}</h1>
 									<p>{{ $booking->carType}} {{ $booking->carSubtype}} ({{ $booking->carColor }})</p>
 								</div>
 								<div class="flex-1 text-right self-center">
@@ -85,36 +80,56 @@
 								</div>
 							</div>
 
-							@if (!$booking->services->isEmpty())
-								<hr class="border border-grey-100 w-full my-6">
-							@endif
+                            <hr class="border border-grey-100 w-full my-6">
+
+                            <div class="flex my-4">
+                                <div class="w-64 self-center">
+                                    <h3 class="font-light text-xl">Flugupplýsingar:</h3>
+                                </div>
+                                <div class="flex-1 text-right self-center">
+                                    <p><strong>Flugnúmer:</strong> {{ $booking->flightNumber }}</p>
+                                    <p><strong>Áætlaður brottfarartími:</strong> {{ $booking->flightTime }}</p>
+                                </div>
+                            </div>
+
+
+                        @if (!$booking->services->isEmpty())
+                            <hr class="border border-grey-100 w-full my-6">
 
 							<div class="flex my-4">
-								<div class="flex-1 text-right self-center">
+                                <div class="w-64 self-center">
+                                    <h3 class="font-light text-xl">Þjónusta:</h3>
+                                </div>
+								<div class="flex-1 text-right">
 									<ul>
 										@foreach ($booking->services as $service)
 											<li>
-												<p>{{ $service->description }}</p>
+												<p class="font-bold">{{ $service->description }}</p>
 											</li>
 										@endforeach
 									</ul>
 								</div>
 							</div>
+                        @endif
 
 							<hr class="border border-grey-100 w-full my-6">
 
 							<div class="flex">
-								<div class="flex-1">
-									<p class="text-lg mb-2">{{ $booking->name}} <span class="text-gray-600 text-base ml-8">{{ $booking->socialId }}</span></p>
-									
-									<ul>
-										<li>
-											<a href="tel:{{ $booking->phone }}" class="text-orange-500">{{ $booking->phone }}</a>
-										</li>
-										<li>
-											<a href="mailto:{{ $booking->email }}" class="text-orange-500">{{ $booking->email }}</a>
-										</li>
-									</ul>
+                                <div class="w-64 self-center">
+                                    <h3 class="font-light text-xl">Eigandi bíls:</h3>
+                                </div>
+								<div class="flex-1 text-right">
+                                    <p><strong>Nafn:</strong> {{ $booking->name }}</p>
+                                    <p><strong>Kennitala:</strong> {{ substr_replace($booking->socialId, "-", 6, 0) }}</p>
+
+                                    <ul>
+                                        <li>
+                                            <p><strong>Sími:</strong> <a href="tel:{{ $booking->phone }}" class="text-orange-500">{{ $booking->phone }}</a></p>
+                                        </li>
+                                        <li>
+                                            <p><strong>Netfang:</strong> <a href="mailto:{{ $booking->email }}" class="text-orange-500">{{ $booking->email }}</a></p>
+                                        </li>
+                                    </ul>
 								</div>
 							</div>
 						</div>
