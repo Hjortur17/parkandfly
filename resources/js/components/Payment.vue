@@ -157,15 +157,7 @@
             },
 
             couponApplied() {
-                if (this.couponInput.toLowerCase().trim() === 'reynir1980') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
-
-                if (this.couponInput.toLowerCase().trim() === 'liverpool1920') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
-
-                if (this.couponInput.toLowerCase().trim() === 'budapestklinikken') {
+                if (this.couponInput.toLowerCase().trim() === 'reynir1980' || this.couponInput.toLowerCase().trim() === 'liverpool1920' || this.couponInput.toLowerCase().trim() === 'budapestklinikken') {
                     return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
                 }
             },
