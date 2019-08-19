@@ -7,10 +7,10 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+                <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
-                    <li v-for="error in errors">{{ error }}</li>
+                    <li v-for="error in errors" class="text-base">{{ error }}</li>
                 </ul>
             </p>
 
@@ -57,10 +57,10 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+                <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
-                    <li v-for="error in errors">{{ error }}</li>
+                    <li v-for="error in errors" class="text-base">{{ error }}</li>
                 </ul>
             </p>
 
@@ -106,10 +106,10 @@
 			</div>
 
             <p v-if="errors.length" class="text-white mb-6">
-                <strong class="font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+                <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
                 <ul>
-                    <li v-for="error in errors">{{ error }}</li>
+                    <li v-for="error in errors" class="text-base">{{ error }}</li>
                 </ul>
             </p>
 

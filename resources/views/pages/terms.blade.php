@@ -10,34 +10,32 @@
                 <div class="flex flex-col">
                     <h1 class="text-left text-5xl text-white font-bold mb-6">Skilmálar</h1>
 
-                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
-                        <strong class="font-bold mb-1">Persónuupplýsingar: </strong><br>
-
+                    <h3 class="font-bold text-left text-lg text-white text-xl">Persónuupplýsingar: </h3>
+                    <p class="text-left text-lg text-white text-lg mb-6">
                         Viðskiptavinir gefa upp nafn sitt, kennitölu, upplýsingar um bílinn og ferðaáætlun. Þessar upplýsingar verða einungis notaðar til að aðstoða þig á sem bestan hátt.  Allar upplýsingar um greiðslur fara í gegnum Korta og Netgíró. Park And Fly hefur ekki aðgang að þeim upplýsingum. 
                     </p>
 
-                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
-                        <strong class="font-bold mb-1">Endurgreiðsla: </strong><br>
-
+                    <h3 class="font-bold text-left text-lg text-white text-xl">Endurgreiðsla: </h3>
+                    <p class="text-left text-lg text-white text-lg mb-6">
                         Ekki er hægt að fá endurgreitt ef afbókað er innan við 24 klst. fyrir brottför!
                     </p>
 
-                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
-                        <strong class="font-bold mb-1">Ábyrgðarmál: </strong><br>
-
+                    <h3 class="font-bold text-left text-lg text-white text-xl">Ábyrgðarmál: </h3>
+                    <p class="text-left text-lg text-white text-lg">
                         Tjón á bílum viðskiptavina eru að fullu tryggð meðan þeir eru í vörslu hjá Park And Fly. Svæðin okkar eru afgirt og varinn með öryggismyndavélakerfum og flóðlýsingum.  Enginn umgangur er leyfð á svæðum okkar nema fyrir starfsmenn. 
-                        <br>
+                    </p>
+                    <p class="text-left text-lg text-white text-lg mb-6">
                          Ef sannarlegt tjón verður á bíl meðan hann er í umsjá starfmanns Park And Fly þá greiðir fyrirtækið allan kostnað. Komi upp bilun í bifreið sem er í umsjá Park And Fly sem rekja má til eðlilegar bilunar í bílnum sjálfum ber Park And Fly ENGA ÁBYRGÐ á því tjóni. Dæmi um slíka bilun gæti verið slit á tímareim eða önnur eðlileg slit á eldri bílum.
                     </p>
 
-                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
-                        <strong class="font-bold mb-1">Lög og varningur: </strong><br>
-
+                    <h3  class="font-bold text-left text-lg text-white text-xl">Lög og varningur: </h3>
+                    <p class="text-left text-lg text-white text-lg leading-normal mb-6">
                         Ákvæði og skilmálar þessir ber að túlka í samræmi við íslensk lög.  Komi upp ágreiningur eða telji einhver að hann eigi kröfu á hendur Park And Fly ehf. á grundvelli þessara ákvæða og skilmála verður slíkum ágreiningi eða kröfu vísað til meðferðar hjá íslenskum dómstólum.
                     </p>
 
-                    <p class="text-left text-lg text-white text-lg leading-normal mb-2">
-                        <strong class="font-bold mb-1">Athuga þegar greitt er fyrir þjónustu hjá okkur er greitt 500kr minna en upplagt verð fyrir útgöngumiða á bílastæði Isavia. </strong><br>
+                    <p class="text-left text-lg text-white text-lg leading-normal mb-6 font-bold">
+                        Athuga þegar greitt er fyrir þjónustu hjá okkur er greitt 500kr minna en upplagt verð fyrir útgöngumiða á bílastæði Isavia. 
+                    </p>
                 </div>
             </div>
         </div>
