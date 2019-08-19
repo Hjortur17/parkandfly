@@ -135,7 +135,7 @@
 		</div>
 
 
-        @if (!empty($booking->services))
+        @if (!$booking->services->isEmpty())
             <hr class="my-6">
 
             <div class="px-6">
