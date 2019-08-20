@@ -124,10 +124,10 @@
 
                                     <ul>
                                         <li>
-                                            <p><strong>Sími:</strong> <a href="tel:{{ $booking->phone }}" class="text-orange-500">{{ $booking->phone }}</a></p>
+                                            <p><strong>Sími:</strong> <a href="tel:{{ $booking->phone }}" title="Hringja í viðkomandi" class="text-orange-500 hover:text-orange-300 transition">{{ $booking->phone }}</a></p>
                                         </li>
                                         <li>
-                                            <p><strong>Netfang:</strong> <a href="mailto:{{ $booking->email }}" class="text-orange-500">{{ $booking->email }}</a></p>
+                                            <p><strong>Netfang:</strong> <a href="mailto:{{ $booking->email }}" title="Senda tölvupóst á viðkomandi" class="text-orange-500 hover:text-orange-300 transition">{{ $booking->email }}</a></p>
                                         </li>
                                     </ul>
 								</div>

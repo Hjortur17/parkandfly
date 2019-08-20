@@ -168,6 +168,10 @@
                 if (this.couponInput.toLowerCase().trim() === 'budapestklinikken') {
                     return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
                 }
+
+                if (this.couponInput.toLowerCase().trim() === 'icelandairstaff') {
+                    return this.amount = this.paidPrice - (this.paidPrice *(25)/100);
+                }
             },
 
             checkPaymentForm: function (e) {
