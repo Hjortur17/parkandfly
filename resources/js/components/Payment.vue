@@ -117,7 +117,7 @@
                                     <input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
                                 </p>
 
-                                <a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm">Borga</a>
+                                <a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
                             </div>
                         </slot>
                     </div>
@@ -172,6 +172,10 @@
                 if (this.couponInput.toLowerCase().trim() === 'icelandairstaff') {
                     return this.amount = this.paidPrice - (this.paidPrice *(25)/100);
                 }
+
+                if (this.couponInput.toLowerCase().trim() === 'olisstaff') {
+                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
+                }
             },
 
             checkPaymentForm: function (e) {
@@ -183,6 +187,10 @@
 
                 e.preventDefault();
             },
+
+            facebookAd: function () {
+                fbq('track', 'Purchase');
+            }
         },
 
         computed: {
