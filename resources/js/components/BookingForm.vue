@@ -673,7 +673,9 @@
 
 					sessionKey: this.sessionKey
 				})
-				.then(function (response) {})
+				.then(function (response) {
+					console.log('Komið í session!');
+				})
 				.catch(function (error) {});
 			},
 		dropOffDate: function () {
