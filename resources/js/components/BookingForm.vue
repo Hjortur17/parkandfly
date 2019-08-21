@@ -115,10 +115,10 @@
 
             <div class="flex flex-wrap -mx-3 my-6">
                 <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
+                    <datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
                 </div>
                 <div class="inline-block relative w-full md:w-1/2 px-3">
-                    <datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
+                    <datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
                 </div>
             </div>
 
@@ -576,9 +576,11 @@
                 if (!this.booking.socialId) {
                     this.errors.push('Vantar kennitölu!');
                 }
+
                 if (!this.booking.email) {
                     this.errors.push('Vantar netfang!');
                 }
+
                 if (!this.booking.phone) {
                     this.errors.push('Vantar símanúmer!');
                 }

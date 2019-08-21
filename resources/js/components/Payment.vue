@@ -186,10 +186,6 @@
                 }
 
                 e.preventDefault();
-            },
-
-            facebookAd: function () {
-                fbq('track', 'Purchase');
             }
         },
 

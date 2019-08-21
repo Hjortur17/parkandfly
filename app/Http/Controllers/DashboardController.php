@@ -8,94 +8,115 @@ use App\Booking;
 
 class DashboardController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+	public function __construct()
+	{
+		$this->middleware('auth');
+	}
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+	public function today()
+	{
+		// $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
+		// $today = date("d/m/Y");
 
-        // $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
+		$date = date_create("2019-09-30");
+		$today = date_format($date, "d/m/Y");
 
-        // $today = date("d/m/Y");
+		$bookings = Booking::where('dropOffDate', $today)
+		->orWhere('pickUpDate', $today)
+		->orderBy('flightTime', 'asc')
+		->get();
 
-        $date = date_create("2019-09-06");
-        $today = date_format($date, "d/m/Y");
+		return view('dashboard.today', compact('bookings'));
+	}
 
-        $bookings = Booking::where('dropOffDate', $today)->orderBy('flightTime', 'asc')->get();
+	public function todayIn()
+	{
 
-        return view('dashboard.index', compact('bookings'));
-    }
+		// $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+		// $today = date("d/m/Y");
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+		$date = date_create("2019-09-06");
+		$today = date_format($date, "d/m/Y");
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+		$bookings = Booking::where('dropOffDate', $today)->orderBy('flightTime', 'asc')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+		return view('dashboard.todayIn', compact('bookings'));
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+	public function todayGoingOut()
+	{
+		$date = date_create("2019-09-06");
+		$today = date_format($date, "d/m/Y");
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+		$bookings = Booking::where('pickUpDate', $today)->orderBy('flightTime', 'asc')->get();
+
+		return view('dashboard.todayGoingOut', compact('bookings'));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		//
+	}
+
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		//
+	}
+
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show($id)
+	{
+		//
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit($id)
+	{
+		//
+	}
+
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, $id)
+	{
+		//
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  int  $id
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy($id)
+	{
+		//
+	}
 }

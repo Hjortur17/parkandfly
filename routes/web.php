@@ -2,7 +2,7 @@
 
 Auth::routes();
 
-Route::get('/', 'MainController@index');
+Route::get('/', 'PagesController@index');
 Route::get('/um-okkur', 'PagesController@about');
 Route::get('/skilmalar', 'PagesController@terms');
 Route::get('/hvernig-virkar-park-and-fly', 'PagesController@howDoesItWork');
@@ -10,10 +10,12 @@ Route::get('/algengar-spurningar', 'PagesController@questions');
 Route::get('/verdskra', 'PagesController@prices');
 
 Route::get('/stjornbord', function () {
-    return redirect('/stjornbord/i-dag/koma-inn');
+    return redirect('/stjornbord/i-dag');
 })->middleware('auth');
 
-Route::get('/stjornbord/i-dag/koma-inn', 'DashboardController@index');
+Route::get('/stjornbord/i-dag', 'DashboardController@today')->name('today');
+Route::get('/stjornbord/i-dag/koma-inn', 'DashboardController@todayIn')->name('todayIn');
+Route::get('/stjornbord/i-dag/fara-ut', 'DashboardController@todayGoingOut')->name('todayGoingOut');
 
 Route::prefix('api')->group(function () {
 	Route::get('services/get', 'ApiController@getServices');
