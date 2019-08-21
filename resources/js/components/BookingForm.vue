@@ -676,7 +676,9 @@
 				.then(function (response) {
 					console.log('Komið í session!');
 				})
-				.catch(function (error) {});
+				.catch(function (error) {
+					console.log(error);
+				});
 			},
 		dropOffDate: function () {
 		    return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
