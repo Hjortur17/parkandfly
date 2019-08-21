@@ -2,17 +2,17 @@
 	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
 		<section class="w-full my-8" id="car-form" v-if="step === 1">
 
-		<div class="w-full">
+			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um bílinn</h2>
 			</div>
 
-		<p v-if="errors.length" class="text-white mb-6">
-		    <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+			<p v-if="errors.length" class="text-white mb-6">
+				<strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
-		    <ul>
-			  <li v-for="error in errors" class="text-base">{{ error }}</li>
-		    </ul>
-		</p>
+				<ul>
+					<li v-for="error in errors" class="text-base">{{ error }}</li>
+				</ul>
+			</p>
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -56,13 +56,13 @@
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um eiganda eða notanda bílsins</h2>
 			</div>
 
-		<p v-if="errors.length" class="text-white mb-6">
-		    <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+			<p v-if="errors.length" class="text-white mb-6">
+				<strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
-		    <ul>
-			  <li v-for="error in errors" class="text-base">{{ error }}</li>
-		    </ul>
-		</p>
+				<ul>
+					<li v-for="error in errors" class="text-base">{{ error }}</li>
+				</ul>
+			</p>
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -105,22 +105,22 @@
 				<h2 class="font-bold text-white text-4xl text-center mb-12 pt-20">Hvenær er ferðin þín?</h2>
 			</div>
 
-		<p v-if="errors.length" class="text-white mb-6">
-		    <strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
+			<p v-if="errors.length" class="text-white mb-6">
+				<strong class="text-lg font-bold">Úpps! Eitthvað fór úrskeiðis:</strong>
 
-		    <ul>
-			  <li v-for="error in errors" class="text-base">{{ error }}</li>
-		    </ul>
-		</p>
+				<ul>
+					<li v-for="error in errors" class="text-base">{{ error }}</li>
+				</ul>
+			</p>
 
-		<div class="flex flex-wrap -mx-3 my-6">
-		    <div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-			  <datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
-		    </div>
-		    <div class="inline-block relative w-full md:w-1/2 px-3">
-			  <datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
-		    </div>
-		</div>
+			<div class="flex flex-wrap -mx-3 my-6">
+				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
+					<datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
+				</div>
+				<div class="inline-block relative w-full md:w-1/2 px-3">
+					<datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
+				</div>
+			</div>
 
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -379,11 +379,11 @@
 				</div>
 			</div>
 
-		<div class="flex flex-wrap -mx-3 my-6">
-		    <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-			  <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
-		    </div>
-		</div>
+			<div class="flex flex-wrap -mx-3 my-6">
+				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
+				</div>
+			</div>
 
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0">
@@ -412,18 +412,18 @@
 			<div class="flex flex-wrap -mx-3 my-12">
 				<div v-for="service in services">
 					<div v-if="service.carMake === booking.carSize">
-				    <div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
-					  <div class="w-4 self-center">
-						<input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id">
-					  </div>
-					  <div class="flex-1 pl-3">
-						<label>
-						    <span class="font-normal text-white" v-text="service.description"></span>
-						    <br>
-						    <span class="text-sm text-white" v-text="service.price + 'kr'"></span>
-						</label>
-					  </div>
-				    </div>
+						<div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
+							<div class="w-4 self-center">
+								<input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id">
+							</div>
+							<div class="flex-1 pl-3">
+								<label>
+									<span class="font-normal text-white" v-text="service.description"></span>
+									<br>
+									<span class="text-sm text-white" v-text="service.price + 'kr'"></span>
+								</label>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -450,282 +450,282 @@
 		</section>
 
 		<payment v-if="showPayment"
-			@hide="hideModal"
-			:userAge="userAge"
-			:servicePrice="servicePrice"
-			:numberOfDays="numberOfDaysData"
-			:priceForDays="priceForDays"
-			:paidPrice="total"
-			:sessionKey="sessionKey">
-		</payment>
+		@hide="hideModal"
+		:userAge="userAge"
+		:servicePrice="servicePrice"
+		:numberOfDays="numberOfDaysData"
+		:priceForDays="priceForDays"
+		:paidPrice="total"
+		:sessionKey="sessionKey">
+	</payment>
 </div>
 </template>
 
 <script>
-	import axios from 'axios';
-	import kennitala from 'kennitala';
-	import moment from 'moment';
-	import payment from './Payment.vue';
+import axios from 'axios';
+import kennitala from 'kennitala';
+import moment from 'moment';
+import payment from './Payment.vue';
 
-	export default {
-		components: { payment },
+export default {
+	components: { payment },
 
-		data() {
-			return {
-				errors: [],
+	data() {
+		return {
+			errors: [],
 
-				services: [],
-				selectedServicesId: [],
-				selectedServicesPrices: [],
+			services: [],
+			selectedServicesId: [],
+			selectedServicesPrices: [],
 
-		    selectedDeliveryDay: "Brottfaradagur",
-		    selectedPickUpDay: "Komudagur",
+			selectedDeliveryDay: "Brottfaradagur",
+			selectedPickUpDay: "Komudagur",
 
-		    numberOfDaysData: null,
+			numberOfDaysData: null,
 
-		    dropOff: null,
-		    pickUp: null,
+			dropOff: null,
+			pickUp: null,
 
-				step: 1,
-				booking: {
-					carNumber: null,
-					carSize: "Fólksbíll",
-					carMake: null,
-					carType: null,
-					carColor: null,
+			step: 1,
+			booking: {
+				carNumber: null,
+				carSize: "Fólksbíll",
+				carMake: null,
+				carType: null,
+				carColor: null,
 
-					name: null,
-					socialId: null,
-					email: null,
-					phone: null,
+				name: null,
+				socialId: null,
+				email: null,
+				phone: null,
 
-					dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
-					pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
-					dropOffTime: "Áætlaður komutími á Leifsstöð?",
-					pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
-					flightNumber: null,
-				},
-				showPayment: false,
-				price: 4000,
-			}
-		},
-
-		methods: {
-			getCarInfo() {
-				if (this.booking.carNumber === null) {
-				} else {
-					axios.get('/api/car/info/get?carNumber=' + this.booking.carNumber)
-					.then(response => {
-						this.booking.carMake = response.data.make;
-						this.booking.carType = response.data.vehcom;
-						this.booking.carColor = response.data.color;
-					})
-					.catch(function (error) {
-						console.log(error);
-					});
-				}
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
+				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
+				dropOffTime: "Áætlaður komutími á Leifsstöð?",
+				pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
+				flightNumber: null,
 			},
+			showPayment: false,
+			price: 4000,
+		}
+	},
 
-			getServices() {
-				axios.get('/api/services/get')
+	methods: {
+		getCarInfo() {
+			if (this.booking.carNumber === null) {
+			} else {
+				axios.get('/api/car/info/get?carNumber=' + this.booking.carNumber)
 				.then(response => {
-					this.services = response.data;
-				})
-			},
-
-			hideModal () {
-				return this.showPayment = false;
-			},
-
-		checkCarForm(e) {
-		    if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.carColor) {
-			  return true;
-		    }
-
-		    this.errors = [];
-
-		    if (!this.booking.carNumber) {
-			  this.errors.push('Vantar bílnúmer!');
-		    }
-		    if (!this.booking.carSize) {
-			  this.errors.push('Veldu stærð!');
-		    }
-		    if (!this.booking.carMake) {
-			  this.errors.push('Vantar tegund bíls!');
-		    }
-		    if (!this.booking.carType) {
-			  this.errors.push('Vantar undirtegund bíls!');
-		    }
-		    if (!this.booking.carColor) {
-			  this.errors.push('Vantar lit bíls!');
-		    }
-
-		    e.preventDefault();
-		},
-
-		checkUserForm(e) {
-		    if (this.booking.name && this.booking.socialId && this.booking.email && this.booking.phone) {
-			  return true;
-		    }
-
-		    this.errors = [];
-
-		    if (!this.booking.name) {
-			  this.errors.push('Vantar nafn!');
-		    }
-		    if (!this.booking.socialId) {
-			  this.errors.push('Vantar kennitölu!');
-		    }
-
-		    if (!this.booking.email) {
-			  this.errors.push('Vantar netfang!');
-		    }
-
-		    if (!this.booking.phone) {
-			  this.errors.push('Vantar símanúmer!');
-		    }
-
-		    if (!kennitala.isPerson(this.booking.socialId)) {
-			  this.errors.push('Kennitala er ekki lögleg');
-		    }
-
-		    e.preventDefault();
-		},
-
-		checkDateForm(e) {
-		    if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
-			  return true;
-		    }
-
-		    this.errors = [];
-
-		    if (!this.booking.dropOffDate) {
-			  this.errors.push('Vantar brottfarardag!');
-		    }
-		    if (!this.booking.dropOffTime) {
-			  this.errors.push('Vantar brottfarartíma!');
-		    }
-		    if (!this.booking.pickUpDate) {
-			  this.errors.push('Vantar komudag!');
-		    }
-		    if (!this.booking.pickUpTime) {
-			  this.errors.push('Vantar komutíma!');
-		    }
-		    if (!this.booking.flightNumber) {
-			  this.errors.push('Vantar flugnúmer!');
-		    }
-
-		    e.preventDefault();
-		},
-
-			prev() {
-				this.step--;
-			},
-
-			next() {
-		    this.errors = [];
-				this.step++;
-			},
-
-			addToArray(id) {
-				if (this.selectedServicesId.includes(id)) {
-					this.selectedServicesId.splice(this.selectedServicesId.indexOf(id), 1)
-				} else {
-					this.selectedServicesId.push(id);
-				}
-			},
-
-		changePrice(service) {
-			    if (service.id === 7 || service.id === 14 || service.id === 21 || service.id === 28) {
-			  if (this.selectedServicesId.includes(service.id)) {
-				return this.price = (((this.numberOfDaysData)*1290)+this.price)-1290;
-			  } else {
-				return this.price -= ((this.numberOfDaysData-1)*1290);
-			  }
-		    }
-		},
-
-			addBookingToSession() {
-				axios.post('/api/session/add/booking', {
-					carNumber: this.booking.carNumber,
-					carSize: this.booking.carSize,
-					carMake: this.booking.carMake,
-					carType: this.booking.carType,
-					carColor: this.booking.carColor,
-
-					name: this.booking.name,
-					socialId: this.booking.socialId,
-					email: this.booking.email,
-					phone: this.booking.phone,
-
-					dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
-					dropOffTime: this.booking.dropOffTime,
-					pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
-					pickUpTime: this.booking.pickUpTime,
-					flightNumber: this.booking.flightNumber,
-
-					numberOfDays: this.numberOfDaysData,
-					priceForDays: this.priceForDays,
-
-					paidPrice: this.total,
-
-					selectedServicesId: this.selectedServicesId,
-
-					sessionKey: this.sessionKey
-				})
-				.then(function (response) {
-					console.log('Komið í session!');
+					this.booking.carMake = response.data.make;
+					this.booking.carType = response.data.vehcom;
+					this.booking.carColor = response.data.color;
 				})
 				.catch(function (error) {
 					console.log(error);
 				});
-			},
-		dropOffDate: function () {
-		    return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
-		},
-		pickUpDate: function () {
-		    return this.pickUp = moment(this.selectedPickUpDay).format('DD/MM/YYYY');
-		},
-		numberOfDays: function () {
-		    return this.numberOfDaysData = Math.abs(moment(this.selectedDeliveryDay).diff(moment(this.selectedPickUpDay), 'days'));
-		},
-		},
-
-		computed: {
-			total: function() {
-				return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price));
-			},
-		servicePrice: function () {
-				return (this.total - this.price) - this.priceForDays;
-			},
-		userAge: function() {
-				return kennitala.info(this.booking.socialId).age;
-			},
-		priceForDays: function () {
-				return (this.numberOfDaysData * 500);
-			},
-		sessionKey: function () {
-				return Math.random().toString(30).substring(2, 15) + Math.random().toString(30).substring(2, 15);
 			}
 		},
 
-		mounted() {
-			this.getServices();
+		getServices() {
+			axios.get('/api/services/get')
+			.then(response => {
+				this.services = response.data;
+			})
+		},
+
+		hideModal () {
+			return this.showPayment = false;
+		},
+
+		checkCarForm(e) {
+			if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.carColor) {
+				return true;
+			}
+
+			this.errors = [];
+
+			if (!this.booking.carNumber) {
+				this.errors.push('Vantar bílnúmer!');
+			}
+			if (!this.booking.carSize) {
+				this.errors.push('Veldu stærð!');
+			}
+			if (!this.booking.carMake) {
+				this.errors.push('Vantar tegund bíls!');
+			}
+			if (!this.booking.carType) {
+				this.errors.push('Vantar undirtegund bíls!');
+			}
+			if (!this.booking.carColor) {
+				this.errors.push('Vantar lit bíls!');
+			}
+
+			e.preventDefault();
+		},
+
+		checkUserForm(e) {
+			if (this.booking.name && this.booking.socialId && this.booking.email && this.booking.phone) {
+				return true;
+			}
+
+			this.errors = [];
+
+			if (!this.booking.name) {
+				this.errors.push('Vantar nafn!');
+			}
+			if (!this.booking.socialId) {
+				this.errors.push('Vantar kennitölu!');
+			}
+
+			if (!this.booking.email) {
+				this.errors.push('Vantar netfang!');
+			}
+
+			if (!this.booking.phone) {
+				this.errors.push('Vantar símanúmer!');
+			}
+
+			if (!kennitala.isPerson(this.booking.socialId)) {
+				this.errors.push('Kennitala er ekki lögleg');
+			}
+
+			e.preventDefault();
+		},
+
+		checkDateForm(e) {
+			if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
+				return true;
+			}
+
+			this.errors = [];
+
+			if (!this.booking.dropOffDate) {
+				this.errors.push('Vantar brottfarardag!');
+			}
+			if (!this.booking.dropOffTime) {
+				this.errors.push('Vantar brottfarartíma!');
+			}
+			if (!this.booking.pickUpDate) {
+				this.errors.push('Vantar komudag!');
+			}
+			if (!this.booking.pickUpTime) {
+				this.errors.push('Vantar komutíma!');
+			}
+			if (!this.booking.flightNumber) {
+				this.errors.push('Vantar flugnúmer!');
+			}
+
+			e.preventDefault();
+		},
+
+		prev() {
+			this.step--;
+		},
+
+		next() {
+			this.errors = [];
+			this.step++;
+		},
+
+		addToArray(id) {
+			if (this.selectedServicesId.includes(id)) {
+				this.selectedServicesId.splice(this.selectedServicesId.indexOf(id), 1)
+			} else {
+				this.selectedServicesId.push(id);
+			}
+		},
+
+		changePrice(service) {
+			if (service.id === 7 || service.id === 14 || service.id === 21 || service.id === 28) {
+				if (this.selectedServicesId.includes(service.id)) {
+					return this.price = (((this.numberOfDaysData)*1290)+this.price)-1290;
+				} else {
+					return this.price -= ((this.numberOfDaysData-1)*1290);
+				}
+			}
+		},
+
+		addBookingToSession() {
+			axios.post('/api/session/add/booking', {
+				carNumber: this.booking.carNumber,
+				carSize: this.booking.carSize,
+				carMake: this.booking.carMake,
+				carType: this.booking.carType,
+				carColor: this.booking.carColor,
+
+				name: this.booking.name,
+				socialId: this.booking.socialId,
+				email: this.booking.email,
+				phone: this.booking.phone,
+
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
+				dropOffTime: this.booking.dropOffTime,
+				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
+				pickUpTime: this.booking.pickUpTime,
+				flightNumber: this.booking.flightNumber,
+
+				numberOfDays: this.numberOfDaysData,
+				priceForDays: this.priceForDays,
+
+				paidPrice: this.total,
+
+				selectedServicesId: this.selectedServicesId,
+
+				sessionKey: this.sessionKey
+			})
+			.then(function (response) {
+				console.log('Komið í session!');
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		},
+		dropOffDate: function () {
+			return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
+		},
+		pickUpDate: function () {
+			return this.pickUp = moment(this.selectedPickUpDay).format('DD/MM/YYYY');
+		},
+		numberOfDays: function () {
+			return this.numberOfDaysData = Math.abs(moment(this.selectedDeliveryDay).diff(moment(this.selectedPickUpDay), 'days'));
+		},
+	},
+
+	computed: {
+		total: function() {
+			return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price));
+		},
+		servicePrice: function () {
+			return (this.total - this.price) - this.priceForDays;
+		},
+		userAge: function() {
+			return kennitala.info(this.booking.socialId).age;
+		},
+		priceForDays: function () {
+			return (this.numberOfDaysData * 500);
+		},
+		sessionKey: function () {
+			return Math.random().toString(30).substring(2, 15) + Math.random().toString(30).substring(2, 15);
 		}
+	},
+
+	mounted() {
+		this.getServices();
 	}
+}
 </script>
 
 
 <style>
-    .theme-orange .vdatetime-popup__header,
-    .theme-orange .vdatetime-calendar__month__day--selected > span > span,
-    .theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {
-	  background: #FF9800;
-    }
+.theme-orange .vdatetime-popup__header,
+.theme-orange .vdatetime-calendar__month__day--selected > span > span,
+.theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {
+	background: #FF9800;
+}
 
-    .theme-orange .vdatetime-year-picker__item--selected,
-    .theme-orange .vdatetime-time-picker__item--selected,
-    .theme-orange .vdatetime-popup__actions__button {
-	  color: #ff9800;
-    }
+.theme-orange .vdatetime-year-picker__item--selected,
+.theme-orange .vdatetime-time-picker__item--selected,
+.theme-orange .vdatetime-popup__actions__button {
+	color: #ff9800;
+}
 </style>

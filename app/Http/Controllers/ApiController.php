@@ -47,9 +47,11 @@ class ApiController extends Controller
 
 		Session::put('form', $form);
 
-        if (request()->wantsJson()) {
-            return $form;
-        }
+		if (request()->wantsJson()) {
+			return $form;
+		}
+
+		dd($form);
 
 		return $form;
 	}
