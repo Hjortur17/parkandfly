@@ -58,7 +58,7 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
-	    if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
+		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
 
 			$booking = Booking::create([
 				'carNumber' => $request->session()->get('form.carNumber'),
@@ -89,15 +89,14 @@ class ApiController extends Controller
 
 			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
 
-            Mail::to($request->session()->get('form.email'))
-                ->cc('bokanir@parkandfly.is')
-			    ->send(new BookingConfirmed($booking));
+			Mail::to($request->session()->get('form.email'))
+				->cc('bokanir@parkandfly.is')
+				->send(new BookingConfirmed($booking));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 		} else {
-            $request->session()->flush();
-
-            return redirect('/');
-        }
+			$request->session()->flush();
+		}
+		return redirect('/');
 	}
 }
