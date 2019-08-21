@@ -19,6 +19,7 @@ Route::get('/stjornbord/i-dag/fara-ut', 'DashboardController@todayGoingOut')->na
 
 Route::prefix('api')->group(function () {
 	Route::get('services/get', 'ApiController@getServices');
+	Route::get('discounts/get', 'ApiController@getDiscounts');
 	Route::get('car/info/get', 'ApiController@getCarInfo');
 	Route::get('booking/get/id', 'ApiController@getBookingId');
 

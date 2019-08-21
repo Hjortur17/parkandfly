@@ -39,15 +39,15 @@
 								<div class="block flex justify-between mb-8">
 									<div class="w-0 md:flex-1 text-left text-xs md:text-base self-center invisible md:visible"><strong class="font-normal">Afsláttarkóði</strong></div>
 									<div class="flex-1 text-right text-sm md:text-base">
-                                        <form class="w-full">
-                                            <div class="flex items-center border-b border-b-2 border-orange-500 py-2">
-                                                <input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Afsláttarkóði" v-model="couponInput">
-                                                <button class="flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none" type="button" @click="couponApplied()">
-                                                    Nota
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
+										<form class="w-full">
+											<div class="flex items-center border-b border-b-2 border-orange-500 py-2">
+												<input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Afsláttarkóði" v-model="couponInput">
+												<button class="flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none" type="button" @click="couponApplied()">
+													Nota
+												</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
 						</slot>
@@ -98,184 +98,183 @@
 								<form action="https://netgreidslur.korta.is" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
-                                    <input name="merchant" type="hidden" value="8190444">
-                                    <input name="terminal" type="hidden" value="52176">
-                                    <input name="description" type="hidden" value="Park and fly">
-                                    <input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
+									<input name="merchant" type="hidden" value="8190444">
+									<input name="terminal" type="hidden" value="52176">
+									<input name="description" type="hidden" value="Park and fly">
+									<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
 
-                                    <input name="look" type="hidden" value="SIMPLE">
-                                    <input name="readonly" type="hidden" value="Y">
+									<input name="look" type="hidden" value="SIMPLE">
+									<input name="readonly" type="hidden" value="Y">
 
-                                    <input name="refermethod" type="hidden" value="post">
-                                    <input name="refertarget" type="hidden" value="_top">
-                                    <input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
+									<input name="refermethod" type="hidden" value="post">
+									<input name="refertarget" type="hidden" value="_top">
+									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
 
-                                    <input name="reference" type="hidden" :value="this.sessionKey">
-                                </form>
+									<input name="reference" type="hidden" :value="this.sessionKey">
+								</form>
 
-                                <p class="mt-8 mb-6 text-sm">
-                                    <input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
-                                </p>
+								<p class="mt-8 mb-6 text-sm">
+									<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+								</p>
 
-                                <a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
-                            </div>
-                        </slot>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </transition>
+								<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
+							</div>
+						</slot>
+					</div>
+				</div>				
+			</div>
+		</div>
+	</transition>
 </template>
 
 <script>
-    import md5 from 'md5';
-    import sha256 from 'sha256';
+	import md5 from 'md5';
+	import sha256 from 'sha256';
 
-    export default {
-        props: [
-            'userAge',
-            'servicePrice',
-            'numberOfDays',
-            'priceForDays',
-            'paidPrice',
-            'sessionKey'
-        ],
+	export default {
+		props: [
+			'userAge',
+			'servicePrice',
+			'numberOfDays',
+			'priceForDays',
+			'paidPrice',
+			'sessionKey'
+		],
 
-        data() {
-            return {
-                netgiro_reference: 1,
-                couponInput: '',
-                amount: this.paidPrice,
-                netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
-                termsChecked: false
-            }
-        },
+		data() {
+			return {
+				netgiro_reference: 1,
+				couponInput: '',
+				amount: this.paidPrice,
+				netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
+				termsChecked: false,
+				discounts: [],
+			}
+		},
 
-        methods: {
-            hideModal() {
-                this.$emit('hide');
-            },
+		methods: {
+			hideModal() {
+				this.$emit('hide');
+			},
 
-            couponApplied() {
-                if (this.couponInput.toLowerCase().trim() === 'reynir1980') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
+			getDiscounts() {
+				axios.get('/api/discounts/get')
+				.then(response => {
+					this.discounts = response.data;
+				})
+			},
 
-                if (this.couponInput.toLowerCase().trim() === 'liverpool1920') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
+			couponApplied() {
+				for (var i = 0; i < this.discounts.length; i++) {
+					if (this.couponInput.toLowerCase().trim() === this.discounts[i].discount_title) {
+						return this.amount = this.paidPrice - (this.paidPrice *(this.discounts[i].discount_value)/100);
+					}
+				}
+			},
 
-                if (this.couponInput.toLowerCase().trim() === 'budapestklinikken') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
+			checkPaymentForm: function (e) {
+				if (this.termsChecked) {
+					return true;
+				} else {
+					alert('Upps! Þú þarft að samþykkja skilmálana!');
+				}
 
-                if (this.couponInput.toLowerCase().trim() === 'icelandairstaff') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(25)/100);
-                }
+				e.preventDefault();
+			},
 
-                if (this.couponInput.toLowerCase().trim() === 'olisstaff') {
-                    return this.amount = this.paidPrice - (this.paidPrice *(20)/100);
-                }
-            },
+			checkUserAge() {
+				if (this.userAge >= 65) {
+					return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
+				}
+			}
+		},
 
-            checkPaymentForm: function (e) {
-                if (this.termsChecked) {
-                    return true;
-                } else {
-                    alert('Upps! Þú þarft að samþykkja skilmálana!');
-                }
+		computed: {
+			netgiro_signature: function () {
+				return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
+			},
+			checkvaluemd5: function () {
+			//return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
+				return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
+			},
+			korta_link: function () {
+				return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
+			},
+			netgiro_link: function () {
+				return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
+			}
+		},
 
-                e.preventDefault();
-            }
-        },
-
-        computed: {
-            netgiro_signature: function () {
-                return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
-            },
-            checkvaluemd5: function () {
-                //return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
-                return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
-            },
-            korta_link: function () {
-                return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.sessionKey + '&startnewpayment=y';
-            },
-            netgiro_link: function () {
-                return 'https://parkandfly.is/api/booking/create?sessionKey=' + this.sessionKey;
-            }
-        },
-
-        mounted() {
-            if (this.userAge >= 65) {
-                return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
-            }
-        }
-    }
+		mounted() {
+			this.checkUserAge();	
+			this.getDiscounts();
+		},
+	}
 </script>
 
 <style>
     .modal-mask {
-        position: fixed;
-        z-index: 9998;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, .5);
-        display: table;
-        transition: opacity .3s ease;
+	 position: fixed;
+	 z-index: 9998;
+	 top: 0;
+	 left: 0;
+	 width: 100%;
+	 height: 100%;
+	 background-color: rgba(0, 0, 0, .5);
+	 display: table;
+	 transition: opacity .3s ease;
     }
 
     .modal-wrapper {
-        display: table-cell;
-        vertical-align: middle;
+	 display: table-cell;
+	 vertical-align: middle;
     }
 
     .modal-container {
-        width: 500px;
-        margin: 0px auto;
-        padding: 20px 30px;
-        background-color: #fff;
-        border-radius: 2px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
-        transition: all .3s ease;
+	 width: 500px;
+	 margin: 0px auto;
+	 padding: 20px 30px;
+	 background-color: #fff;
+	 border-radius: 2px;
+	 box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+	 transition: all .3s ease;
     }
 
     .modal-header h3 {
-        margin-top: 0;
-        color: #42b983;
+	 margin-top: 0;
+	 color: #42b983;
     }
 
     .modal-body {
-        margin: 20px 0;
+	 margin: 20px 0;
     }
 
     .modal-default-button {
-        float: right;
+	 float: right;
     }
 
 
     .modal-enter {
-        opacity: 0;
+	 opacity: 0;
     }
 
     .modal-leave-active {
-        opacity: 0;
+	 opacity: 0;
     }
 
     .modal-enter .modal-container,
     .modal-leave-active .modal-container {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
+	 -webkit-transform: scale(1.1);
+	 transform: scale(1.1);
     }
 
     @media only screen and (max-width: 600px) {
-        .modal-container {
-            width: 325px;
-        }
+	 .modal-container {
+	     width: 325px;
+	 }
 
-        .modal-mask {
-            height: 100vh;
-        }
+	 .modal-mask {
+	     height: 100vh;
+	 }
     }
 </style>

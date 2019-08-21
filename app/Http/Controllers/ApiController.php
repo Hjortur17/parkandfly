@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Booking;
 use App\Service;
+use App\Discount;
 
 use Illuminate\Support\Facades\Mail;
 use Session;
@@ -18,6 +19,13 @@ class ApiController extends Controller
 		$services = Service::orderBy('id', 'asc')->get();
 
 		return $services;
+	}
+
+	public function getDiscounts()
+	{
+		$discounts = Discount::latest()->get();
+
+		return $discounts;
 	}
 
 	public function getCarInfo(Request $request)
