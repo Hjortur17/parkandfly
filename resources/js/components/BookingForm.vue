@@ -450,14 +450,14 @@
 		</section>
 
 		<payment v-if="showPayment"
-		@hide="hideModal"
-		:userAge="userAge"
-		:servicePrice="servicePrice"
-		:numberOfDays="numberOfDaysData"
-		:priceForDays="priceForDays"
-		:paidPrice="total"
-		:sessionKey="sessionKey">
-	</payment>
+			@hide="hideModal"
+			:userAge="userAge"
+			:servicePrice="servicePrice"
+			:numberOfDays="numberOfDaysData"
+			:priceForDays="priceForDays"
+			:paidPrice="total"
+			:bookingId="bookingId">
+		</payment>
 </div>
 </template>
 
@@ -482,6 +482,8 @@ export default {
 			selectedPickUpDay: "Komudagur",
 
 			numberOfDaysData: null,
+
+			bookingId: null,
 
 			dropOff: null,
 			pickUp: null,
@@ -646,7 +648,7 @@ export default {
 		},
 
 		addBookingToSession() {
-			axios.post('/api/session/add/booking', {
+			axios.post('/api/database/add/booking', {
 				carNumber: this.booking.carNumber,
 				carSize: this.booking.carSize,
 				carMake: this.booking.carMake,
@@ -671,10 +673,10 @@ export default {
 
 				selectedServicesId: this.selectedServicesId,
 
-				sessionKey: this.sessionKey
+				step: 1
 			})
-			.then(function (response) {
-				console.log('Komið í session!');
+			.then(response => {
+				this.bookingId = response.data
 			})
 			.catch(function (error) {
 				console.log(error);
@@ -703,9 +705,6 @@ export default {
 		},
 		priceForDays: function () {
 			return (this.numberOfDaysData * 500);
-		},
-		sessionKey: function () {
-			return Math.random().toString(30).substring(2, 15) + Math.random().toString(30).substring(2, 15);
 		}
 	},
 

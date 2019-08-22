@@ -58,45 +58,68 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
-		if ($request->input('reference') === $request->session()->get('form.sessionKey')) {
+		$booking = Booking::create([
+			'carNumber' => $request->input('carNumber'),
+			'carSize' => $request->input('carSize'),
+			'carMake' => $request->input('carMake'),
+			'carType' => $request->input('carType'),
+			'carColor' => $request->input('carColor'),
 
-			$booking = Booking::create([
-				'carNumber' => $request->session()->get('form.carNumber'),
-				'carSize' => $request->session()->get('form.carSize'),
-				'carMake' => $request->session()->get('form.carMake'),
-				'carType' => $request->session()->get('form.carType'),
-				'carColor' => $request->session()->get('form.carColor'),
+			'name' => $request->input('name'),
+			'socialId' => $request->input('socialId'),
+			'email' => $request->input('email'),
+			'phone' => $request->input('phone'),
 
-				'name' => $request->session()->get('form.name'),
-				'socialId' => $request->session()->get('form.socialId'),
-				'email' => $request->session()->get('form.email'),
-				'phone' => $request->session()->get('form.phone'),
+			'dropOffDate' => $request->input('dropOffDate'),
+			'dropOffTime' => $request->input('dropOffTime'),
+			'pickUpDate' => $request->input('pickUpDate'),
+			'pickUpTime' => $request->input('pickUpTime'),
 
-				'dropOffDate' => $request->session()->get('form.dropOffDate'),
-				'dropOffTime' => $request->session()->get('form.dropOffTime'),
-				'pickUpDate' => $request->session()->get('form.pickUpDate'),
-				'pickUpTime' => $request->session()->get('form.pickUpTime'),
+			'flightNumber' => $request->input('flightNumber'),
 
-				'flightNumber' => $request->session()->get('form.flightNumber'),
+			'numberOfDays' => $request->input('numberOfDays'),
+			'priceForDays' => $request->input('priceForDays'),
 
-				'numberOfDays' => $request->session()->get('form.numberOfDays'),
-				'priceForDays' => $request->session()->get('form.priceForDays'),
+			'paidPrice' => $request->input('paidPrice'),
 
-				'paidPrice' => $request->session()->get('form.paidPrice'),
+			'step' => $request->input('step'),
 
-				'korta_authcode' => $request->input('authcode')
-			]);
+			'reservation_date' => date("Y-m-d H:i:s")
+		]);
 
-			$booking->services()->attach($request->session()->get('form.selectedServicesId'));
+		$booking->services()->attach($request->input('selectedServicesId'));
 
-			Mail::to($request->session()->get('form.email'))
-				->cc('bokanir@parkandfly.is')
-				->send(new BookingConfirmed($booking));
-
-			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
-		} else {
-			$request->session()->flush();
+		if (request()->wantsJson()) {
+			return $booking->id;
 		}
-		return redirect('/');
+
+		return $booking->id;
 	}
+
+	public function updateBooking(Request $request)
+	{
+		Booking::where([
+			['id', '=', $request->input('reference')],
+			['step', '=', 1],
+			// ['korta_authcode', '<>', $request->input('korta_authcode')],
+		])->update(
+			[
+				'korta_authcode' => $request->input('korta_authcode'),
+				'step' => 2,
+				'confirmation_date' => date("Y-m-d H:i:s")
+			]
+		);
+
+		$booking = Booking::where([
+			['id', '=', $request->input('reference')]
+		])->get()->first();
+		
+		Mail::to($booking->email)
+			->cc('hjorturfreyr@hjorturfreyr.com')
+			//->cc('bokanir@parkandfly.is')
+			->send(new BookingConfirmed($booking));
+
+		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð! #');
+	}
+
 }

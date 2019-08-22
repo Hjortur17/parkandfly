@@ -40,7 +40,9 @@ class CreateBookingTable extends Migration
 
     		$table->mediumInteger('paidPrice');
 
-    		$table->string('korta_authcode');
+    		$table->string('korta_authcode')->nullable();
+
+            $table->integer('step')->nullable();
 
     		$table->timestamps();
     	});
