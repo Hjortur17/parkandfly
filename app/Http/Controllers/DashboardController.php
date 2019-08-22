@@ -22,18 +22,16 @@ class DashboardController extends Controller
 		$today = date_format($date, "d/m/Y");
 
 		$bookings = Booking::where('dropOffDate', $today)
-		->orWhere('pickUpDate', $today)
-		->orderBy('flightTime', 'asc')
-		->get();
+			->orWhere('pickUpDate', $today)
+			->orderBy('flightTime', 'asc')
+			->get();
 
 		return view('dashboard.today', compact('bookings'));
 	}
 
 	public function todayIn()
 	{
-
 		// $bookings = Booking::orderBy('dropOffDate', 'asc')->get();
-
 		// $today = date("d/m/Y");
 
 		$date = date_create("2019-09-06");

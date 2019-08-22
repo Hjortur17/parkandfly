@@ -81,9 +81,9 @@
 			margin-bottom: 0.5rem;
 		}
 
-        .mt-10 {
-            margin-top: 50px;
-        }
+		.mt-10 {
+			margin-top: 50px;
+		}
 	</style>
 </head>
 <body>
@@ -99,7 +99,7 @@
 			</div>
 		</div>
 
-        <hr class="my-6">
+		<hr class="my-6">
 
 		<div class="px-6">
 			<ul class="list-none">
@@ -135,23 +135,27 @@
 		</div>
 
 
-        @if (!$booking->services->isEmpty())
-            <hr class="my-6">
+		@if (!$booking->services->isEmpty())
+			<hr class="my-6">
 
-            <div class="px-6">
-                <ul class="list-none">
-                    <strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
+			<div class="px-6">
+				<ul class="list-none">
+					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
-                    @foreach ($booking->services as $service)
-                        <li>{{ $service->description }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @else
-            <p>Þú valdir einga þjónustu hjá okkur.</p>
-        @endif
+					@foreach ($booking->services as $service)
+					<li>{{ $service->description }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@else
+			<hr class="my-6">
 
-        <hr class="my-6">
+			<div class="px-6">
+				<p>Þú valdir enga þjónustu hjá okkur.</p>
+			</div>
+		@endif
+
+		<hr class="my-6">
 
 		<div class="px-6">
 			<ul class="list-none">

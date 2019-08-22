@@ -44,6 +44,13 @@ class CreateBookingTable extends Migration
 
             $table->integer('step')->nullable();
 
+            $table->dateTime('reservation_date')->nullable();
+            $table->dateTime('confirmation_date')->nullable();
+            $table->dateTime('token_expaire_date')->nullable();
+
+            $table->string('booking_ref', 13)->nullable();
+            $table->string('token_korta', 13)->nullable();
+
     		$table->timestamps();
     	});
     }
