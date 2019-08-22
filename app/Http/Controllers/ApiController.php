@@ -58,6 +58,10 @@ class ApiController extends Controller
 
 	public function createBooking (Request $request)
 	{
+		$token = uniqid();
+
+		$booking_ref = uniqid();
+
 		$booking = Booking::create([
 			'carNumber' => $request->input('carNumber'),
 			'carSize' => $request->input('carSize'),
@@ -84,24 +88,58 @@ class ApiController extends Controller
 
 			'step' => $request->input('step'),
 
-			'reservation_date' => date("Y-m-d H:i:s")
+			'reservation_date' => date("Y-m-d H:i:s"),
+			'token_expaire_date' => date("Y-m-d H:i:s"),
+
+			'token_korta' => $token,
+			'booking_ref' => $booking_ref
 		]);
 
 		$booking->services()->attach($request->input('selectedServicesId'));
 
+		$key = $booking_ref . '-' . $token;
+
+		// if (request()->wantsJson()) {
+		// 	return $booking->id;
+		// }
+
+		// return $booking->id;
+
 		if (request()->wantsJson()) {
-			return $booking->id;
+			return $key;
 		}
 
-		return $booking->id;
+		return $key;
 	}
 
 	public function updateBooking(Request $request)
 	{
-		Booking::where([
-			['id', '=', $request->input('reference')],
+		$temp_booking_ref = substr($request->input('reference'), 0, 13);
+		$temp_token = substr($request->input('reference'), 14, 26);
+
+		$token_expaire_date = date("Y-m-d H:i:s");
+
+		$current = Booking::where([
+			['booking_ref', '=', $temp_booking_ref],
+			['token_korta', '=', $temp_token],
 			['step', '=', 1],
-			// ['korta_authcode', '<>', $request->input('korta_authcode')],
+		])->get()->first();
+
+		$keyNow = \DateTime::createFromFormat('Y-m-d H:i:s', $current->token_expaire_date);
+
+		$inAYear = $keyNow->add(new \DateInterval('PT10M'));
+		$prevTokenDate = $inAYear;
+
+		$tempDateNow = \DateTime::createFromFormat('Y-m-d H:i:s', date("Y-m-d H:i:s"));
+
+		if ($prevTokenDate < $tempDateNow) {
+			return redirect('/')->with('flash', 'Óvænt villa!');
+		}
+
+		Booking::where([
+			['booking_ref', '=', $temp_booking_ref],
+			['token_korta', '=', $temp_token],
+			['step', '=', 1]
 		])->update(
 			[
 				'korta_authcode' => $request->input('korta_authcode'),
@@ -109,17 +147,13 @@ class ApiController extends Controller
 				'confirmation_date' => date("Y-m-d H:i:s")
 			]
 		);
-
-		$booking = Booking::where([
-			['id', '=', $request->input('reference')]
-		])->get()->first();
 		
-		Mail::to($booking->email)
+		Mail::to($current->email)
+			->cc('bokanir@parkandfly.is')
 			->cc('hjorturfreyr@hjorturfreyr.com')
-			//->cc('bokanir@parkandfly.is')
-			->send(new BookingConfirmed($booking));
+			->send(new BookingConfirmed($current));
 
-		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð! #');
+		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 	}
 
 }
