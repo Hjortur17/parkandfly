@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Booking;
 use App\Service;
@@ -39,21 +40,6 @@ class ApiController extends Controller
 		$carNumberInfo = $array;
 
 		return $carNumberInfo;
-	}
-
-	public function addBookingToSession(Request $request)
-	{
-		$form = collect($request->all());
-
-		Session::put('form', $form);
-
-		if (request()->wantsJson()) {
-			return $form;
-		}
-
-		dd($form);
-
-		return $form;
 	}
 
 	public function createBooking (Request $request)
@@ -99,11 +85,9 @@ class ApiController extends Controller
 
 		$key = $booking_ref . '-' . $token;
 
-		// if (request()->wantsJson()) {
-		// 	return $booking->id;
-		// }
+		$dateTimeNow = date("Y-m-d H:i:s");
 
-		// return $booking->id;
+		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
 
 		if (request()->wantsJson()) {
 			return $key;
@@ -147,6 +131,8 @@ class ApiController extends Controller
 				'confirmation_date' => date("Y-m-d H:i:s")
 			]
 		);
+
+		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($booking->socialId).', Bókunarnr.: '.$key.', Korta auth_code.: '.($request->input('korta_authcode')).', Skref: 2');
 		
 		Mail::to($current->email)
 			->cc('bokanir@parkandfly.is')

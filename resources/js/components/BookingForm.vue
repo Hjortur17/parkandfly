@@ -20,7 +20,8 @@
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize">
-						<option selected value="Fólksbíll">Fólksbíll</option>
+						<option selected value="">Veldu stærð</option>
+						<option value="Fólksbíll">Fólksbíll</option>
 						<option value="Jepplingur">Jepplingur</option>
 						<option value="Jeppi">Jeppi</option>
 						<option value="Yfirstærð">Yfirstærð</option>
@@ -440,7 +441,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true, addBookingToSession()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true, addBookingToDatabase()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
 								Klára Pöntun
 							</button>
 						</li>
@@ -491,7 +492,7 @@ export default {
 			step: 1,
 			booking: {
 				carNumber: null,
-				carSize: "Fólksbíll",
+				carSize: "",
 				carMake: null,
 				carType: null,
 				carColor: null,
@@ -647,8 +648,8 @@ export default {
 			}
 		},
 
-		addBookingToSession() {
-			axios.post('/api/database/add/booking', {
+		addBookingToDatabase() {
+			axios.post('/api/database/booking/create', {
 				carNumber: this.booking.carNumber,
 				carSize: this.booking.carSize,
 				carMake: this.booking.carMake,

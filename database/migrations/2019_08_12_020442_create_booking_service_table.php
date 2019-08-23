@@ -17,7 +17,6 @@ class CreateBookingServiceTable extends Migration
             $table->primary(['booking_id', 'service_id']);
             $table->integer('booking_id')->nullable();
             $table->integer('service_id')->nullable();
-            
             $table->timestamps();
         });
     }

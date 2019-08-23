@@ -5,6 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Illuminate\Support\Facades\Log;
+
 class Handler extends ExceptionHandler
 {
     /**
@@ -34,7 +36,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
-        parent::report($exception);
+        Log::channel('slackError')->error($exception->getMessage());
+
+        //parent::report($exception);
     }
 
     /**
@@ -46,6 +50,8 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        // return parent::render($request, $exception);
+
+        return redirect('/')->with('flash', 'Óvænt villa koma upp!');
     }
 }

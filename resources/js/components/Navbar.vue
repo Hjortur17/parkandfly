@@ -4,8 +4,8 @@
 			<li>
 				<a href="/">
 					<h1>
-						<img src="/images/white_logo.png" width="200px" title="Park and fly" alt="Park and fly | Logo">
-                        <span class="text-xs md:text-sm text-white mt-1">Tryggðu þér öruggt bílastæði meðan þú ferðast. </span>
+						<img src="/images/logo.png" width="200px" title="Park and fly" alt="Park and fly | Logo">
+                        		<span class="text-xs md:text-sm text-white mt-1">Tryggðu þér öruggt bílastæði meðan þú ferðast. </span>
 					</h1>
 				</a>
 			</li>
@@ -72,8 +72,7 @@
 	}
 </script>
 
-<style type="text/css">
-
+<style>
 .button_container {
 	position: relative;
 	height: 27px;

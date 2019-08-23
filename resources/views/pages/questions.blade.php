@@ -8,7 +8,7 @@
             <div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center md:items-center">
 
                 <div class="flex flex-col">
-                    <h1 class="text-left text-5xl text-white font-bold mb-6">Algengar spurningar</h1>
+                    <h1 class="text-left text-5xl text-white font-bold mt-16 mb-6">Algengar spurningar</h1>
 
                     <h3 class="text-white text-left font-bold mb-1 text-lg">Hvernig virkar Park And Fly? </h3>
                     <p class="text-left text-white leading-normal mb-6">

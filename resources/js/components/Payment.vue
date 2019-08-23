@@ -108,7 +108,7 @@
 
 									<input name="refermethod" type="hidden" value="post">
 									<input name="refertarget" type="hidden" value="_top">
-									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/booking/create">
+									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/database/booking/update">
 
 									<input name="reference" type="hidden" :value="this.bookingId">
 								</form>
@@ -198,10 +198,10 @@
 				return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
 			},
 			korta_link: function () {
-				return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/booking/create&refermethod=POST&refertarget=_top&reference=' + this.bookingId + '&startnewpayment=y';
+				return 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=8190444&terminal=52176&description=Park and fly&lang=is&checkvaluemd5=' + this.checkvaluemd5 + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + this.bookingId + '&startnewpayment=y';
 			},
 			netgiro_link: function () {
-				return 'https://parkandfly.is/api/booking/create?bookingId=' + this.bookingId;
+				return 'https://parkandfly.is/api/database/booking/update?bookingId=' + this.bookingId;
 			}
 		},
 

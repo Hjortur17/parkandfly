@@ -8,7 +8,7 @@
             <div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center md:items-center py-16 mb:py-0">
 
                 <div class="flex flex-col">
-                    <h1 class="text-left text-5xl text-white font-bold mb-6">Skilmálar</h1>
+                    <h1 class="text-left text-5xl text-white font-bold mt-16 mb-6">Skilmálar</h1>
 
                     <h3 class="font-bold text-left text-lg text-white text-xl">Persónuupplýsingar: </h3>
                     <p class="text-left text-lg text-white text-lg mb-6">
