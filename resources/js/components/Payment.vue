@@ -94,7 +94,7 @@
 								</form>
 							</div> -->
 
-							<div class="text-center mt-8">
+							<div class="text-center mt-8 mb-6">
 								<form action="https://netgreidslur.korta.is" method="post">
 									<input name="amount" type="hidden" :value="this.amount">
 									<input name="currency" type="hidden" value="ISK">
@@ -113,9 +113,14 @@
 									<input name="reference" type="hidden" :value="this.bookingId">
 								</form>
 
-								<p class="mt-8 mb-6 text-sm">
+								<p class="my-4 text-sm">
 									<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
 								</p>
+
+								<p class="mb-6 text-sm">
+									<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
+								</p>
+
 
 								<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
 							</div>
