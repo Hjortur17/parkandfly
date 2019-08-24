@@ -42,14 +42,14 @@
 		&noscript=1"/>
 	</noscript>
 
-	{{-- <script async src="www.googletagmanager.com/gtag/js?id=AW-715601160"></script>
+	<script async src="www.googletagmanager.com/gtag/js?id=AW-715601160"></script>
 	<script>
 		window.dataLayer = window.dataLayer || [];
 		function gtag(){dataLayer.push(arguments);}
 		gtag('js', new Date());
 
 		gtag('config', 'AW-715601160');
-	</script> --}}
+	</script>
 
 	@yield ('head')
 </head>
