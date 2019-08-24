@@ -132,7 +132,7 @@ class ApiController extends Controller
 			]
 		);
 
-		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($current->socialId).', Bókunarnr.: '.$key.', Korta auth_code.: '.($request->input('korta_authcode')).', Skref: 2');
+		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($current->socialId).', Bókunarnr.: '.($current->id).', Korta auth_code.: '.($request->input('korta_authcode')).', Skref: 2');
 		
 		Mail::to($current->email)
 			->cc('bokanir@parkandfly.is')
