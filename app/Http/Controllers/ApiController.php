@@ -31,7 +31,8 @@ class ApiController extends Controller
 
 	public function getCarInfo(Request $request)
 	{
-		$content = utf8_encode(file_get_contents("https://rogg.is/bizServices/CarRegistry/XmlService/CarService/v0703/CarDataByNumber.aspx?user=parkandflyws&password=LeggiStaedi13X12&number=" . $request->carNumber));
+		$strippedRequest = str_replace(' ', '', $request->carNumber);
+		$content = utf8_encode(file_get_contents("https://rogg.is/bizServices/CarRegistry/XmlService/CarService/v0703/CarDataByNumber.aspx?user=parkandflyws&password=LeggiStaedi13X12&number=" . $strippedRequest));
 		$xml = simplexml_load_string($content);
 		$json = json_encode($xml);
 
@@ -42,7 +43,7 @@ class ApiController extends Controller
 		return $carNumberInfo;
 	}
 
-	public function createBooking (Request $request)
+	public function createBooking(Request $request)
 	{
 		$token = uniqid();
 
@@ -135,11 +136,10 @@ class ApiController extends Controller
 		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($current->socialId).', Bókunarnr.: '.($current->id).', Korta auth_code.: '.($request->input('korta_authcode')).', Skref: 2');
 		
 		Mail::to($current->email)
-			->cc('bokanir@parkandfly.is')
+			->cc('admin@parkandfly.is')
 			->cc('hjorturfreyr@hjorturfreyr.com')
 			->send(new BookingConfirmed($current));
 
 		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 	}
-
 }

@@ -74,55 +74,64 @@
 
 					<div class="modal-footer">
 						<slot name="footer">
-							<!-- <div class="text-center my-8" v-if="this.paymentPicked === 'Netgiro'">
-								<form method="post" action="https://test.netgiro.is/securepay">
-									<input type="hidden" name="ApplicationID" :value="this.netgiroId">
-									<input type="hidden" name="Iframe" value="false">
-									<input type="hidden" name="Signature" :value="netgiro_signature">
-									<input type="hidden" name="PaymentSuccessfulURL" :value="ne°tgiro_link">
-
-									<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference">
-									<input type="hidden" name="TotalAmount" :value="this.amount">
-
-									<input type="hidden" name="Items[0].ProductNo" value='1'>
-									<input type="hidden" name="Items[0].Name" value="Bíl">
-									<input type="hidden" name="Items[0].UnitPrice" :value="this.amount">
-									<input type="hidden" name="Items[0].Amount" :value="this.amount">
-									<input type="hidden" name="Items[0].Quantity" value="1">
-
-									<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
-								</form>
-							</div> -->
-
-							<div class="text-center mt-8 mb-6">
-								<form action="https://netgreidslur.korta.is" method="post">
-									<input name="amount" type="hidden" :value="this.amount">
-									<input name="currency" type="hidden" value="ISK">
-									<input name="merchant" type="hidden" value="8190444">
-									<input name="terminal" type="hidden" value="52176">
-									<input name="description" type="hidden" value="Park and fly">
-									<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
-
-									<input name="look" type="hidden" value="SIMPLE">
-									<input name="readonly" type="hidden" value="Y">
-
-									<input name="refermethod" type="hidden" value="post">
-									<input name="refertarget" type="hidden" value="_top">
-									<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/database/booking/update">
-
+							<div v-if="this.amount === 0" class="text-center">
+								<form method="post" action="/api/database/booking/update">
 									<input name="reference" type="hidden" :value="this.bookingId">
+									<input name="korta_authcode" type="hidden" :value="this.couponInput">
+									
+									<button class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" type="submit">Klára pöntun</button>
 								</form>
+							</div>
+							<div v-else>
+								<!-- <div class="text-center my-8" v-if="this.paymentPicked === 'Netgiro'">
+									<form method="post" action="https://test.netgiro.is/securepay">
+										<input type="hidden" name="ApplicationID" :value="this.netgiroId">
+										<input type="hidden" name="Iframe" value="false">
+										<input type="hidden" name="Signature" :value="netgiro_signature">
+										<input type="hidden" name="PaymentSuccessfulURL" :value="ne°tgiro_link">
 
-								<p class="my-4 text-sm">
-									<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
-								</p>
+										<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference">
+										<input type="hidden" name="TotalAmount" :value="this.amount">
 
-								<p class="mb-6 text-sm">
-									<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
-								</p>
+										<input type="hidden" name="Items[0].ProductNo" value='1'>
+										<input type="hidden" name="Items[0].Name" value="Bíl">
+										<input type="hidden" name="Items[0].UnitPrice" :value="this.amount">
+										<input type="hidden" name="Items[0].Amount" :value="this.amount">
+										<input type="hidden" name="Items[0].Quantity" value="1">
 
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</button>
+									</form>
+								</div> -->
 
-								<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
+								<div class="text-center mt-8 mb-6">
+									<form action="https://netgreidslur.korta.is" method="post">
+										<input name="amount" type="hidden" :value="this.amount">
+										<input name="currency" type="hidden" value="ISK">
+										<input name="merchant" type="hidden" value="8190444">
+										<input name="terminal" type="hidden" value="52176">
+										<input name="description" type="hidden" value="Park and fly">
+										<input name="checkvaluemd5" type="hidden" :value="checkvaluemd5">
+
+										<input name="look" type="hidden" value="SIMPLE">
+										<input name="readonly" type="hidden" value="Y">
+
+										<input name="refermethod" type="hidden" value="post">
+										<input name="refertarget" type="hidden" value="_top">
+										<input name="downloadurl" type="hidden" value="https://parkandfly.is/api/database/booking/update">
+
+										<input name="reference" type="hidden" :value="this.bookingId">
+									</form>
+
+									<p class="my-4 text-sm">
+										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+									</p>
+
+									<p class="mb-6 text-sm">
+										<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
+									</p>
+
+									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
+								</div>
 							</div>
 						</slot>
 					</div>
@@ -181,7 +190,7 @@
 				if (this.termsChecked) {
 					return true;
 				} else {
-					alert('Upps! Þú þarft að samþykkja skilmálana!');
+					alert('Úpps! Þú þarft að samþykkja skilmálana!');
 				}
 
 				e.preventDefault();
@@ -220,7 +229,7 @@
 <style>
     .modal-mask {
 	 position: fixed;
-	 z-index: 9998;
+	 z-index: 49;
 	 top: 0;
 	 left: 0;
 	 width: 100%;

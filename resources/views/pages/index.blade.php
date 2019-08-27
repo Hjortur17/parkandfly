@@ -20,6 +20,6 @@
 			</li>
 		</ul>
 
-        <flash message="{{ session('flash') }}"></flash>
+		<flash message="{{ session('flash') }}"></flash>
 	</section>
 @endsection
