@@ -546,7 +546,7 @@ export default {
 		},
 
 		getServices() {
-			axios.get('http://admin.parkandfly.is/api/ServicesServiceApi')
+			axios.get('/api/services/get')
 			.then(response => {
 				this.services = response.data;
 			})
