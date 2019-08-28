@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\BookingConfirmed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -11,24 +10,10 @@ use App\Service;
 use App\Discount;
 
 use Illuminate\Support\Facades\Mail;
-use Session;
+use App\Mail\BookingConfirmed;
 
 class ApiController extends Controller
 {
-	public function getServices()
-	{
-		$services = Service::orderBy('id', 'asc')->get();
-
-		return $services;
-	}
-
-	public function getDiscounts()
-	{
-		$discounts = Discount::latest()->get();
-
-		return $discounts;
-	}
-
 	public function getCarInfo(Request $request)
 	{
 		$strippedRequest = str_replace(' ', '', $request->carNumber);
@@ -43,10 +28,23 @@ class ApiController extends Controller
 		return $carNumberInfo;
 	}
 
+	public function getServices()
+	{
+		$services = Service::orderBy('id', 'asc')->get();
+
+		return $services;
+	}
+
+	public function getDiscounts()
+	{
+		$discounts = Discount::latest()->get();
+
+		return $discounts;
+	}
+
 	public function createBooking(Request $request)
 	{
 		$token = uniqid();
-
 		$booking_ref = uniqid();
 
 		$booking = Booking::create([
@@ -88,7 +86,7 @@ class ApiController extends Controller
 
 		$dateTimeNow = date("Y-m-d H:i:s");
 
-		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
+		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.($booking->id).', Dags.: '.$dateTimeNow.', Skref: 1');
 
 		if (request()->wantsJson()) {
 			return $key;
@@ -127,7 +125,7 @@ class ApiController extends Controller
 			['step', '=', 1]
 		])->update(
 			[
-				'korta_authcode' => $request->input('korta_authcode'),
+				'korta_authcode' => $request->input('reference')$request->input('authcode'),
 				'step' => 2,
 				'confirmation_date' => date("Y-m-d H:i:s")
 			]

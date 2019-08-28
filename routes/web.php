@@ -21,6 +21,7 @@ Route::prefix('api')->group(function () {
 	Route::get('services/get', 'ApiController@getServices');
 	Route::get('discounts/get', 'ApiController@getDiscounts');
 	Route::get('car/info/get', 'ApiController@getCarInfo');
+	Route::get('flight/info/get', 'ApiController@getFlightInfo');
 	Route::get('booking/get/id', 'ApiController@getBookingId');
 	
 	Route::post('database/booking/create', 'ApiController@createBooking');
