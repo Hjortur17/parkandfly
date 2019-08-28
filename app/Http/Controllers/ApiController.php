@@ -12,6 +12,8 @@ use App\Discount;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\BookingConfirmed;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 class ApiController extends Controller
 {
 	public function getCarInfo(Request $request)
@@ -86,7 +88,7 @@ class ApiController extends Controller
 
 		$dateTimeNow = date("Y-m-d H:i:s");
 
-		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.($booking->id).', Dags.: '.$dateTimeNow.', Skref: 1');
+		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
 
 		if (request()->wantsJson()) {
 			return $key;
@@ -125,7 +127,7 @@ class ApiController extends Controller
 			['step', '=', 1]
 		])->update(
 			[
-				'korta_authcode' => $request->input('reference')$request->input('authcode'),
+				'korta_authcode' => $request->input('authcode'),
 				'step' => 2,
 				'confirmation_date' => date("Y-m-d H:i:s")
 			]
