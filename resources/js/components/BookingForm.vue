@@ -409,7 +409,7 @@
 				<p class="font-light text-white text-lg text-center italic">Hvaða þjónustu má bjóða þér?</p>
 			</div>
 
-			<div class="flex flex-wrap -mx-3 pt-12">
+			<div class="flex flex-wrap -mx-3 mt-12">
 				<div v-for="service in services">
 					<div v-if="service.carMake === booking.carSize">
 						<div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
