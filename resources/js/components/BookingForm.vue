@@ -15,7 +15,7 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="carNumber" placeholder="Bílnúmer" required v-model="booking.carNumber" @blur="getCarInfo()">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="carNumber" placeholder="Bílnúmer" required v-model="booking.carNumber" @blur="getCarInfo()" :maxlength="8">
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-0">
 					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize">
@@ -66,7 +66,7 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Kennitala" name="socialId" required v-model="booking.socialId">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Kennitala" name="socialId" :maxlength="11" required v-model="booking.socialId">
 				</div>
 				<div class="w-full md:w-1/2 px-3">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Nafn" name="name" required v-model="booking.name">
@@ -78,7 +78,7 @@
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="email" placeholder="Netfang" name="email" required v-model="booking.email">
 				</div>
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Símanúmer" name="phone" required v-model="booking.phone">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="phone" placeholder="Símanúmer" name="phone" required v-model="booking.phone">
 				</div>
 			</div>
 
@@ -118,7 +118,7 @@
 					<datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3">
-					<datetime type="date" v-model="selectedPickUpDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
+					<datetime type="date" v-model="selectedPickUpDay" class="theme-orange" :min-datetime="selectedDeliveryDay" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
 				</div>
 			</div>
 
@@ -581,6 +581,8 @@ export default {
 			}
 			if (!this.booking.socialId) {
 				this.errors.push('Vantar kennitölu!');
+			} else if (!kennitala.isPerson(this.booking.socialId)) {
+				this.errors.push('Kennitala er ekki lögleg');
 			}
 
 			if (!this.booking.email) {
@@ -589,10 +591,6 @@ export default {
 
 			if (!this.booking.phone) {
 				this.errors.push('Vantar símanúmer!');
-			}
-
-			if (!kennitala.isPerson(this.booking.socialId)) {
-				this.errors.push('Kennitala er ekki lögleg');
 			}
 
 			e.preventDefault();
