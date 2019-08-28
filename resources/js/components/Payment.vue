@@ -75,9 +75,13 @@
 					<div class="modal-footer">
 						<slot name="footer">
 							<div v-if="this.amount === 0" class="text-center">
-								<form method="post" action="/api/database/booking/update">
+								<form method="post" action="/api/database/booking/update" @submit.prevent="checkPaymentForm()">
 									<input name="reference" type="hidden" :value="this.bookingId">
 									<input name="korta_authcode" type="hidden" :value="this.couponInput">
+
+									<p class="my-4 text-sm">
+										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+									</p>
 									
 									<button class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" type="submit">Klára pöntun</button>
 								</form>
@@ -104,7 +108,7 @@
 								</div> -->
 
 								<div class="text-center mt-8 mb-6">
-									<form action="https://netgreidslur.korta.is" method="post">
+									<form action="https://netgreidslur.korta.is" method="post" @submit.prevent="checkPaymentForm()">
 										<input name="amount" type="hidden" :value="this.amount">
 										<input name="currency" type="hidden" value="ISK">
 										<input name="merchant" type="hidden" value="8190444">
@@ -130,7 +134,7 @@
 										<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 									</p>
 
-									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" @click="checkPaymentForm()">Borga</a>
+									<a :href="korta_link" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">Borga</a>
 								</div>
 							</div>
 						</slot>
