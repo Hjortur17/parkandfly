@@ -80,7 +80,7 @@
 									<input name="korta_authcode" type="hidden" :value="this.couponInput">
 
 									<p class="my-4 text-sm">
-										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold">skilmála</a> Park and fly</p>
 									</p>
 									
 									<button class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" type="submit">Klára pöntun</button>
@@ -127,7 +127,7 @@
 									</form>
 
 									<p class="my-4 text-sm">
-										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" class="font-bold">skilmála</a> Park and fly</p>
+										<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold">skilmála</a> Park and fly</p>
 									</p>
 
 									<p class="mb-6 text-sm">

@@ -1,7 +1,6 @@
 <template>
 	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
 		<section class="w-full my-8" id="car-form" v-if="step === 1">
-
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um bílinn</h2>
 			</div>
@@ -410,7 +409,7 @@
 				<p class="font-light text-white text-lg text-center italic">Hvaða þjónustu má bjóða þér?</p>
 			</div>
 
-			<div class="flex flex-wrap -mx-3 my-12">
+			<div class="flex flex-wrap -mx-3 pt-12">
 				<div v-for="service in services">
 					<div v-if="service.carMake === booking.carSize">
 						<div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
@@ -427,6 +426,10 @@
 						</div>
 					</div>
 				</div>
+			</div>
+			
+			<div class="flex flex-wrap -mx-3 mt-4 mb-12">
+				<small class="italic text-white">* Inni geymsla er 990kr á dag.</small>
 			</div>
 
 			<div class="flex flex-wrap -mx-3">
