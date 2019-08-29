@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 use App\Booking;
-use App\Service;
 use App\Discount;
 
 use Illuminate\Support\Facades\Mail;
@@ -32,24 +31,32 @@ class ApiController extends Controller
 
 	public function getServices()
 	{
-		$services = Service::orderBy('id', 'asc')->get();
+		$services = json_decode(file_get_contents('http://admin.parkandfly.is/api/ServicesServiceApi'), true);
 
 		return $services;
 	}
 
 	public function getDiscounts()
 	{
-		$discounts = Discount::latest()->get();
+		$discounts = json_decode(file_get_contents('http://admin.parkandfly.is/api/DiscountsServiceApi'), true);
 
 		return $discounts;
 	}
 
-	public function createBooking(Request $request)
+	public function getSingleDiscount($discount)
 	{
-		$token = uniqid();
-		$booking_ref = uniqid();
+		$url = 'http://admin.parkandfly.is/api/DiscountsServiceApi/getbycode/'.$discount;
+		
+		$discounts = json_decode(file_get_contents($url), true);
 
-		$booking = Booking::create([
+		return $discounts;
+	}
+
+	public function createBookingStepOne(Request $request)
+	{
+		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/createbooking';
+
+		$data = json_encode(array([
 			'carNumber' => $request->input('carNumber'),
 			'carSize' => $request->input('carSize'),
 			'carMake' => $request->input('carMake'),
@@ -73,22 +80,31 @@ class ApiController extends Controller
 
 			'paidPrice' => $request->input('paidPrice'),
 
-			'step' => $request->input('step'),
+			'selectedServicesId' => $request->input('selectedServicesId'),
 
-			'reservation_date' => date("Y-m-d H:i:s"),
-			'token_expaire_date' => date("Y-m-d H:i:s"),
+			'bookingRef' => '123',
+			'tokenKorta' => '456',
+		]), JSON_FORCE_OBJECT);
 
-			'token_korta' => $token,
-			'booking_ref' => $booking_ref
-		]);
+		$options = array(
+			'http' => array(
+				'header'  => "Content-type: application/json",
+				'method'  => 'POST',
+				'content' => $data
+			)
+		);
 
-		$booking->services()->attach($request->input('selectedServicesId'));
+		$context  = stream_context_create($options);
+		$resultTemp = file_get_contents($url, true, $context);
 
-		$key = $booking_ref . '-' . $token;
+		$result = json_decode($resultTemp, true);
 
+		dd($result);
+
+		$key = $result.bookingRef . '-' . $result.tokenKorta;
 		$dateTimeNow = date("Y-m-d H:i:s");
 
-		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($booking->socialId).', Netfang: '.($booking->email).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
+		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($result->socialId).', Netfang: '.($result->email).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
 
 		if (request()->wantsJson()) {
 			return $key;
@@ -134,11 +150,11 @@ class ApiController extends Controller
 		);
 
 		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($current->socialId).', Bókunarnr.: '.($current->id).', Korta auth_code.: '.($request->input('korta_authcode')).', Skref: 2');
-		
+
 		Mail::to($current->email)
-			->cc('admin@parkandfly.is')
-			->cc('hjorturfreyr@hjorturfreyr.com')
-			->send(new BookingConfirmed($current));
+		->cc('admin@parkandfly.is')
+		->cc('hjorturfreyr@hjorturfreyr.com')
+		->send(new BookingConfirmed($current));
 
 		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 	}

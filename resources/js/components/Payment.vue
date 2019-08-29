@@ -92,7 +92,7 @@
 										<input type="hidden" name="ApplicationID" :value="this.netgiroId">
 										<input type="hidden" name="Iframe" value="false">
 										<input type="hidden" name="Signature" :value="netgiro_signature">
-										<input type="hidden" name="PaymentSuccessfulURL" :value="ne°tgiro_link">
+										<input type="hidden" name="PaymentSuccessfulURL" :value="netgiro_link">
 
 										<input type="hidden" name="ReferenceNumber" :value="this.netgiro_reference">
 										<input type="hidden" name="TotalAmount" :value="this.amount">
@@ -167,6 +167,8 @@
 				netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 				termsChecked: false,
 				discounts: [],
+
+				selectedDiscount: [],
 			}
 		},
 
@@ -175,19 +177,11 @@
 				this.$emit('hide');
 			},
 
-			getDiscounts() {
-				axios.get('/api/discounts/get')
-				.then(response => {
-					this.discounts = response.data;
-				})
-			},
-
 			couponApplied() {
-				for (var i = 0; i < this.discounts.length; i++) {
-					if (this.couponInput.toLowerCase().trim() === this.discounts[i].discount_title) {
-						return this.amount = this.paidPrice - (this.paidPrice *(this.discounts[i].discount_value)/100);
-					}
-				}
+				axios.get('/api/discounts/get/' + this.couponInput.trim())
+				.then(response => {
+					this.amount = this.paidPrice - (this.paidPrice *(response.data.discountValue)/100);
+				});
 			},
 
 			checkPaymentForm: function (e) {
@@ -212,7 +206,7 @@
 				return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=" + this.netgiro_reference + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
 			},
 			checkvaluemd5: function () {
-			//return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
+				//return md5(this.amount + "ISK819009450719Park and fly6ADcgKHhfeG4fBvD4r37A2cjLSrn2aFVBiVFR5MXTEST"); // TEST
 				return md5(this.amount + "ISK819044452176Park and flyE54AYVXe8vF6GtwZ9hRFqYbTx4NAIp5kHXI8J8AG");
 			},
 			korta_link: function () {
@@ -224,8 +218,7 @@
 		},
 
 		mounted() {
-			this.checkUserAge();	
-			this.getDiscounts();
+			this.checkUserAge();
 		},
 	}
 </script>
