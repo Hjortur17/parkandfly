@@ -75,7 +75,7 @@
 					<div class="modal-footer">
 						<slot name="footer">
 							<div v-if="this.amount === 0" class="text-center">
-								<form method="post" action="/api/database/booking/update" @submit.prevent="checkPaymentForm()">
+								<form method="post" action="/api/database/booking/update">
 									<input name="reference" type="hidden" :value="this.bookingId">
 									<input name="korta_authcode" type="hidden" :value="this.couponInput">
 
