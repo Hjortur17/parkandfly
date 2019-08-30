@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Bókun Staðfest | #{{ $booking->id}}</title>
+	<title>Bókun Staðfest | #{{ $result['bookingRef']}}</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap" rel="stylesheet">
 
@@ -61,7 +61,7 @@
 		}
 
 		.header {
-			font-size: 3rem;
+			font-size: 2rem;
 			font-weight: 300;
 		}
 
@@ -94,7 +94,7 @@
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
 				<div class="flex-1 self-center text-right">
-					<h2 class="header">#{{ $booking->id }}</h2>
+					<h2 class="header">{{ $result['bookingRef'] }}</h2>
 				</div>
 			</div>
 		</div>
@@ -104,10 +104,10 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um þig:</strong>
-				<li style="padding-top: 1.5rem;">{{ $booking->name }}</li>
-				<li>{{ $booking->socialId }}</li>
-				<li>{{ $booking->email }}</li>
-				<li>{{ $booking->phone }}</li>
+				<li style="padding-top: 1.5rem;">{{ $result['name'] }}</li>
+				<li>{{ $result['socialId'] }}</li>
+				<li>{{ $result['email'] }}</li>
+				<li>{{ $result['phone'] }}</li>
 			</ul>
 		</div>
 
@@ -116,10 +116,10 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um bílinn þinn:</strong>
-				<li style="padding-top: 1.5rem;">{{ $booking->carNumber }} | {{ $booking->carSize }}</li>
-				<li>{{ $booking->carMake }}</li>
-				<li>{{ $booking->carType }}</li>
-				<li>{{ $booking->carColor }}</li>
+				<li style="padding-top: 1.5rem;">{{ $result['carNumber'] }} | {{ $result['carSize'] }}</li>
+				<li>{{ $result['carMake'] }}</li>
+				<li>{{ $result['carType'] }}</li>
+				<li>{{ $result['carColor'] }}</li>
 			</ul>
 		</div>
 
@@ -128,38 +128,17 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um flugið þitt:</strong>
-				<li style="padding-top: 1.5rem;">Áætlaður komutími á Leifsstöð - {{ $booking->dropOffDate }} {{ $booking->dropOffTime }}</li>
-				<li>Áætlaður lendingartími á Leifsstöð - {{ $booking->pickUpDate }} {{ $booking->pickUpTime }}</li>
-				<li>Flugnúmer - {{ $booking->flightNumber }}</li>
+				<li style="padding-top: 1.5rem;">Áætlaður komutími á Leifsstöð - {{ $result['dropOffDate'] }} {{ $result['dropOffTime'] }}</li>
+				<li>Áætlaður lendingartími á Leifsstöð - {{ $result['pickUpDate'] }} {{ $result['pickUpTime'] }}</li>
+				<li>Flugnúmer - {{ $result['flightNumber'] }}</li>
 			</ul>
 		</div>
-
-
-		@if (!$booking->services->isEmpty())
-			<hr class="my-6">
-
-			<div class="px-6">
-				<ul class="list-none">
-					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
-
-					@foreach ($booking->services as $service)
-					<li>{{ $service->description }}</li>
-					@endforeach
-				</ul>
-			</div>
-		@else
-			<hr class="my-6">
-
-			<div class="px-6">
-				<p>Þú valdir enga þjónustu hjá okkur.</p>
-			</div>
-		@endif
 
 		<hr class="my-6">
 
 		<div class="px-6">
 			<ul class="list-none">
-				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $booking->paidPrice }}kr.</li>
+				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $result['paidPrice'] }}kr.</li>
 				<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
 			</ul>
 		</div>

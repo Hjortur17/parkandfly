@@ -7,22 +7,20 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-use App\Booking;
-
 class BookingConfirmed extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $booking;
+    public $result;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct(Booking $booking)
+    public function __construct($result)
     {
-    	$this->booking = $booking;
+    	$this->result = $result;
     }
 
     /**
