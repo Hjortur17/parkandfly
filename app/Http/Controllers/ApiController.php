@@ -31,21 +31,30 @@ class ApiController extends Controller
 
 	public function getServices()
 	{
-		$services = json_decode(file_get_contents('http://localhost:5000/api/ServicesServiceApi'), true);
+		$services = json_decode(file_get_contents('http://admin.parkandfly.is/api/ServicesServiceApi'), true);
 
 		return $services;
 	}
 
-	// public function getDiscounts()
-	// {
-	// 	$discounts = json_decode(file_get_contents('http://localhost:5000/api/DiscountsServiceApi'), true);
+	public function getFlightInfo(Request $request)
+	{
+		$strippedRequest = str_replace(' ', '', $request->flightNumber);
+		$string = strtoupper($strippedRequest);
 
-	// 	return $discounts;
-	// }
+		$content = json_encode(file_get_contents("https://apis.is/flight?language=en&type=departures"));
+		$json = json_decode($content);
+		$strippedRequest = strip_tags($json);
+
+		$finalJson = json_decode($strippedRequest, true);
+
+		dd($finalJson);
+
+		return $carNumberInfo;
+	}
 
 	public function getSingleDiscount($discount)
 	{
-		$url = 'http://localhost:5000/api/DiscountsServiceApi/getbycode/'.$discount;
+		$url = 'http://admin.parkandfly.is/api/DiscountsServiceApi/getbycode/'.$discount;
 		
 		$discounts = json_decode(file_get_contents($url), true);
 
@@ -58,9 +67,9 @@ class ApiController extends Controller
 		return $result;
 	}
 
-	public function bookingStepOne(Request $request)
+	public function bookingCheck(Request $request)
 	{
-		$url = 'http://localhost:5000/api/BookingsServiceApi/createbooking';
+		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/checkbooking';
 
 		$data = json_encode(array(
 			'carNumber' => $request->input('carNumber'),
@@ -86,7 +95,70 @@ class ApiController extends Controller
 
 			'paidPrice' => $request->input('paidPrice'),
 
-			'selectedServicesId' => $request->input('selectedServicesId')
+			'selectedServicesId' => $request->input('selectedServicesId'),
+
+			'discountCode' => $request->input('discountCode')
+		));
+
+		$options = array(
+			'http' => array(
+				'header'  => "Content-type: application/json",
+				'method'  => 'POST',
+				'content' => $data
+			)
+		);
+
+		$context  = stream_context_create($options);
+		$resultTemp = file_get_contents($url, true, $context);
+
+		$result = json_decode($resultTemp, true);
+
+		if ($result['success'] == false) {
+			$temp_error_message = 'API call BookingsServiceApi for action checkbooking failed. Result message: ' . $result['message'];
+
+			Log::channel('slackError')->error($temp_error_message);
+			
+			return redirect('/')->with('flash', 'Óvænt villa!');
+		}
+
+		if (request()->wantsJson()) {
+			return $result;
+		}
+
+		return $result;
+	}
+
+	public function bookingStepOne(Request $request)
+	{
+		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/createbooking';
+
+		$data = json_encode(array(
+			'carNumber' => $request->input('carNumber'),
+			'carSize' => $request->input('carSize'),
+			'carMake' => $request->input('carMake'),
+			'carType' => $request->input('carType'),
+			'carColor' => $request->input('carColor'),
+
+			'name' => $request->input('name'),
+			'socialId' => $request->input('socialId'),
+			'email' => $request->input('email'),
+			'phone' => $request->input('phone'),
+
+			'dropOffDate' => $request->input('dropOffDate'),
+			'dropOffTime' => $request->input('dropOffTime'),
+			'pickUpDate' => $request->input('pickUpDate'),
+			'pickUpTime' => $request->input('pickUpTime'),
+
+			'flightNumber' => $request->input('flightNumber'),
+
+			'numberOfDays' => $request->input('numberOfDays'),
+			'priceForDays' => $request->input('priceForDays'),
+
+			'paidPrice' => $request->input('paidPrice'),
+
+			'selectedServicesId' => $request->input('selectedServicesId'),
+
+			'discountCode' => $request->input('discountCode')
 		));
 
 		$options = array(
@@ -118,16 +190,20 @@ class ApiController extends Controller
 
 		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($result['socialId']).', Netfang: '.($result['email']).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
 
-		if (request()->wantsJson()) {
-			return $key;
+		if ($result['step'] == 2) {
+			Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Skref: 2');
 		}
 
-		return $key;
+		if (request()->wantsJson()) {
+			return $result;
+		}
+
+		return $result;
 	}
 
 	public function bookingStepTwo(Request $request)
 	{
-		$url = 'http://localhost:5000/api/BookingsServiceApi/confirmbooking?token=' . $request->input('reference') . '&kortaAuthcode=' . $request->input('authcode');
+		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/confirmbooking?token=' . $request->input('reference') . '&kortaAuthcode=' . $request->input('authcode');
 
 		$data = json_encode(array(
 			'token' => $request->input('reference'),
@@ -158,7 +234,7 @@ class ApiController extends Controller
 			// $result.Message = "Booking is null"
 		}
 
-		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['id']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
+		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
 		
 		// Mail::send('emails.confirmed', $result, function ($message) use ($result) {
 		// 	$message->to($result['email'])
@@ -172,8 +248,8 @@ class ApiController extends Controller
 		// });
 
 		Mail::to($result['email'])
-			->cc(['admin@parkandfly.is','hjorturfreyr@hjorturfreyr.com','bokanir@parkandfly.is'])
-			->send(new BookingConfirmed($result));
+		->cc(['admin@parkandfly.is','hjorturfreyr@hjorturfreyr.com','bokanir@parkandfly.is'])
+		->send(new BookingConfirmed($result));
 
 		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 

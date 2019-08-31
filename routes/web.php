@@ -17,6 +17,7 @@ Route::prefix('api')->group(function () {
 	Route::get('car/info/get', 'ApiController@getCarInfo');
 	Route::get('flight/info/get', 'ApiController@getFlightInfo');
 	
+	Route::post('database/booking/checkbooking', 'ApiController@bookingCheck');
 	Route::post('database/booking/create', 'ApiController@bookingStepOne');
 	Route::post('database/booking/update', 'ApiController@bookingStepTwo');
 	

@@ -380,23 +380,17 @@
 				</div>
 			</div>
 
-			<div class="flex flex-wrap -mx-3 my-6">
-				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+			<div class="flex flex-wrap -mx-3 mb-6">
+				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
 					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
+				</div>
+				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugfélag" name="flightAirlane" v-model="booking.flightAirlane" disabled>
+				</div>
+				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Brottfarastaður" name="flightDeparture" v-model="booking.flightDeparture" disabled>
 				</div>
 			</div>
-
-			<!-- <div class="flex flex-wrap -mx-3 mb-6">
-				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
-				</div>
-				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugfélag" disabled>
-				</div>
-				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Brottfarastaður" disabled>
-				</div>
-			</div> -->
 
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0">
@@ -457,7 +451,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true, addBookingToDatabase()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
 								Klára Pöntun
 							</button>
 						</li>
@@ -473,7 +467,9 @@
 			:numberOfDays="numberOfDaysData"
 			:priceForDays="priceForDays"
 			:paidPrice="total"
-			:bookingId="bookingId">
+			:bookingId="bookingId"
+			:booking="booking"
+			:selectedServicesId="selectedServicesId">
 		</payment>
 </div>
 </template>
@@ -522,8 +518,13 @@ export default {
 				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
 				dropOffTime: "Áætlaður komutími á Leifsstöð?",
 				pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
+
 				flightNumber: null,
 			},
+
+			flightAirlane: null,
+			flightDeparture: null,
+
 			showPayment: false,
 			price: 4000,
 		}
@@ -540,7 +541,7 @@ export default {
 					this.booking.carColor = response.data.color;
 				})
 				.catch(function (error) {
-					console.log(error);
+					
 				});
 			}
 		},
@@ -662,41 +663,6 @@ export default {
 			}
 		},
 
-		addBookingToDatabase() {
-			axios.post('/api/database/booking/create', {
-				carNumber: this.booking.carNumber,
-				carSize: this.booking.carSize,
-				carMake: this.booking.carMake,
-				carType: this.booking.carType,
-				carColor: this.booking.carColor,
-
-				name: this.booking.name,
-				socialId: this.booking.socialId,
-				email: this.booking.email,
-				phone: this.booking.phone,
-
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
-				dropOffTime: this.booking.dropOffTime,
-				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
-				pickUpTime: this.booking.pickUpTime,
-				flightNumber: this.booking.flightNumber,
-
-				numberOfDays: this.numberOfDaysData,
-				priceForDays: this.priceForDays,
-
-				paidPrice: this.total,
-
-				selectedServicesId: this.selectedServicesId,
-
-				step: 1
-			})
-			.then(response => {
-				this.bookingId = response.data
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-		},
 		dropOffDate: function () {
 			return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
 		},
@@ -706,6 +672,13 @@ export default {
 		numberOfDays: function () {
 			return this.numberOfDaysData = Math.abs(moment(this.selectedDeliveryDay).diff(moment(this.selectedPickUpDay), 'days'));
 		},
+		updateFlightInfo: function () {
+			axios.get('/api/flight/info/get?flightNumber=' + this.booking.flightNumber)
+			.then(response => {
+				this.flightAirlane = response.data.flightAirlane,
+				this.flightDeparture = response.data.flightDeparture
+			})
+		}
 	},
 
 	computed: {
