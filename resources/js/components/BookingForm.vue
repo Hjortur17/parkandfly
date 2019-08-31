@@ -469,7 +469,9 @@
 			:paidPrice="total"
 			:bookingId="bookingId"
 			:booking="booking"
-			:selectedServicesId="selectedServicesId">
+			:selectedServicesId="selectedServicesId"
+			:selectedDeliveryDay="selectedDeliveryDay"
+			:selectedPickUpDay="selectedPickUpDay">
 		</payment>
 </div>
 </template>

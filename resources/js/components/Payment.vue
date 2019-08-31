@@ -94,7 +94,9 @@ export default {
 		'paidPrice',
 		'bookingId',
 		'booking',
-		'selectedServicesId'
+		'selectedServicesId',
+		'selectedDeliveryDay',
+		'selectedPickUpDay'
 	],
 
 	data() {
@@ -142,10 +144,11 @@ export default {
 				email: this.booking.email,
 				phone: this.booking.phone,
 
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
 				dropOffTime: this.booking.dropOffTime,
-				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
+				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
 				pickUpTime: this.booking.pickUpTime,
+
 				flightNumber: this.booking.flightNumber,
 
 				numberOfDays: this.numberOfDays,
@@ -202,10 +205,11 @@ export default {
 				email: this.booking.email,
 				phone: this.booking.phone,
 
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
 				dropOffTime: this.booking.dropOffTime,
-				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
+				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
 				pickUpTime: this.booking.pickUpTime,
+
 				flightNumber: this.booking.flightNumber,
 
 				numberOfDays: this.numberOfDays,
