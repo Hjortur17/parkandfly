@@ -220,29 +220,25 @@ export default {
 				step: 1
 			})
 			.then(response => {
-				if (response.data.discountValid == false) {
-					alert('Afsláttarkóði ekki til!');
+				this.amount = response.data.priceTotalDiscount;
+				this.discountValid = response.data.discountValid;
+
+				this.kortaMerchant = response.data.ProviderMerchant;
+				this.kortaTerminal = response.data.ProviderTerminal;
+				this.kortaDescription = response.data.ProviderDescription;
+				this.providerKeyMethod = response.data.ProviderKeyMethod;
+				this.providerKey = response.data.providerKey;
+
+				if (this.amount == 0) {
+					window.location.href = 'https://parkandfly.is?status=1';
 				} else {
-					this.amount = response.data.priceTotalDiscount;
-					this.discountValid = response.data.discountValid;
+					var key = response.data.bookingRef + '-' + response.data.tokenKorta;
 
-					this.kortaMerchant = response.data.ProviderMerchant;
-					this.kortaTerminal = response.data.ProviderTerminal;
-					this.kortaDescription = response.data.ProviderDescription;
-					this.providerKeyMethod = response.data.ProviderKeyMethod;
-					this.providerKey = response.data.providerKey;
+					var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
 
-					if (this.amount == 0) {
-						window.location.href = 'https://parkandfly.is?status=1';
-					} else {
-						var key = response.data.bookingRef + '-' + response.data.tokenKorta;
+					window.location.href = kortaLinkUrl;
 
-						var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
-
-						window.location.href = kortaLinkUrl;
-
-						return false;
-					}
+					return false;
 				}
 			})
 			.catch(function (error) {
