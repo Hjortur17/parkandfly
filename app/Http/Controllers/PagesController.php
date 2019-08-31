@@ -9,7 +9,13 @@ use Exception;
 
 class PagesController extends Controller
 {
-	public function index() {
+	public function index(Request $request) {
+		$status = $request->status;
+
+		if ($status == 1) {
+			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
+		}
+
 		return view('pages.index');
 	}
 

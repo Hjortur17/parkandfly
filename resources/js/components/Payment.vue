@@ -163,7 +163,6 @@ export default {
 				if (response.data.discountValid == false) {
 					alert('Afsláttarkóði ekki til!');
 				} else {
-					// this.amount = this.paidPrice - (this.paidPrice *(response.data.discountValue)/100);
 					this.amount = response.data.priceTotalDiscount;
 					this.discountValid = response.data.discountValid;
 					this.providerKey = response.data.providerKey;
@@ -224,7 +223,6 @@ export default {
 				if (response.data.discountValid == false) {
 					alert('Afsláttarkóði ekki til!');
 				} else {
-					// this.amount = this.paidPrice - (this.paidPrice *(response.data.discountValue)/100);
 					this.amount = response.data.priceTotalDiscount;
 					this.discountValid = response.data.discountValid;
 
@@ -235,7 +233,7 @@ export default {
 					this.providerKey = response.data.providerKey;
 
 					if (this.amount == 0) {
-						window.location.href = 'https://parkandfly.is';
+						window.location.href = 'https://parkandfly.is?status=1';
 					} else {
 						var key = response.data.bookingRef + '-' + response.data.tokenKorta;
 

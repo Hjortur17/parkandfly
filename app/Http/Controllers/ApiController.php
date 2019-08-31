@@ -180,9 +180,6 @@ class ApiController extends Controller
 			Log::channel('slackError')->error($temp_error_message);
 			
 			return redirect('/')->with('flash', 'Óvænt villa!');
-
-			// $result.Success = false
-			// $result.Message = "Booking is null"
 		}
 
 		$key = $result['bookingRef'] . '-' . $result['tokenKorta'];
@@ -192,6 +189,10 @@ class ApiController extends Controller
 
 		if ($result['step'] == 2) {
 			Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Skref: 2');
+
+			Mail::to($result['email'])
+			->cc(['admin@parkandfly.is','hjorturfreyr@hjorturfreyr.com','bokanir@parkandfly.is'])
+			->send(new BookingConfirmed($result));
 		}
 
 		if (request()->wantsJson()) {
@@ -229,63 +230,14 @@ class ApiController extends Controller
 			Log::channel('slackError')->error($temp_error_message);
 			
 			return redirect('/')->with('flash', 'Óvænt villa!');
-
-			// $result.Success = false
-			// $result.Message = "Booking is null"
 		}
 
 		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
-		
-		// Mail::send('emails.confirmed', $result, function ($message) use ($result) {
-		// 	$message->to($result['email'])
-		// 		->cc('admin@parkandfly.is')
-		// 		->cc('hjorturfreyr@hjorturfreyr.com')
-		// 		->cc('parkandfly@patreksson.net');
-
-		// 	$message->attachData($result);
-
-		// 	$message->from('parkandfly@parkandfly.is', 'Park and fly');
-		// });
 
 		Mail::to($result['email'])
 		->cc(['admin@parkandfly.is','hjorturfreyr@hjorturfreyr.com','bokanir@parkandfly.is'])
 		->send(new BookingConfirmed($result));
 
 		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
-
-		// $temp_booking_ref = substr($request->input('reference'), 0, 13);
-		// $temp_token = substr($request->input('reference'), 14, 26);
-
-
-		// $current = Booking::where([
-		// 	['booking_ref', '=', $temp_booking_ref],
-		// 	['token_korta', '=', $temp_token],
-		// 	['step', '=', 1],
-		// ])->get()->first();
-
-		// $token_expaire_date = date("Y-m-d H:i:s");
-		
-		// $keyNow = \DateTime::createFromFormat('Y-m-d H:i:s', $result->token_expaire_date);
-
-		// $inAYear = $keyNow->add(new \DateInterval('PT10M'));
-		// $prevTokenDate = $inAYear;
-
-		// $tempDateNow = \DateTime::createFromFormat('Y-m-d H:i:s', date("Y-m-d H:i:s"));
-
-		// if ($prevTokenDate < $tempDateNow) {
-		// 	return redirect('/')->with('flash', 'Óvænt villa!');
-		// }
-
-		// Booking::where([
-		// 	['booking_ref', '=', $temp_booking_ref],
-		// 	['token_korta', '=', $temp_token],
-		// 	['step', '=', 1]
-		// ])->update(
-		// 	[
-		// 		'korta_authcode' => $request->input('authcode'),
-		// 		'step' => 2,
-		// 		'confirmation_date' => date("Y-m-d H:i:s")
-		// 	]
-		// );
 	}
 }
