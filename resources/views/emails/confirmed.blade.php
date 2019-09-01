@@ -88,8 +88,8 @@
 </head>
 <body>
 	<header>
-		<div class="px-6 my-12">
-			<div class="flex">
+		<div class="px-6">
+			<div class="flex" style="padding-top: 2rem;">
 				<div class="w-60">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
@@ -128,9 +128,9 @@
 		<div class="px-6">
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um flugið þitt:</strong>
-				<li style="padding-top: 1.5rem;">Áætlaður komutími á Leifsstöð - {{ date("DD/MM/YYYY", strtotime($result['dropOffDate'])) }} {{ $result['dropOffTime'] }}</li>
-				<li>Áætlaður lendingartími á Leifsstöð - {{ date("DD/MM/YYYY", strtotime($result['pickUpDate'])) }} {{ $result['pickUpTime'] }}</li>
-				<li>Flugnúmer - {{ $result['flightNumber'] }}</li>
+				<li style="padding-top: 1.5rem;">Áætlaður komutími á Leifsstöð - {{ date("d/m/y", strtotime($result['dropOffDate'])) }} {{ $result['dropOffTime'] }}</li>
+				<li>Áætlaður lendingartími á Leifsstöð - {{ date("d/m/y", strtotime($result['pickUpDate'])) }} {{ $result['pickUpTime'] }}</li>
+				<li>Flugnúmer - {{ strtoupper($result['flightNumber']) }}</li>
 			</ul>
 		</div>
 
