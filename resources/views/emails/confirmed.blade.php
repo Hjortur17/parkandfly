@@ -88,9 +88,9 @@
 </head>
 <body>
 	<header>
-		<div class="px-6 py-8">
+		<div class="px-6 py-12">
 			<div class="flex">
-				<div class="w-60 mt-10">
+				<div class="w-60">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
 				<div class="flex-1 self-center text-right">
