@@ -57,7 +57,7 @@
 		}
 
 		.w-60 {
-			width: 45%;
+			width: 43%;
 		}
 
 		.header {
@@ -93,7 +93,7 @@
 				<div class="w-60 mt-10">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
-				<div class="flex-1 mt-10 text-right">
+				<div class="flex-1 self-center text-right">
 					<h2 class="header">{{ $result['bookingRef'] }}</h2>
 				</div>
 			</div>
@@ -139,26 +139,61 @@
 
 			<div class="px-6">
 				<ul class="list-none">
-					<strong style="font-size: 20px; padding-bottom: 1.5rem;">Þjónustur sem þú hefur greitt fyrir:</strong>
+					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
-					@foreach ($result['servicesSelected'] as $service)
-						<li>{{ $service['description'] }}</li>
-					@endforeach
+					<div style="padding-top: 1.5rem;">
+						@foreach ($result['servicesSelected'] as $service)
+							<li>{{ $service['description'] }}</li>
+						@endforeach
+					</div>
 				</ul>
 			</div>
 		@else
+			<hr class="my-6">
+
 			<div class="px-6">
-				<p>Þú valdir einga þjónustu hjá okkur.</p>
+				<ul class="list-none">
+					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
+
+					<div style="padding-top: 1.5rem;">
+						<p>Þú valdir einga þjónustu hjá okkur.</p>
+					</div>
+				</ul>
+			</div>
+		@endif
+
+		@if (!empty($result['servicesSelected']))
+			<div class="px-6">
+				<ul class="list-none">
+					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
+
+					<div style="padding-top: 1.5rem;">
+						@foreach ($result['servicesSelected'] as $service)
+							<li>{{ $service['description'] }}</li>
+						@endforeach
+					</div>
+				</ul>
 			</div>
 		@endif
 
 		<hr class="my-6">
 
 		<div class="px-6">
-			<ul class="list-none">
-				<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Heildarverð:</strong> {{ $result['paidPrice'] }}kr.</li>
-				<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
-			</ul>
+			@if (!empty($result['discountCode']))
+				<ul class="list-none">
+					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Afsláttarkóði:</strong> {{ $result['discountCode'] }}</li>
+
+					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Fullt verð:</strong> {{ $result['priceTotalNoDiscount'] }}</li>
+					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Greitt verð:</strong> {{ $result['priceTotalDiscount'] }}kr.</li>
+					<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
+				</ul>
+			@else
+				<ul class="list-none">
+					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Greitt verð:</strong> {{ $result['priceTotalDiscount'] }}kr.</li>
+					<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
+				</ul>	
+			@endif
+
 		</div>
 	</header>
 </body>
