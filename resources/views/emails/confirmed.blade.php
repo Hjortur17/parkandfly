@@ -61,7 +61,7 @@
 		}
 
 		.header {
-			font-size: 2rem;
+			font-size: 1.5rem;
 			font-weight: 300;
 		}
 
@@ -133,6 +133,24 @@
 				<li>Flugnúmer - {{ $result['flightNumber'] }}</li>
 			</ul>
 		</div>
+
+		@if (!empty($result['servicesSelected']))
+			<hr class="my-6">
+
+			<div class="px-6">
+				<ul class="list-none">
+					<strong style="font-size: 20px; margin-bottom: 1.5rem;">Þjónustur sem þú hefur greitt fyrir:</strong>
+
+					@foreach ($result['servicesSelected'] as $service)
+						<li>{{ $service['description'] }}</li>
+					@endforeach
+				</ul>
+			</div>
+		@else
+			<div class="px-6">
+				<p>Þú valdir einga þjónustu hjá okkur.</p>
+			</div>
+		@endif
 
 		<hr class="my-6">
 

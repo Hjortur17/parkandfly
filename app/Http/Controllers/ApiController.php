@@ -60,9 +60,7 @@ class ApiController extends Controller
 
 		$result = json_decode(json_encode($discounts), true);
 
-		if ($result['success'] == false) {
-
-		}
+		if ($result['success'] == false) {}
 
 		return $result;
 	}
