@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Bókun Staðfest | #{{ $result['bookingRef']}}</title>
+	<title>Bókun Staðfest | {{ $result['bookingRef']}}</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500&display=swap" rel="stylesheet">
 
@@ -90,7 +90,7 @@
 	<header>
 		<div class="px-6">
 			<div class="flex" style="padding-top: 2rem;">
-				<div class="w-60">
+				<div class="w-60" style="margin-top: 0.5rem">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
 				<div class="flex-1 self-center text-right">

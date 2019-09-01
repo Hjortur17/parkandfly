@@ -66,7 +66,7 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<input type="submit" value="Borga" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full"/>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
 									</form>
 								</div>
 							</div>
