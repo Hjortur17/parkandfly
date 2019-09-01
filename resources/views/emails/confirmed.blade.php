@@ -162,20 +162,6 @@
 			</div>
 		@endif
 
-		@if (!empty($result['servicesSelected']))
-			<div class="px-6">
-				<ul class="list-none">
-					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
-
-					<div style="padding-top: 1.5rem;">
-						@foreach ($result['servicesSelected'] as $service)
-							<li>{{ $service['description'] }}</li>
-						@endforeach
-					</div>
-				</ul>
-			</div>
-		@endif
-
 		<hr class="my-6">
 
 		<div class="px-6">
