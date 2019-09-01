@@ -61,7 +61,7 @@
 		}
 
 		.header {
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 			font-weight: 300;
 		}
 
@@ -93,7 +93,7 @@
 				<div class="w-60 mt-10">
 					<img src="{{ asset('/images/logo.png') }}" width="100%" height="auto" style="padding-right: 1rem; padding-left: 1rem">
 				</div>
-				<div class="flex-1 self-center text-right">
+				<div class="flex-1 mt-10 text-right">
 					<h2 class="header">{{ $result['bookingRef'] }}</h2>
 				</div>
 			</div>
@@ -139,7 +139,7 @@
 
 			<div class="px-6">
 				<ul class="list-none">
-					<strong style="font-size: 20px; margin-bottom: 1.5rem;">Þjónustur sem þú hefur greitt fyrir:</strong>
+					<strong style="font-size: 20px; padding-bottom: 1.5rem;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
 					@foreach ($result['servicesSelected'] as $service)
 						<li>{{ $service['description'] }}</li>
