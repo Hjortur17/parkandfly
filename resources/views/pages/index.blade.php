@@ -5,10 +5,10 @@
 @endsection
 
 @section ('main')
-	<section id="home" class="relative h-auto w-full background">
-		<navbar></navbar>
+	<section id="home" class="relative w-full background">
+		<div class="container max-w-4xl mx-auto px-6 min-h-screen">
+			<navbar></navbar>
 
-		<div class="container max-w-4xl mx-auto px-6">
 			<booking-form></booking-form>
 		</div>
 

@@ -1,14 +1,13 @@
 @extends ('layouts.master')
 
 @section ('main')
-	<section id="home" class="relative h-auto w-full background">
-		<navbar></navbar>
-
-		<div class="container max-w-4xl mx-auto px-6 pt-12">
-			<div class="md:min-h-screen p-0 flex flex-col flex-no-wrap justify-center md:items-center">
+	<section id="home" class="relative w-full background">
+		<div class="container max-w-4xl mx-auto px-6">
+			<div class="flex flex-col flex-no-wrap">
+				<navbar></navbar>
 
 				<div class="flex flex-col">
-					<h1 class="text-left text-5xl text-white font-bold mt-16 mb-6">Algengar spurningar</h1>
+					<h1 class="text-left text-5xl text-white font-bold mb-6">Algengar spurningar</h1>
 
 					<h3 class="text-white text-left font-bold mb-1 text-lg">Hvernig virkar Park And Fly? </h3>
 					<p class="text-left text-white leading-normal mb-6">
@@ -41,7 +40,7 @@
 					</p>
 
 					<h3 class="text-white text-left font-bold mb-1 text-lg">Spurningar varðandi bón og aukaþjónustu</h3>
-					<p class="text-left text-white leading-normal mb-6">
+					<p class="text-left text-white leading-normal pb-24">
 						Við rekum okkar eigin bónstöð til að hámarka gæði þjónustunnar. Við erum í góðu samstarfi við önnur fyrirtæki sem sérhæfa sig í þeirri þjónustu sem við bjóðum upp á, en sjáum ekki sjálf um þjónustu eins og skoðun, olíuskipti og dekkjaskipti.
 					</p>
 				</div>

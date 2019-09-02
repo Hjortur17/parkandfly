@@ -1,5 +1,5 @@
 <template>
-	<nav class="md:absolute inset-x-0 top-0 container max-w-4xl mx-auto pt-10 px-6">
+	<nav class="w-full py-12">
 		<ul class="flex justify-between">
 			<li>
 				<a href="/">

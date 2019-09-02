@@ -1,6 +1,6 @@
 <template>
-	<div class="min-h-screen p-0 flex flex-col flex-no-wrap justify-center items-center">
-		<section class="w-full my-8" id="car-form" v-if="step === 1">
+	<div class="p-0">
+		<section class="w-full mt-16" id="car-form" v-if="step === 1">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um bílinn</h2>
 			</div>
@@ -52,7 +52,7 @@
 			</div>
 		</section>
 
-		<section class="w-full my-8" id="about-form" v-if="step === 2">
+		<section class="w-full mt-16" id="about-form" v-if="step === 2">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center mb-12">Upplýsingar um eiganda eða notanda bílsins</h2>
 			</div>
@@ -101,9 +101,9 @@
 			</div>
 		</section>
 
-		<section class="w-full my-8" id="arrival-form" v-if="step === 3">
+		<section class="w-full mt-16" id="arrival-form" v-if="step === 3">
 			<div class="w-full">
-				<h2 class="font-bold text-white text-4xl text-center mb-12 pt-20">Hvenær er ferðin þín?</h2>
+				<h2 class="font-bold text-white text-4xl text-center mb-12">Hvenær er ferðin þín?</h2>
 			</div>
 
 			<p v-if="errors.length" class="text-white mb-6">
@@ -410,7 +410,7 @@
 			</div>
 		</section>
 
-		<section class="w-full my-8" id="service-form" v-if="step === 4">
+		<section class="w-full mt-16" id="service-form" v-if="step === 4">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center">Klárum dæmið</h2>
 				<p class="font-light text-white text-lg text-center italic">Hvaða þjónustu má bjóða þér?</p>

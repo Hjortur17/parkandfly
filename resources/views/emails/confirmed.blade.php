@@ -156,7 +156,7 @@
 					<strong style="font-size: 20px;">Þjónustur sem þú hefur greitt fyrir:</strong>
 
 					<div style="padding-top: 1.5rem;">
-						<p>Þú valdir einga þjónustu hjá okkur.</p>
+						<p>Þú valdir enga þjónustu hjá okkur.</p>
 					</div>
 				</ul>
 			</div>
