@@ -45,7 +45,7 @@
 
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0 float-right">
-					<button @click.prevent="checkCarForm(), next()"  class="float-right">
+					<button @click.prevent="checkCarForm($event), next()"  class="float-right">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 					</button>
 				</div>
@@ -461,18 +461,18 @@
 		</section>
 
 		<payment v-if="showPayment"
-			@hide="hideModal"
-			:userAge="userAge"
-			:servicePrice="servicePrice"
-			:numberOfDays="numberOfDaysData"
-			:priceForDays="priceForDays"
-			:paidPrice="total"
-			:bookingId="bookingId"
-			:booking="booking"
-			:selectedServicesId="selectedServicesId"
-			:selectedDeliveryDay="selectedDeliveryDay"
-			:selectedPickUpDay="selectedPickUpDay">
-		</payment>
+		@hide="hideModal"
+		:userAge="userAge"
+		:servicePrice="servicePrice"
+		:numberOfDays="numberOfDaysData"
+		:priceForDays="priceForDays"
+		:paidPrice="total"
+		:bookingId="bookingId"
+		:booking="booking"
+		:selectedServicesId="selectedServicesId"
+		:selectedDeliveryDay="selectedDeliveryDay"
+		:selectedPickUpDay="selectedPickUpDay">
+	</payment>
 </div>
 </template>
 
@@ -562,10 +562,6 @@ export default {
 		},
 
 		checkCarForm(e) {
-			if (this.booking.carNumber && this.booking.carSize && this.booking.carMake && this.booking.carType && this.booking.carColor) {
-				return true;
-			}
-
 			this.errors = [];
 
 			if (!this.booking.carNumber) {
@@ -583,15 +579,9 @@ export default {
 			if (!this.booking.carColor) {
 				this.errors.push('Vantar lit bíls!');
 			}
-
-			e.preventDefault();
 		},
 
 		checkUserForm(e) {
-			if (this.booking.name && this.booking.socialId && this.booking.email && this.booking.phone) {
-				return true;
-			}
-
 			this.errors = [];
 
 			if (!this.booking.name) {
@@ -599,7 +589,8 @@ export default {
 			}
 			if (!this.booking.socialId) {
 				this.errors.push('Vantar kennitölu!');
-			} else if (!kennitala.isPerson(this.booking.socialId)) {
+			} 
+			if (!kennitala.isPerson(this.booking.socialId)) {
 				this.errors.push('Kennitala er ekki lögleg');
 			}
 
@@ -610,27 +601,23 @@ export default {
 			if (!this.booking.phone) {
 				this.errors.push('Vantar símanúmer!');
 			}
-
-			e.preventDefault();
 		},
 
 		checkDateForm(e) {
-			if (this.booking.dropOffDate && this.booking.dropOffTime && this.booking.pickUpDate && this.booking.pickUpTime && this.booking.flightNumber) {
-				return true;
-			}
-
 			this.errors = [];
-
-			if (this.booking.dropOffDate === String(moment(this.today).format('DD/MM/YYYY'))) {
+			
+			if (!this.selectedDeliveryDay) {
 				this.errors.push('Vantar brottfarardag!');
 			}
+
 			if (!this.booking.dropOffTime) {
 				this.errors.push('Vantar brottfarartíma!');
 			}
 
-			if (this.booking.pickUpDate === String(moment(this.today).format('DD/MM/YYYY'))) {
+			if (!this.selectedPickUpDay) {
 				this.errors.push('Vantar komudag!');
 			}
+
 			if (!this.booking.pickUpTime) {
 				this.errors.push('Vantar komutíma!');
 			}
@@ -638,8 +625,6 @@ export default {
 			if (!this.booking.flightNumber) {
 				this.errors.push('Vantar flugnúmer!');
 			}
-
-			e.preventDefault();
 		},
 
 		prev() {
@@ -647,6 +632,10 @@ export default {
 		},
 
 		next() {
+			if (this.errors.length > 0) {
+				return false;
+			}
+
 			this.errors = [];
 			this.step++;
 		},
