@@ -116,7 +116,7 @@
 
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" min-datetime="2019-09-01T00:00:00.000Z" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
+					<datetime type="date" v-model="selectedDeliveryDay" class="theme-orange" :min-datetime="today" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Brottfaradagur"></datetime>
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3">
 					<datetime type="date" v-model="selectedPickUpDay" class="theme-orange" :min-datetime="selectedDeliveryDay" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="{ year: 'numeric', month: 'numeric', day: 'numeric' }" placeholder="Komudagur"></datetime>
@@ -126,7 +126,7 @@
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
 					<select @click="dropOffDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
-						<option selected disabled>Áætlaður komutími á Leifsstöð?</option>
+						<option selected value="">Áætlaður komutími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
 						<option>00:30</option>
@@ -253,7 +253,7 @@
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3">
 					<select @click="pickUpDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
-						<option selected disabled>Áætlaður lendingartími á Leifsstöð?</option>
+						<option selected value="">Áætlaður lendingartími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
 						<option>00:30</option>
@@ -487,14 +487,16 @@ export default {
 
 	data() {
 		return {
+			today: moment(new Date()).toISOString(),
+
 			errors: [],
 
 			services: [],
 			selectedServicesId: [],
 			selectedServicesPrices: [],
 
-			selectedDeliveryDay: "Brottfaradagur",
-			selectedPickUpDay: "Komudagur",
+			selectedDeliveryDay: null,
+			selectedPickUpDay: null,
 
 			numberOfDaysData: null,
 
@@ -518,8 +520,8 @@ export default {
 
 				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
 				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
-				dropOffTime: "Áætlaður komutími á Leifsstöð?",
-				pickUpTime: "Áætlaður lendingartími á Leifsstöð?",
+				dropOffTime: "",
+				pickUpTime: "",
 
 				flightNumber: null,
 			},
@@ -619,18 +621,20 @@ export default {
 
 			this.errors = [];
 
-			if (!this.booking.dropOffDate) {
+			if (this.booking.dropOffDate === String(moment(this.today).format('DD/MM/YYYY'))) {
 				this.errors.push('Vantar brottfarardag!');
 			}
 			if (!this.booking.dropOffTime) {
 				this.errors.push('Vantar brottfarartíma!');
 			}
-			if (!this.booking.pickUpDate) {
+
+			if (this.booking.pickUpDate === String(moment(this.today).format('DD/MM/YYYY'))) {
 				this.errors.push('Vantar komudag!');
 			}
 			if (!this.booking.pickUpTime) {
 				this.errors.push('Vantar komutíma!');
 			}
+			
 			if (!this.booking.flightNumber) {
 				this.errors.push('Vantar flugnúmer!');
 			}
