@@ -467,7 +467,6 @@
 		:numberOfDays="numberOfDaysData"
 		:priceForDays="priceForDays"
 		:paidPrice="total"
-		:bookingId="bookingId"
 		:booking="booking"
 		:selectedServicesId="selectedServicesId"
 		:selectedDeliveryDay="selectedDeliveryDay"
@@ -499,8 +498,6 @@ export default {
 			selectedPickUpDay: null,
 
 			numberOfDaysData: null,
-
-			bookingId: null,
 
 			dropOff: null,
 			pickUp: null,

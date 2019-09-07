@@ -53,11 +53,35 @@
 						</slot>
 					</div>
 
+					<div class="modal-body">
+						<div class="flex justify-center px-20">
+							<div class="flex-1 px-2 text-center">
+								<input type="radio" id="one" value="Netgiro" v-model="paymentPicked">
+								<label for="one">Netgíró</label>
+							</div>
+							<div class="flex-1 px-2 self-center text-center">
+								<input type="radio" id="two" value="Korta" v-model="paymentPicked">
+								<label for="two">Kort</label>
+							</div>
+						</div>
+					</div>
+
 					<div class="modal-footer">
 						<slot name="footer">
 							<div>
 								<div class="text-center mt-8 mb-6">
-									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkPaymentForm($event)">
+									<form action="https://test.netgiro.is/securepay" method="POST" @submit.prevent="checkNetgiroForm($event)" v-if="this.paymentPicked === 'Netgiro'">
+										<p class="my-4 text-sm">
+											<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold hover:text-orange-500 transition">skilmála</a> Park and fly</p>
+										</p>
+
+										<p class="mb-6 text-sm">
+											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
+										</p>
+
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
+									</form>
+									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkKortaForm($event)">
 										<p class="my-4 text-sm">
 											<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold hover:text-orange-500 transition">skilmála</a> Park and fly</p>
 										</p>
@@ -92,7 +116,6 @@ export default {
 		'numberOfDays',
 		'priceForDays',
 		'paidPrice',
-		'bookingId',
 		'booking',
 		'selectedServicesId',
 		'selectedDeliveryDay',
@@ -102,7 +125,6 @@ export default {
 	data() {
 		return {
 			amount: this.paidPrice,
-			netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 
 			discounts: [],
 			errors: [],
@@ -176,7 +198,7 @@ export default {
 			});
 		},
 
-		checkPaymentForm(e) {
+		checkKortaForm(e) {
 			e.preventDefault();
 			e.stopPropagation();
 			
@@ -252,6 +274,79 @@ export default {
 			return false;
 		},
 
+		checkNetgiroForm(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			
+			this.checkData();
+
+			if (!this.termsChecked) {
+				alert('Úpps! Þú þarft að samþykkja skilmálana!');
+				return false;
+			}
+
+			if (this.errors.length > 0) {
+				alert('Úpps! Þú fylltir ekki formið rétt inn!');
+				return false;
+			}
+
+			axios.post('/api/database/booking/create', {
+				carNumber: this.booking.carNumber,
+				carSize: this.booking.carSize,
+				carMake: this.booking.carMake,
+				carType: this.booking.carType,
+				carColor: this.booking.carColor,
+
+				name: this.booking.name,
+				socialId: this.booking.socialId,
+				email: this.booking.email,
+				phone: this.booking.phone,
+
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
+				dropOffTime: this.booking.dropOffTime,
+				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
+				pickUpTime: this.booking.pickUpTime,
+
+				flightNumber: this.booking.flightNumber,
+
+				numberOfDays: this.numberOfDays,
+				priceForDays: this.priceForDays,
+
+				paidPrice: this.amount,
+
+				selectedServicesId: this.selectedServicesId,
+
+				discountCode: this.couponInput,
+
+				step: 1
+			})
+			.then(response => {
+				this.amount = response.data.priceTotalDiscount;
+				this.discountValid = response.data.discountValid;
+
+				if (this.amount == 0) {
+					window.location.href = 'https://parkandfly.is?status=1';
+				} else {
+					var netgiro_refrence = response.data.bookingRef;
+
+					var netgiroId = '881E674F-7891-4C20-AFD8-56FE2624C4B5';
+
+					var netgiro_signature = String(sha256('YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=' + netgiro_refrence + this.amount + netgiroId));
+
+					var netgiroLink = 'https://test.netgiro.is/securepay?ApplicationID=' + netgiroId + '&Iframe=false&Signature=' + netgiro_signature + '&PaymentConfirmedURL=https://parkandfly.is/api/database/booking/update&ReferenceNumber=' + netgiro_refrence + '&TotalAmount=' + this.amount + '&Items[0].ProductNo=' + netgiro_refrence + '&Name=' + this.booking.name + '&Items[0].Description=Park and fly&Items[0].Amount=' + this.amount;
+
+					window.location.href = netgiroLink;
+
+					return false;
+				}
+			})
+			.catch(function (error) {
+				
+			});
+
+			return false;
+		},
+
 		checkUserAge() {
 			if (this.userAge >= 65) {
 				return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
@@ -309,18 +404,9 @@ export default {
 		},
 	},
 
-	computed: {
-		netgiro_signature: function () {
-			return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=1" + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
-		},
-		netgiro_link: function () {
-			return 'https://parkandfly.is/api/database/booking/update?bookingId=' + this.bookingId;
-		}
-	},
-
 	mounted() {
 		this.checkUserAge();
-	},
+	}
 }
 </script>
 
