@@ -2782,6 +2782,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2804,7 +2824,10 @@ __webpack_require__.r(__webpack_exports__);
       kortaTerminal: null,
       kortaDescription: '',
       providerKeyMethod: null,
-      providerKey: null
+      providerKey: null,
+      netgiro_refrence: '',
+      netgiro_link: '',
+      netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5'
     };
   },
   methods: {
@@ -2946,19 +2969,14 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this3.amount = response.data.priceTotalDiscount;
         _this3.discountValid = response.data.discountValid;
+        var key = response.data.bookingRef + '-' + response.data.tokenKorta;
+        _this3.netgiro_refrence = key;
+        alert(_this3.netgiro_refrence); // this.netgiro_link = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking';
+        // alert(this.netgiro_link) ?referenceNumber=' + key + '&transactionId=netgiro';
 
-        if (_this3.amount == 0) {
-          window.location.href = 'https://parkandfly.is?status=1';
-        } else {
-          var netgiro_refrence = response.data.bookingRef;
-          var netgiroId = '881E674F-7891-4C20-AFD8-56FE2624C4B5';
-          var netgiro_signature = String(sha256__WEBPACK_IMPORTED_MODULE_4___default()('YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=' + netgiro_refrence + _this3.amount + netgiroId));
-          var netgiroLink = 'https://test.netgiro.is/securepay?ApplicationID=' + netgiroId + '&Iframe=false&Signature=' + netgiro_signature + '&PaymentConfirmedURL=https://parkandfly.is/api/database/booking/update&ReferenceNumber=' + netgiro_refrence + '&TotalAmount=' + _this3.amount + '&Items[0].ProductNo=' + netgiro_refrence + '&Name=' + _this3.booking.name + '&Items[0].Description=Park and fly&Items[0].Amount=' + _this3.amount;
-          window.location.href = netgiroLink;
-          return false;
-        }
+        _this3.$refs.netgiroForm.submit(); // ref i url 
+
       })["catch"](function (error) {});
-      return false;
     },
     checkUserAge: function checkUserAge() {
       if (this.userAge >= 65) {
@@ -3023,6 +3041,11 @@ __webpack_require__.r(__webpack_exports__);
       if (!this.booking.flightNumber) {
         this.errors.push('Vantar flugnúmer!');
       }
+    }
+  },
+  computed: {
+    netgiro_signature: function netgiro_signature() {
+      return String(sha256__WEBPACK_IMPORTED_MODULE_4___default()('YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=' + this.netgiro_refrence + this.amount + this.netgiroId));
     }
   },
   mounted: function mounted() {
@@ -40989,6 +41012,7 @@ var render = function() {
                       ? _c(
                           "form",
                           {
+                            ref: "netgiroForm",
                             attrs: {
                               action: "https://test.netgiro.is/securepay",
                               method: "POST"
@@ -40997,6 +41021,203 @@ var render = function() {
                               submit: function($event) {
                                 $event.preventDefault()
                                 return _vm.checkNetgiroForm($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("input", {
+                              attrs: { type: "hidden", name: "ApplicationID" },
+                              domProps: { value: _vm.netgiroId }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Iframe",
+                                value: "false"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "Signature" },
+                              domProps: { value: _vm.netgiro_signature }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "PaymentSuccessfulURL",
+                                value:
+                                  "http://localhost:3000/api/database/booking/update/netgiro"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "PaymentConfirmedURL",
+                                value:
+                                  "http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "PaymentCancelledURL",
+                                value: "http://localhost:3000/um-okkur"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "ConfirmationType",
+                                value: "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "ReferenceNumber"
+                              },
+                              domProps: { value: _vm.netgiro_refrence }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: { type: "hidden", name: "TotalAmount" },
+                              domProps: { value: _vm.amount }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Items[0].ProductNo",
+                                value: "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Items[0].Name",
+                                value: "Park and fly"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Items[0].Amount"
+                              },
+                              domProps: { value: _vm.amount }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Items[0].UnitPrice"
+                              },
+                              domProps: { value: _vm.amount }
+                            }),
+                            _vm._v(" "),
+                            _c("input", {
+                              attrs: {
+                                type: "hidden",
+                                name: "Items[0].Quantity",
+                                value: "1"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "my-4 text-sm" }, [
+                              _c("input", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.termsChecked,
+                                    expression: "termsChecked"
+                                  }
+                                ],
+                                staticClass: "mr-2 leading-tight",
+                                attrs: { type: "checkbox" },
+                                domProps: {
+                                  checked: Array.isArray(_vm.termsChecked)
+                                    ? _vm._i(_vm.termsChecked, null) > -1
+                                    : _vm.termsChecked
+                                },
+                                on: {
+                                  change: function($event) {
+                                    var $$a = _vm.termsChecked,
+                                      $$el = $event.target,
+                                      $$c = $$el.checked ? true : false
+                                    if (Array.isArray($$a)) {
+                                      var $$v = null,
+                                        $$i = _vm._i($$a, $$v)
+                                      if ($$el.checked) {
+                                        $$i < 0 &&
+                                          (_vm.termsChecked = $$a.concat([$$v]))
+                                      } else {
+                                        $$i > -1 &&
+                                          (_vm.termsChecked = $$a
+                                            .slice(0, $$i)
+                                            .concat($$a.slice($$i + 1)))
+                                      }
+                                    } else {
+                                      _vm.termsChecked = $$c
+                                    }
+                                  }
+                                }
+                              }),
+                              _vm._v("Ég samþykki "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "font-bold hover:text-orange-500 transition",
+                                  attrs: {
+                                    href: "/skilmalar",
+                                    target: "_blank"
+                                  }
+                                },
+                                [_vm._v("skilmála")]
+                              ),
+                              _vm._v(" Park and fly")
+                            ]),
+                            _vm._v(" "),
+                            _c("p"),
+                            _vm._v(" "),
+                            _c("p", { staticClass: "mb-6 text-sm" }, [
+                              _c("small", [
+                                _vm._v(
+                                  "Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild."
+                                )
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass:
+                                  "bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer",
+                                attrs: { type: "submit" }
+                              },
+                              [_vm._v("Borgaaa")]
+                            )
+                          ]
+                        )
+                      : _c(
+                          "form",
+                          {
+                            attrs: {
+                              action: "https://netgreidslur.korta.is",
+                              method: "POST"
+                            },
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.checkKortaForm($event)
                               }
                             }
                           },
@@ -41078,97 +41299,6 @@ var render = function() {
                             )
                           ]
                         )
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      {
-                        attrs: {
-                          action: "https://netgreidslur.korta.is",
-                          method: "POST"
-                        },
-                        on: {
-                          submit: function($event) {
-                            $event.preventDefault()
-                            return _vm.checkKortaForm($event)
-                          }
-                        }
-                      },
-                      [
-                        _c("p", { staticClass: "my-4 text-sm" }, [
-                          _c("input", {
-                            directives: [
-                              {
-                                name: "model",
-                                rawName: "v-model",
-                                value: _vm.termsChecked,
-                                expression: "termsChecked"
-                              }
-                            ],
-                            staticClass: "mr-2 leading-tight",
-                            attrs: { type: "checkbox" },
-                            domProps: {
-                              checked: Array.isArray(_vm.termsChecked)
-                                ? _vm._i(_vm.termsChecked, null) > -1
-                                : _vm.termsChecked
-                            },
-                            on: {
-                              change: function($event) {
-                                var $$a = _vm.termsChecked,
-                                  $$el = $event.target,
-                                  $$c = $$el.checked ? true : false
-                                if (Array.isArray($$a)) {
-                                  var $$v = null,
-                                    $$i = _vm._i($$a, $$v)
-                                  if ($$el.checked) {
-                                    $$i < 0 &&
-                                      (_vm.termsChecked = $$a.concat([$$v]))
-                                  } else {
-                                    $$i > -1 &&
-                                      (_vm.termsChecked = $$a
-                                        .slice(0, $$i)
-                                        .concat($$a.slice($$i + 1)))
-                                  }
-                                } else {
-                                  _vm.termsChecked = $$c
-                                }
-                              }
-                            }
-                          }),
-                          _vm._v("Ég samþykki "),
-                          _c(
-                            "a",
-                            {
-                              staticClass:
-                                "font-bold hover:text-orange-500 transition",
-                              attrs: { href: "/skilmalar", target: "_blank" }
-                            },
-                            [_vm._v("skilmála")]
-                          ),
-                          _vm._v(" Park and fly")
-                        ]),
-                        _vm._v(" "),
-                        _c("p"),
-                        _vm._v(" "),
-                        _c("p", { staticClass: "mb-6 text-sm" }, [
-                          _c("small", [
-                            _vm._v(
-                              "Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild."
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass:
-                              "bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer",
-                            attrs: { type: "submit" }
-                          },
-                          [_vm._v("Borga")]
-                        )
-                      ]
-                    )
                   ])
                 ])
               ])

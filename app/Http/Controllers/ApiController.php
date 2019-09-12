@@ -31,7 +31,8 @@ class ApiController extends Controller
 
 	public function getServices()
 	{
-		$services = json_decode(file_get_contents('http://admin.parkandfly.is/api/ServicesServiceApi'), true);
+		// $services = json_decode(file_get_contents('http://admin.parkandfly.is/api/ServicesServiceApi'), true);
+		$services = json_decode(file_get_contents('http://admin.parkandfly.is/apitest/ServicesServiceApiTest'), true);
 
 		return $services;
 	}
@@ -54,7 +55,8 @@ class ApiController extends Controller
 
 	public function getSingleDiscount($discount)
 	{
-		$url = 'http://admin.parkandfly.is/api/DiscountsServiceApi/getbycode/'.$discount;
+		// $url = 'http://admin.parkandfly.is/api/DiscountsServiceApi/getbycode/'.$discount;
+		$url = 'http://admin.parkandfly.is/apitest/DiscountsServiceApiTest/getbycode/'.$discount;
 		
 		$discounts = json_decode(file_get_contents($url), true);
 
@@ -67,7 +69,8 @@ class ApiController extends Controller
 
 	public function bookingCheck(Request $request)
 	{
-		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/checkbooking';
+		// $url = 'http://admin.parkandfly.is/api/BookingsServiceApi/checkbooking';
+		$url = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/checkbooking';
 
 		$data = json_encode(array(
 			'carNumber' => $request->input('carNumber'),
@@ -128,7 +131,8 @@ class ApiController extends Controller
 
 	public function bookingStepOne(Request $request)
 	{
-		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/createbooking';
+		// $url = 'http://admin.parkandfly.is/api/BookingsServiceApi/createbooking';
+		$url = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/createbooking';
 
 		$data = json_encode(array(
 			'carNumber' => $request->input('carNumber'),
@@ -202,7 +206,8 @@ class ApiController extends Controller
 
 	public function bookingStepTwo(Request $request)
 	{
-		$url = 'http://admin.parkandfly.is/api/BookingsServiceApi/confirmbooking?token=' . $request->input('reference') . '&kortaAuthcode=' . $request->input('authcode');
+		// $url = 'http://admin.parkandfly.is/api/BookingsServiceApi/confirmbooking?token=' . $request->input('reference') . '&kortaAuthcode=' . $request->input('authcode');
+		$url = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/confirmbooking?token=' . $request->input('reference') . '&kortaAuthcode=' . $request->input('authcode');
 
 		$data = json_encode(array(
 			'token' => $request->input('reference'),
@@ -237,5 +242,27 @@ class ApiController extends Controller
 		->send(new BookingConfirmed($result));
 
 		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
+	}
+
+	public function netnetgiro(Request $request)
+	{
+		return response()->view('pages.about', $request, 200);
+	}
+
+	public function PaymentSuccessfulURLNetgiro(Request $request)
+	{
+		dd($request);
+
+		// $status = $request->input('status');
+
+		// if (status == '2') {
+		// 	return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
+		// } else if (status == '1') {
+		// 	return redirect('/')->with('flash', 'Bókun ókláruð, ekki tókst að staðfesta!');
+		// } else if (status == '5') {
+		// 	return redirect('/')->with('flash', 'Hætt var við!');
+		// }
+
+		// return redirect('/')->with('flash', 'Óþekkt staða!');
 	}
 }

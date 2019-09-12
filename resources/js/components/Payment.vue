@@ -70,7 +70,27 @@
 						<slot name="footer">
 							<div>
 								<div class="text-center mt-8 mb-6">
-									<form action="https://test.netgiro.is/securepay" method="POST" @submit.prevent="checkNetgiroForm($event)" v-if="this.paymentPicked === 'Netgiro'">
+									<form action="https://test.netgiro.is/securepay" method="POST" v-if="this.paymentPicked === 'Netgiro'" ref="netgiroForm" @submit.prevent="checkNetgiroForm($event)">
+										<input type="hidden" name="ApplicationID" :value="netgiroId"/>
+										<input type="hidden" name="Iframe" value="false" />
+										<input type="hidden" name="Signature" :value="netgiro_signature"/>
+
+										<input type="hidden" name="PaymentSuccessfulURL" value="http://localhost:3000/api/database/booking/update/netgiro"/>
+										<input type="hidden" name="PaymentConfirmedURL" value="http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking"/>
+										
+										<input type="hidden" name="PaymentCancelledURL" value="http://localhost:3000/um-okkur"/>
+
+										<input type="hidden" name="ConfirmationType" value="1"/>
+
+										<input type="hidden" name="ReferenceNumber" :value="netgiro_refrence" />
+										<input type="hidden" name="TotalAmount" :value="amount" />
+
+										<input type="hidden" name="Items[0].ProductNo" value="1" />
+										<input type="hidden" name="Items[0].Name" value="Park and fly" />
+										<input type="hidden" name="Items[0].Amount" :value="amount" />
+										<input type="hidden" name="Items[0].UnitPrice" :value="amount" />
+										<input type="hidden" name="Items[0].Quantity" value="1" />
+
 										<p class="my-4 text-sm">
 											<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold hover:text-orange-500 transition">skilmála</a> Park and fly</p>
 										</p>
@@ -79,9 +99,9 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borgaaa</button>
 									</form>
-									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkKortaForm($event)">
+									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkKortaForm($event)" v-else>
 										<p class="my-4 text-sm">
 											<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold hover:text-orange-500 transition">skilmála</a> Park and fly</p>
 										</p>
@@ -141,7 +161,11 @@ export default {
 			kortaTerminal: null,
 			kortaDescription: '',
 			providerKeyMethod: null,
-			providerKey: null
+			providerKey: null,
+
+			netgiro_refrence: '',
+			netgiro_link: '',
+			netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 		}
 	},
 
@@ -277,7 +301,7 @@ export default {
 		checkNetgiroForm(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			
+
 			this.checkData();
 
 			if (!this.termsChecked) {
@@ -324,27 +348,18 @@ export default {
 				this.amount = response.data.priceTotalDiscount;
 				this.discountValid = response.data.discountValid;
 
-				if (this.amount == 0) {
-					window.location.href = 'https://parkandfly.is?status=1';
-				} else {
-					var netgiro_refrence = response.data.bookingRef;
+				var key = response.data.bookingRef + '-' + response.data.tokenKorta;
 
-					var netgiroId = '881E674F-7891-4C20-AFD8-56FE2624C4B5';
+				this.netgiro_refrence = key;
 
-					var netgiro_signature = String(sha256('YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=' + netgiro_refrence + this.amount + netgiroId));
+				alert(this.netgiro_refrence);
 
-					var netgiroLink = 'https://test.netgiro.is/securepay?ApplicationID=' + netgiroId + '&Iframe=false&Signature=' + netgiro_signature + '&PaymentConfirmedURL=https://parkandfly.is/api/database/booking/update&ReferenceNumber=' + netgiro_refrence + '&TotalAmount=' + this.amount + '&Items[0].ProductNo=' + netgiro_refrence + '&Name=' + this.booking.name + '&Items[0].Description=Park and fly&Items[0].Amount=' + this.amount;
+				// this.netgiro_link = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking';
+				// alert(this.netgiro_link) ?referenceNumber=' + key + '&transactionId=netgiro';
 
-					window.location.href = netgiroLink;
-
-					return false;
-				}
+				this.$refs.netgiroForm.submit(); // ref i url 
 			})
-			.catch(function (error) {
-				
-			});
-
-			return false;
+			.catch(function (error) {});
 		},
 
 		checkUserAge() {
@@ -402,6 +417,12 @@ export default {
 				this.errors.push('Vantar flugnúmer!');
 			}
 		},
+	},
+
+	computed: {
+		netgiro_signature: function () {
+			return String(sha256('YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=' + this.netgiro_refrence + this.amount + this.netgiroId));
+		}
 	},
 
 	mounted() {
