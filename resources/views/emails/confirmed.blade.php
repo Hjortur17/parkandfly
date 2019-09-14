@@ -171,12 +171,12 @@
 
 					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Fullt verð:</strong> {{ $result['priceTotalNoDiscount'] }}</li>
 					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Greitt verð:</strong> {{ $result['priceTotalDiscount'] }}kr.</li>
-					<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
+					<li style="font-size: 14px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
 				</ul>
 			@else
 				<ul class="list-none">
 					<li style="font-size: 20px; font-weight: 300"><strong style="font-size: 20px">Greitt verð:</strong> {{ $result['priceTotalDiscount'] }}kr.</li>
-					<li style="font-size: 12px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
+					<li style="font-size: 14px; font-weight: 300">Athuga skal að greitt hefur verið 500kr minna fyrir útgöngumiða á bílastæði Isavia.</li>
 				</ul>	
 			@endif
 

@@ -75,10 +75,10 @@
 									<tr class="hover:bg-grey-lighter">
 										<td class="py-4 px-6 border-b border-grey-light font-bold">Olíuskipti</td>
 
-										<td class="py-4 px-6 border-b border-grey-light">16.900kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">18.900kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">22.900kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">26.900kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
 									</tr>
 
 									<tr class="hover:bg-grey-lighter">
@@ -91,17 +91,18 @@
 									</tr>
 								</tbody>
 							</table>
-
 						</div>
+						
+						<p class="pb-6 text-white">Reikningur fyrir Olíuskiptum eru sendur í heimabanka. Við rukkum aðeins þjónustugjald.</p>
 					</div>
 				</div>
 
 				<div class="w-full pb-24">
 					<h3 class="font-bold text-white text-2xl mb-2">Aðrar þjónustur:</h3>
 
-					<p class="text-white text-lg">Aðalskoðun: 15.000kr</p>
-					<p class="text-white text-lg">Dekkjaskipti: 11.000kr</p>
-					<p class="text-white text-lg">Rafhleðsla: 3.000kr</p>
+					<p class="text-white text-lg"><strong>Aðalskoðun:</strong> 15.000kr</p>
+					<p class="text-white text-lg"><strong>Dekkjaskipti:</strong> 11.000kr</p>
+					<p class="text-white text-lg"><strong>Rafhleðsla:</strong> 1.500kr</p>
 				</div>
 			</div>
 		</div>
