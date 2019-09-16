@@ -75,10 +75,8 @@
 										<input type="hidden" name="Iframe" value="false" />
 										<input type="hidden" name="Signature" :value="netgiro_signature"/>
 
-										<input type="hidden" name="PaymentSuccessfulURL" value="http://localhost:3000/api/database/booking/update/netgiro"/>
+										<input type="hidden" name="PaymentSuccessfulURL" value="http://localhost:3000/api/booking/update/netgiro"/>
 										<input type="hidden" name="PaymentConfirmedURL" value="http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking"/>
-										
-										<input type="hidden" name="PaymentCancelledURL" value="http://localhost:3000/um-okkur"/>
 
 										<input type="hidden" name="ConfirmationType" value="1"/>
 
@@ -99,7 +97,7 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borgaaa</button>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
 									</form>
 									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkKortaForm($event)" v-else>
 										<p class="my-4 text-sm">
@@ -131,15 +129,15 @@ import sha256 from 'sha256';
 
 export default {
 	props: [
-		'userAge',
-		'servicePrice',
-		'numberOfDays',
-		'priceForDays',
-		'paidPrice',
-		'booking',
-		'selectedServicesId',
-		'selectedDeliveryDay',
-		'selectedPickUpDay'
+	'userAge',
+	'servicePrice',
+	'numberOfDays',
+	'priceForDays',
+	'paidPrice',
+	'booking',
+	'selectedServicesId',
+	'selectedDeliveryDay',
+	'selectedPickUpDay'
 	],
 
 	data() {
@@ -164,7 +162,6 @@ export default {
 			providerKey: null,
 
 			netgiro_refrence: '',
-			netgiro_link: '',
 			netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 		}
 	},
@@ -178,7 +175,7 @@ export default {
 			e.preventDefault();
 			e.stopPropagation();
 
-			axios.post('/api/database/booking/checkbooking', {
+			axios.post('/api/booking/checkbooking', {
 				carNumber: this.booking.carNumber,
 				carSize: this.booking.carSize,
 				carMake: this.booking.carMake,
@@ -239,7 +236,7 @@ export default {
 			}
 
 
-			axios.post('/api/database/booking/create', {
+			axios.post('/api/booking/create/korta', {
 				carNumber: this.booking.carNumber,
 				carSize: this.booking.carSize,
 				carMake: this.booking.carMake,
@@ -284,7 +281,7 @@ export default {
 				} else {
 					var key = response.data.bookingRef + '-' + response.data.tokenKorta;
 
-					var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
+					var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/booking/update/korta&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
 
 					window.location.href = kortaLinkUrl;
 
@@ -314,7 +311,7 @@ export default {
 				return false;
 			}
 
-			axios.post('/api/database/booking/create', {
+			axios.post('/api/booking/create', {
 				carNumber: this.booking.carNumber,
 				carSize: this.booking.carSize,
 				carMake: this.booking.carMake,
@@ -353,11 +350,10 @@ export default {
 				this.netgiro_refrence = key;
 
 				alert(this.netgiro_refrence);
-
-				// this.netgiro_link = 'http://admin.parkandfly.is/apitest/BookingsServiceApiTest/netgiroconfirmbooking';
-				// alert(this.netgiro_link) ?referenceNumber=' + key + '&transactionId=netgiro';
-
-				this.$refs.netgiroForm.submit(); // ref i url 
+				
+				this.$nextTick(() => {
+					this.$refs.netgiroForm.submit();
+				});
 			})
 			.catch(function (error) {});
 		},
@@ -428,7 +424,7 @@ export default {
 	mounted() {
 		this.checkUserAge();
 	}
-}
+};
 </script>
 
 <style>

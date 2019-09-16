@@ -1,7 +1,5 @@
 <?php
 
-// Auth::routes();
-
 Route::get('/', 'PagesController@index');
 Route::get('/um-okkur', 'PagesController@about');
 Route::get('/skilmalar', 'PagesController@terms');
@@ -17,15 +15,11 @@ Route::prefix('api')->group(function () {
 	Route::get('car/info/get', 'ApiController@getCarInfo');
 	Route::get('flight/info/get', 'ApiController@getFlightInfo');
 	
-	Route::post('database/booking/checkbooking', 'ApiController@bookingCheck');
-	Route::post('database/booking/create', 'ApiController@bookingStepOne');
-	Route::post('database/booking/update', 'ApiController@bookingStepTwo');
-
-	Route::get('database/booking/update/netnetgiro', 'ApiController@netnetgiro');
-	Route::get('database/booking/update/netgiro', 'ApiController@PaymentSuccessfulURLNetgiro');
+	Route::post('booking/checkbooking', 'ApiController@bookingCheck');
+	Route::post('booking/create', 'ApiController@bookingCreate');
 	
-	// Route::get('discounts/get', 'ApiController@getDiscounts');
-	// Route::post('database/booking/create', 'ApiController@createBooking');
+	Route::post('booking/update/korta', 'ApiController@kortaBookingUpdate');
+	Route::post('booking/update/netgiro', 'ApiController@netgiroBookingUpdate');
 });
 
 

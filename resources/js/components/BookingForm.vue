@@ -435,8 +435,12 @@
 				</div>
 			</div>
 			
-			<div class="flex flex-wrap -mx-3 mt-4 mb-12">
+			<div class="flex flex-wrap -mx-3 mt-4">
 				<small class="italic text-white">* Inni geymsla er 990kr á dag.</small>
+			</div>
+
+			<div class="flex flex-wrap -mx-3 mb-12">
+				<small class="italic text-white">* Uppgefið verð á Olíuskipti er aðeins þjónustugjald.</small>
 			</div>
 
 			<div class="flex flex-wrap -mx-3">
@@ -691,7 +695,7 @@ export default {
 	mounted() {
 		this.getServices();
 	}
-}
+};
 </script>
 
 

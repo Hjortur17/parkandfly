@@ -13,6 +13,7 @@ Vue.component('datetime', Datetime);
 
 Vue.component('booking-form', require('./components/BookingForm.vue').default);
 Vue.component('navbar', require('./components/Navbar.vue').default);
+Vue.component('price', require('./components/Price.vue').default);
 
 Vue.component('flash', require('./components/Flash.vue').default);
 
