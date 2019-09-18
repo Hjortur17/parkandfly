@@ -105,7 +105,6 @@
 			<ul class="list-none">
 				<strong style="font-size: 20px;">Upplýsingar um þig:</strong>
 				<li style="padding-top: 1.5rem;">{{ $result['name'] }}</li>
-				<li>{{ $result['socialId'] }}</li>
 				<li>{{ $result['email'] }}</li>
 				<li>{{ $result['phone'] }}</li>
 			</ul>

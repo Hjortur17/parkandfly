@@ -13,6 +13,8 @@ use App\Mail\BookingConfirmed;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
+use Exception;
+
 class ApiController extends Controller
 {
 	public function getCarInfo(Request $request)
@@ -36,22 +38,6 @@ class ApiController extends Controller
 		return $services;
 	}
 
-	public function getFlightInfo(Request $request)
-	{
-		$strippedRequest = str_replace(' ', '', $request->flightNumber);
-		$string = strtoupper($strippedRequest);
-
-		$content = json_encode(file_get_contents("https://apis.is/flight?language=en&type=departures"));
-		$json = json_decode($content);
-		$strippedRequest = strip_tags($json);
-
-		$finalJson = json_decode($strippedRequest, true);
-
-		dd($finalJson);
-
-		return $carNumberInfo;
-	}
-
 	public function getSingleDiscount($discount)
 	{
 		$url = 'http://admin.parkandfly.is/api/DiscountsServiceApi/getbycode/'.$discount;
@@ -62,7 +48,7 @@ class ApiController extends Controller
 
 		if ($result['success'] == false) {}
 
-		return $result;
+			return $result;
 	}
 
 	public function bookingCheck(Request $request)
@@ -106,24 +92,30 @@ class ApiController extends Controller
 			)
 		);
 
-		$context  = stream_context_create($options);
-		$resultTemp = file_get_contents($url, true, $context);
+		try {
+			$context  = stream_context_create($options);
+			$resultTemp = file_get_contents($url, true, $context);
 
-		$result = json_decode($resultTemp, true);
+			$result = json_decode($resultTemp, true);
 
-		if ($result['success'] == false) {
-			$temp_error_message = 'API call BookingsServiceApi for action checkbooking failed. Result message: ' . $result['message'];
+			if ($result['success'] == false) {
+				$temp_error_message = 'API call BookingsServiceApi for action checkbooking failed. Result message: ' . $result['message'];
 
-			Log::channel('slackError')->error($temp_error_message);
-			
-			return redirect('/')->with('flash', 'Óvænt villa!');
+				Log::channel('slackError')->error($temp_error_message);
+				
+				return redirect('/')->with('flash', 'Óvænt villa!');
+			} else {
+				if (request()->wantsJson()) {
+					return $result;
+				}
+
+				return $result;
+			}
+		} catch (Exception $e) {
+			Log::channel('slackError')->error('On coupon on applied: ' . $e->getMessage());
+
+			return response('Óvænt villa!', 500);
 		}
-
-		if (request()->wantsJson()) {
-			return $result;
-		}
-
-		return $result;
 	}
 
 	public function bookingStepOne(Request $request)
@@ -167,37 +159,35 @@ class ApiController extends Controller
 			)
 		);
 
-		$context  = stream_context_create($options);
-		$resultTemp = file_get_contents($url, true, $context);
+		try {
+			$context  = stream_context_create($options);
+			$resultTemp = file_get_contents($url, true, $context);
 
-		$result = json_decode($resultTemp, true);
+			$result = json_decode($resultTemp, true);
 
-		if ($result['success'] == false) {
-			$temp_error_message = 'API call BookingsServiceApi for action createbooking failed. Result message: ' . $result['message'];
+			if ($result['success'] == false) {
+				$temp_error_message = 'API call BookingsServiceApi for action createbooking failed. Result message: ' . $result['message'];
 
-			Log::channel('slackError')->error($temp_error_message);
-			
-			return redirect('/')->with('flash', 'Óvænt villa!');
-		}
+				Log::channel('slackError')->error($temp_error_message);
 
-		$key = $result['bookingRef'] . '-' . $result['tokenKorta'];
-		$dateTimeNow = date("Y-m-d H:i:s");
+				return redirect('/')->with('flash', 'Óvænt villa!');
+			}
 
-		Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($result['socialId']).', Netfang: '.($result['email']).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
+			$key = $result['bookingRef'] . '-' . $result['tokenKorta'];
+			$dateTimeNow = date("Y-m-d H:i:s");
 
-		if ($result['step'] == 2) {
-			Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Skref: 2');
+			Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($result['socialId']).', Netfang: '.($result['email']).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
 
-			Mail::to($result['email'])
-			->cc('bokanir@parkandfly.is')
-			->send(new BookingConfirmed($result));
-		}
+			if (request()->wantsJson()) {
+				return $result;
+			}
 
-		if (request()->wantsJson()) {
 			return $result;
-		}
+		} catch (Exception $e) {
+			Log::channel('slackError')->error('On booking create: ' . $e->getMessage());
 
-		return $result;
+			return response('Óvænt villa!', 500);
+		}
 	}
 
 	public function bookingStepTwo(Request $request)
@@ -217,25 +207,31 @@ class ApiController extends Controller
 			)
 		);
 
-		$context  = stream_context_create($options);
-		$resultTemp = file_get_contents($url, true, $context);
+		try {
+			$context  = stream_context_create($options);
+			$resultTemp = file_get_contents($url, true, $context);
 
-		$result = json_decode($resultTemp, true);
+			$result = json_decode($resultTemp, true);
 
-		if ($result['success'] == false) {
-			$temp_error_message = 'API call BookingsServiceApi for action confirmbooking failed. Result message: ' . $result['message'];
+			if ($result['success'] == false) {
+				$temp_error_message = 'API call BookingsServiceApi for action confirmbooking failed. Result message: ' . $result['message'];
 
-			Log::channel('slackError')->error($temp_error_message);
-			
+				Log::channel('slackError')->error($temp_error_message);
+
+				return redirect('/')->with('flash', 'Óvænt villa!');
+			}
+
+			Log::channel('slack')->notice('Bókun hefur verið staðfest. Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
+
+			Mail::to($result['email'])
+				->cc('bokanir@parkandfly.is')
+				->send(new BookingConfirmed($result));
+
+			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
+		} catch (Exception $e) {
+			Log::channel('slackError')->error('On booking update: ' . $e->getMessage());
+
 			return redirect('/')->with('flash', 'Óvænt villa!');
 		}
-
-		Log::channel('slack')->notice('Bókun hefur verið staðfest. Kt: '.($result['socialId']).', Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
-
-		Mail::to($result['email'])
-		->cc('bokanir@parkandfly.is')
-		->send(new BookingConfirmed($result));
-
-		return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 	}
 }

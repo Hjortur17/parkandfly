@@ -172,7 +172,7 @@ export default {
 				}
 			})
 			.catch(function (error) {
-
+				alert('Aðgerð tókst ekki!');
 			});
 		},
 
@@ -246,7 +246,9 @@ export default {
 				}
 			})
 			.catch(function (error) {
-				
+				alert('Aðgerð tókst ekki!');
+
+				return false;
 			});
 
 			return false;
@@ -280,13 +282,9 @@ export default {
 			if (!this.booking.name) {
 				this.errors.push('Vantar nafn!');
 			}
-			if (!this.booking.socialId) {
-				this.errors.push('Vantar kennitölu!');
-			} 
 			if (!this.booking.email) {
 				this.errors.push('Vantar netfang!');
 			}
-
 			if (!this.booking.phone) {
 				this.errors.push('Vantar símanúmer!');
 			}
