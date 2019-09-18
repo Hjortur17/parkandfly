@@ -176,7 +176,15 @@ class ApiController extends Controller
 			$key = $result['bookingRef'] . '-' . $result['tokenKorta'];
 			$dateTimeNow = date("Y-m-d H:i:s");
 
-			Log::channel('slack')->notice('Bókun hefur stofnuð. Kt: '.($result['socialId']).', Netfang: '.($result['email']).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
+			Log::channel('slack')->notice('Bókun hefur stofnuð. Netfang: '.($result['email']).', Bókunarnr.: '.$key.', Dags.: '.$dateTimeNow.', Skref: 1');
+
+			if ($result['step'] == 2) {
+				Log::channel('slack')->notice('Bókun hefur verið staðfest. Bókunarnr.: '.($result['bookingRef']).', Skref: 2');
+				
+				Mail::to($result['email'])
+				->cc('bokanir@parkandfly.is')
+				->send(new BookingConfirmed($result));
+			}
 
 			if (request()->wantsJson()) {
 				return $result;
@@ -224,8 +232,8 @@ class ApiController extends Controller
 			Log::channel('slack')->notice('Bókun hefur verið staðfest. Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
 
 			Mail::to($result['email'])
-				->cc('bokanir@parkandfly.is')
-				->send(new BookingConfirmed($result));
+			->cc('bokanir@parkandfly.is')
+			->send(new BookingConfirmed($result));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 		} catch (Exception $e) {
