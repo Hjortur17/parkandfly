@@ -7,7 +7,7 @@
 						<slot name="header">
 							<div class="flex mb-12">
 								<div class="w-20 self-center">
-									<button @click="hideModal()">
+									<button @click="hideModal()" title="Loka">
 										<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" width="20px" height="20px"><path d="M193.94 256L296.5 153.44l21.15-21.15c3.12-3.12 3.12-8.19 0-11.31l-22.63-22.63c-3.12-3.12-8.19-3.12-11.31 0L160 222.06 36.29 98.34c-3.12-3.12-8.19-3.12-11.31 0L2.34 120.97c-3.12 3.12-3.12 8.19 0 11.31L126.06 256 2.34 379.71c-3.12 3.12-3.12 8.19 0 11.31l22.63 22.63c3.12 3.12 8.19 3.12 11.31 0L160 289.94 262.56 392.5l21.15 21.15c3.12 3.12 8.19 3.12 11.31 0l22.63-22.63c3.12-3.12 3.12-8.19 0-11.31L193.94 256z"/></svg>
 									</button>
 								</div>
@@ -42,7 +42,7 @@
 										<form class="w-full">
 											<div class="flex items-center border-b border-b-2 border-orange-500 py-2">
 												<input class="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" placeholder="Afsláttarkóði" v-model="couponInput">
-												<button class="flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none" type="button" @click="couponApplied($event)">
+												<button class="flex-shrink-0 border-transparent border-4 text-orange-500 hover:text-orange-800 text-sm py-1 px-2 rounded outline-none" type="button" @click="couponApplied($event)" title="Virkja afsláttarkóða">
 													Nota
 												</button>
 											</div>
@@ -97,7 +97,7 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer" title="Borga">Borga</button>
 									</form>
 									<form action="https://netgreidslur.korta.is" method="POST" @submit.prevent="checkKortaForm($event)" v-else>
 										<p class="my-4 text-sm">
@@ -108,7 +108,7 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer" title="Borga">Borga</button>
 									</form>
 								</div>
 							</div>

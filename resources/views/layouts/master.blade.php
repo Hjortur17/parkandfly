@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	{{-- <meta name="theme-color" content="#4dc0b5"/> --}}
+	<meta name="theme-color" content="#63b3ed"/>
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
 	<title>Park and Fly | Tryggðu þér öruggt bílastæði meðan þú ferðast</title>
