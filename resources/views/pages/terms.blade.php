@@ -11,7 +11,7 @@
 
 					<h3 class="font-bold text-left text-lg text-white text-xl">Persónuupplýsingar: </h3>
 					<p class="text-left text-lg text-white text-lg mb-6">
-						Viðskiptavinir gefa upp nafn sitt, kennitölu, upplýsingar um bílinn og ferðaáætlun. Þessar upplýsingar verða einungis notaðar til að aðstoða þig á sem bestan hátt.  Allar upplýsingar um greiðslur fara í gegnum Korta og Netgíró. Park And Fly hefur ekki aðgang að þeim upplýsingum. 
+						Viðskiptavinir gefa upp nafn sitt, upplýsingar um bílinn og ferðaáætlun.  Þessar upplýsingar verða einungis notaðar til að aðstoða þig á sem bestan hátt.  Allar upplýsingar um greiðslur fara í gegnum Korta. Park And Fly hefur ekki aðgang að þeim upplýsingum. 
 					</p>
 
 					<h3 class="font-bold text-left text-lg text-white text-xl">Endurgreiðsla: </h3>
@@ -21,7 +21,7 @@
 
 					<h3 class="font-bold text-left text-lg text-white text-xl">Ábyrgðarmál: </h3>
 					<p class="text-left text-lg text-white text-lg">
-						Tjón á bílum viðskiptavina eru að fullu tryggð meðan þeir eru í vörslu hjá Park And Fly. Svæðin okkar eru afgirt og varinn með öryggismyndavélakerfum og flóðlýsingum.  Enginn umgangur er leyfð á svæðum okkar nema fyrir starfsmenn. 
+						Tjón á bílum viðskiptavina eru að fullu tryggð meðan þeir eru í vörslu hjá Park And Fly.  Svæðin okkar eru afgirt og varinn með öryggismyndavélakerfum og flóðlýsingum.  Enginn umgangur er leyfð á svæðum okkar nema fyrir starfsmenn. 
 					</p>
 					<p class="text-left text-lg text-white text-lg mb-6">
 						 Ef sannarlegt tjón verður á bíl meðan hann er í umsjá starfmanns Park And Fly þá greiðir fyrirtækið allan kostnað. Komi upp bilun í bifreið sem er í umsjá Park And Fly sem rekja má til eðlilegar bilunar í bílnum sjálfum ber Park And Fly ENGA ÁBYRGÐ á því tjóni. Dæmi um slíka bilun gæti verið slit á tímareim eða önnur eðlileg slit á eldri bílum.
