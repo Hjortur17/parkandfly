@@ -31,6 +31,7 @@
 
 	<div class="flex flex-col w-full pb-16">
 		<small class="text-white text-base mb-1">* Verð á inni geymslu er reiknaður fyrir hvern dag.</small>
+		<small class="text-white text-base mb-1">* Það skal hafa það í huga að við rukkum 500kr á dag fyrir geymslu.</small>
 	</div>
 </div>
 </template>
