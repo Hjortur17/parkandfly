@@ -10,7 +10,7 @@
 					<h1 class="text-center text-5xl text-white font-bold mb-2">Verðskrá</h1>
 					<p class="italic text-white text-center mb-6">4.500kr þjónustugjald</p>
 
-					<div class="w-full">
+					<div class="w-full pb-10">
 						<div class="bg-white shadow rounded my-6 overflow-x-auto">
 							<table class="text-left w-full border-collapse"> <!--Border collapse doesn't work on this site yet but it's available in newer tailwind versions -->
 								<thead>
@@ -73,15 +73,6 @@
 									</tr>
 
 									<tr class="hover:bg-grey-lighter">
-										<td class="py-4 px-6 border-b border-grey-light font-bold">Olíuskipti</td>
-
-										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
-										<td class="py-4 px-6 border-b border-grey-light">2.500kr</td>
-									</tr>
-
-									<tr class="hover:bg-grey-lighter">
 										<td class="py-4 px-6 border-b border-grey-light font-bold">Inni geymsla</td>
 
 										<td class="py-4 px-6 border-b border-grey-light">990kr (á dag)</td>
@@ -89,20 +80,19 @@
 										<td class="py-4 px-6 border-b border-grey-light">990kr (á dag)</td>
 										<td class="py-4 px-6 border-b border-grey-light">990kr (á dag)</td>
 									</tr>
+
+									<tr class="hover:bg-grey-lighter">
+										<td class="py-4 px-6 border-b border-grey-light font-bold">Rafhleðsla</td>
+
+										<td class="py-4 px-6 border-b border-grey-light">1500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">1500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">1500kr</td>
+										<td class="py-4 px-6 border-b border-grey-light">1500kr</td>
+									</tr>
 								</tbody>
 							</table>
 						</div>
-						
-						<p class="pb-6 text-white">Reikningur fyrir Olíuskiptum eru sendur í heimabanka. Við rukkum aðeins þjónustugjald.</p>
 					</div>
-				</div>
-
-				<div class="w-full pb-24">
-					<h3 class="font-bold text-white text-2xl mb-2">Aðrar þjónustur:</h3>
-
-					<p class="text-white text-lg"><strong>Aðalskoðun:</strong> 15.000kr</p>
-					<p class="text-white text-lg"><strong>Dekkjaskipti:</strong> 11.000kr</p>
-					<p class="text-white text-lg"><strong>Rafhleðsla:</strong> 1.500kr</p>
 				</div>
 			</div>
 		</div>
