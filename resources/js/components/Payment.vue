@@ -80,18 +80,14 @@
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
 import md5 from 'md5';
-import sha256 from 'sha256';
 
 export default {
 	props: [
-		'userAge',
 		'servicePrice',
 		'numberOfDays',
 		'priceForDays',
 		'paidPrice',
-		'bookingId',
 		'booking',
 		'selectedServicesId',
 		'selectedDeliveryDay',
@@ -101,7 +97,6 @@ export default {
 	data() {
 		return {
 			amount: this.paidPrice,
-			netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 
 			discounts: [],
 			errors: [],
@@ -143,9 +138,9 @@ export default {
 				email: this.booking.email,
 				phone: this.booking.phone,
 
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
+				dropOffDate: this.booking.dropOffDate,
 				dropOffTime: this.booking.dropOffTime,
-				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
+				pickUpDate: this.booking.pickUpDate,
 				pickUpTime: this.booking.pickUpTime,
 
 				flightNumber: this.booking.flightNumber,
@@ -204,9 +199,9 @@ export default {
 				email: this.booking.email,
 				phone: this.booking.phone,
 
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
+				dropOffDate: this.booking.dropOffDate,
 				dropOffTime: this.booking.dropOffTime,
-				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
+				pickUpDate: this.booking.pickUpDate,
 				pickUpTime: this.booking.pickUpTime,
 
 				flightNumber: this.booking.flightNumber,
@@ -251,12 +246,6 @@ export default {
 			});
 
 			return false;
-		},
-
-		checkUserAge() {
-			if (this.userAge >= 65) {
-				return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
-			}
 		},
 
 		checkData() {
@@ -305,20 +294,7 @@ export default {
 			}
 		},
 	},
-
-	computed: {
-		netgiro_signature: function () {
-			return String(sha256("YCFd6hiA8lUjZejVcIf/LhRXO4wTDxY0JhOXvQZwnMSiNynSxmNIMjMf1HHwdV6cMN48NX3ZipA9q9hLPb9C1ZIzMH5dvELPAHceiu7LbZzmIAGeOf/OUaDrk2Zq2dbGacIAzU6yyk4KmOXRaSLi8KW8t3krdQSX7Ecm8Qunc/A=1" + this.amount + "881E674F-7891-4C20-AFD8-56FE2624C4B5"));
-		},
-		netgiro_link: function () {
-			return 'https://parkandfly.is/api/database/booking/update?bookingId=' + this.bookingId;
-		}
-	},
-
-	mounted() {
-		this.checkUserAge();
-	},
-}
+};
 </script>
 
 <style>

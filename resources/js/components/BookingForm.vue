@@ -119,7 +119,7 @@
 
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<select @click="dropOffDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
+					<select @click="formatDropOffDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.dropOffTime" name="dropOffTime">
 						<option selected value="">Áætlaður komutími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
@@ -246,7 +246,7 @@
 					</div>
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3">
-					<select @click="pickUpDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
+					<select @click="formatPickUpDate" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.pickUpTime" name="pickUpTime">
 						<option selected value="">Áætlaður lendingartími á Leifsstöð?</option>
 						<option>00:00</option>
 						<option>00:15</option>
@@ -456,23 +456,19 @@
 
 		<payment v-if="showPayment"
 		@hide="hideModal"
-		:userAge="userAge"
 		:servicePrice="servicePrice"
 		:numberOfDays="numberOfDaysData"
 		:priceForDays="priceForDays"
 		:paidPrice="total"
-		:bookingId="bookingId"
 		:booking="booking"
-		:selectedServicesId="selectedServicesId"
-		:selectedDeliveryDay="selectedDeliveryDay"
-		:selectedPickUpDay="selectedPickUpDay">
+		:selectedServicesId="selectedServicesId">
 	</payment>
 </div>
 </template>
 
 <script>
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import payment from './Payment.vue';
 
 export default {
@@ -480,7 +476,7 @@ export default {
 
 	data() {
 		return {
-			today: moment(new Date()).toISOString(),
+			today: dayjs().format(),
 
 			errors: [],
 
@@ -492,11 +488,6 @@ export default {
 			selectedPickUpDay: null,
 
 			numberOfDaysData: null,
-
-			bookingId: null,
-
-			dropOff: null,
-			pickUp: null,
 
 			step: 1,
 			booking: {
@@ -511,8 +502,8 @@ export default {
 				email: null,
 				phone: null,
 
-				dropOffDate: String(moment(this.selectedDeliveryDay).format('DD/MM/YYYY')),
-				pickUpDate: String(moment(this.selectedPickUpDay).format('DD/MM/YYYY')),
+				dropOffDate: null,
+				pickUpDate: null,
 				dropOffTime: "",
 				pickUpTime: "",
 
@@ -645,21 +636,16 @@ export default {
 			}
 		},
 
-		dropOffDate: function () {
-			return this.dropOff = moment(this.selectedDeliveryDay).format('DD/MM/YYYY');
+		formatDropOffDate() {
+			return this.booking.dropOffDate = dayjs(this.selectedDeliveryDay).format('DD/MM/YYYY');
 		},
-		pickUpDate: function () {
-			return this.pickUp = moment(this.selectedPickUpDay).format('DD/MM/YYYY');
+
+		formatPickUpDate() {
+			return this.booking.pickUpDate = dayjs(this.selectedPickUpDay).format('DD/MM/YYYY');
 		},
+
 		numberOfDays: function () {
-			return this.numberOfDaysData = Math.abs(moment(this.selectedDeliveryDay).diff(moment(this.selectedPickUpDay), 'days'));
-		},
-		updateFlightInfo: function () {
-			axios.get('/api/flight/info/get?flightNumber=' + this.booking.flightNumber)
-			.then(response => {
-				this.flightAirlane = response.data.flightAirlane,
-				this.flightDeparture = response.data.flightDeparture
-			})
+			return this.numberOfDaysData = Math.abs(dayjs(this.selectedDeliveryDay).diff(dayjs(this.selectedPickUpDay), 'days'));
 		}
 	},
 

@@ -25,11 +25,11 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "dayjs": "^1.8.16",
         "lodash.filter": "^4.6.0",
         "lodash.groupby": "^4.6.0",
         "luxon": "^1.17.2",
         "md5": "^2.2.1",
-        "moment": "^2.24.0",
         "sha256": "^0.2.0",
         "tailwindcss": "^1.0.5",
         "vue-datetime": "^1.0.0-beta.10",
