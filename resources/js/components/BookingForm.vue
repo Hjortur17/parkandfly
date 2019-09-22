@@ -15,10 +15,10 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="carNumber" placeholder="Bílnúmer" required v-model="booking.carNumber" @blur="getCarInfo()" :maxlength="7">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" name="carNumber" placeholder="Bílnúmer" required v-model="booking.carNumber" @blur="getCarInfo()" :maxlength="7" aria-label="Bílnúmer">
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-0">
-					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize">
+					<select class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" v-model="booking.carSize" name="carSize" aria-label="Stærð bíls">
 						<option selected value="">Veldu stærð</option>
 						<option value="Fólksbíll">Fólksbíll</option>
 						<option value="Jepplingur">Jepplingur</option>
@@ -33,19 +33,19 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Tegund" name="carMake" required v-model="booking.carMake">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Tegund" name="carMake" required v-model="booking.carMake" aria-label="Tegund">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Undirtegund" name="carType" required v-model="booking.carType">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Undirtegund" name="carType" required v-model="booking.carType" aria-label="Undirtegund">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Litur" name="carColor" required v-model="booking.carColor">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Litur" name="carColor" required v-model="booking.carColor" aria-label="Litur">
 				</div>
 			</div>
 
 			<div class="flex flex-wrap -mx-3">
 				<div class="w-full px-3 mb-6 md:mb-0 float-right">
-					<button @click.prevent="checkCarForm($event), next()"  class="float-right">
+					<button @click.prevent="checkCarForm($event), next()"  class="float-right" title="Halda áfram">
 						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 					</button>
 				</div>
@@ -67,13 +67,13 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Nafn" name="name" required v-model="booking.name">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Nafn" name="name" required v-model="booking.name" aria-label="Nafn">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="email" placeholder="Netfang" name="email" required v-model="booking.email">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="email" placeholder="Netfang" name="email" required v-model="booking.email" aria-label="Netfang">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="phone" placeholder="Símanúmer" name="phone" required v-model="booking.phone">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="phone" placeholder="Símanúmer" name="phone" required v-model="booking.phone" aria-label="Símanúmer">
 				</div>
 			</div>
 
@@ -81,12 +81,12 @@
 				<div class="w-full px-3 mb-6 md:mb-0">
 					<ul class="flex float-right">
 						<li class="pr-4">
-							<button @click.prevent="prev()">
+							<button @click.prevent="prev()" title="Til baka">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"/></svg>
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="checkUserForm(), next()">
+							<button @click.prevent="checkUserForm(), next()" title="Halda áfram">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 							</button>
 						</li>
@@ -376,13 +376,13 @@
 
 			<div class="flex flex-wrap -mx-3 mb-6">
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber">
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugnúmer á heimleið" name="flightNumber" v-model="booking.flightNumber" aria-label="Flugnúmer">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugfélag" name="flightAirlane" v-model="booking.flightAirlane" disabled>
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Flugfélag" name="flightAirlane" v-model="booking.flightAirlane" disabled aria-label="Flugfélag">
 				</div>
 				<div class="w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible">
-					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Brottfarastaður" name="flightDeparture" v-model="booking.flightDeparture" disabled>
+					<input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" placeholder="Brottfarastaður" name="flightDeparture" v-model="booking.flightDeparture" disabled aria-label="Brottfarastaður">
 				</div>
 			</div>
 
@@ -390,12 +390,12 @@
 				<div class="w-full px-3 mb-6 md:mb-0">
 					<ul class="flex float-right">
 						<li class="pr-4">
-							<button @click.prevent="prev()">
+							<button @click.prevent="prev()" title="Til baka">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"/></svg>
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="checkDateForm(), numberOfDays(), next()">
+							<button @click.prevent="checkDateForm(), numberOfDays(), next()" title="Halda áfram">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
 							</button>
 						</li>
@@ -415,7 +415,7 @@
 					<div v-if="service.carMake === booking.carSize">
 						<div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
 							<div class="w-4 self-center">
-								<input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id">
+								<input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id" :aria-label="service.description">
 							</div>
 							<div class="flex-1 pl-3">
 								<label>
@@ -440,12 +440,12 @@
 				<div class="w-1/2">
 					<ul class="flex float-right">
 						<li class="pr-4 self-center">
-							<button @click.prevent="prev()" class="mt-1">
+							<button @click.prevent="prev()" class="mt-1" title="Til baka">
 								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"/></svg>
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full">
+							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" title="Sýna greiðslugátt">
 								Klára Pöntun
 							</button>
 						</li>
@@ -678,7 +678,7 @@ export default {
 	mounted() {
 		this.getServices();
 	}
-}
+};
 </script>
 
 

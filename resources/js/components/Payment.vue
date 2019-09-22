@@ -80,7 +80,6 @@
 
 <script>
 import axios from 'axios';
-import kennitala from 'kennitala';
 import moment from 'moment';
 import md5 from 'md5';
 import sha256 from 'sha256';

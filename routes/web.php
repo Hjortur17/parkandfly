@@ -20,9 +20,6 @@ Route::prefix('api')->group(function () {
 	Route::post('database/booking/checkbooking', 'ApiController@bookingCheck');
 	Route::post('database/booking/create', 'ApiController@bookingStepOne');
 	Route::post('database/booking/update', 'ApiController@bookingStepTwo');
-	
-	// Route::get('discounts/get', 'ApiController@getDiscounts');
-	// Route::post('database/booking/create', 'ApiController@createBooking');
 });
 
 
