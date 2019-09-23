@@ -941,16 +941,8 @@ img {
   padding-right: 0.75rem;
 }
 
-.pl-3{
-  padding-left: 0.75rem;
-}
-
 .pr-4{
   padding-right: 1rem;
-}
-
-.pr-8{
-  padding-right: 2rem;
 }
 
 .pb-10{
@@ -1094,6 +1086,10 @@ img {
   text-transform: uppercase;
 }
 
+.underline{
+  text-decoration: underline;
+}
+
 .visible{
   visibility: visible;
 }
@@ -1156,20 +1152,12 @@ button { outline: none;
 
 @media (min-width: 768px){
 
-  .md\:flex-row{
-    flex-direction: row;
-  }
-
   .md\:flex-1{
     flex: 1 1 0%;
   }
 
   .md\:mb-0{
     margin-bottom: 0;
-  }
-
-  .md\:mb-2{
-    margin-bottom: 0.5rem;
   }
 
   .md\:mt-16{

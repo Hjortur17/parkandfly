@@ -123,25 +123,8 @@
 				<p class="font-light text-white text-lg text-center italic">Hvaða þjónustu má bjóða þér?</p>
 			</div>
 
-			<div class="flex flex-wrap -mx-3 mt-12">
-				<!-- <div v-for="service in services">
-					<div v-if="service.carMake === booking.carSize">
-						<div class="flex flex-col md:flex-row pr-8 mb-6 md:mb-2">
-							<div class="w-4 self-center">
-								<input class="leading-tight" type="checkbox" :value="service.price" v-model="selectedServicesPrices" @click="addToArray(service.id), changePrice(service)" :id="service.id" :aria-label="service.description">
-							</div>
-							<div class="flex-1 pl-3">
-								<label>
-									<span class="font-normal text-white" v-text="service.description"></span>
-									<br>
-									<span class="text-sm text-white" v-text="service.price + 'kr'"></span>
-								</label>
-							</div>
-						</div>
-					</div>
-				</div> -->
-
-				<multiselect v-model="selectedServices" :options="sortedServices" :multiple="true" placeholder="Sláðu inn ef þú vilt leita af þjónustu" track-by="description" label="description" :close-on-select="false">
+			<div class="flex flex-wrap -mx-3 mt-12 relative">
+				<multiselect v-model="selectedServices" :options="sortedServices" :multiple="true" placeholder="Veldu þér þjónustu með okkur" track-by="description" label="description" :close-on-select="false" class="absolute appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
 					<span slot="noResult">Engin þjónusta fannst! Reyndu annað leitarskilirði</span>
 				</multiselect>
 			</div>
@@ -162,7 +145,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" title="Sýna greiðslugátt">
+							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-6 py-2 rounded" title="Sýna greiðslugátt">
 								Klára Pöntun
 							</button>
 						</li>
@@ -435,5 +418,50 @@ export default {
 .theme-orange .vdatetime-time-picker__item--selected,
 .theme-orange .vdatetime-popup__actions__button {
 	color: #ff9800;
+}
+
+.multiselect__tag {
+	background: #ed8936;
+	border-radius: .25rem;
+	font-size: .875rem;
+	padding-right: 0.5rem;
+	padding-left: 0.5rem;
+	padding-top: 0.25rem;
+	padding-bottom: 0.25rem;
+	margin-right: 0.25rem;
+	color: white;
+}
+
+.multiselect__input {
+	background: transparent;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	outline: 0;
+}
+
+.multiselect__content {
+	width: 100%;
+	transition: .5s;
+}
+
+.multiselect__element {
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	overflow: auto;
+	cursor: pointer;
+}
+
+.multiselect__element:hover {
+	text-decoration: underline;
+}
+
+.multiselect__content-wrapper {
+	z-index: 10 !important;
+	max-height: 200px !important;
+	overflow: auto !important;
+}
+
+.multiselect__option--selected {
+	font-weight: bold;
 }
 </style>

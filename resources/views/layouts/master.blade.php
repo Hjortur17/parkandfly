@@ -42,18 +42,6 @@
 		&noscript=1"/>
 	</noscript>
 
-	<link rel="stylesheet" href="https://unpkg.com/vue-multiselect@2.1.0/dist/vue-multiselect.min.css">
-
-
-	{{-- <script async src="www.googletagmanager.com/gtag/js?id=AW-715601160"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-
-		gtag('config', 'AW-715601160');
-	</script> --}}
-
 	@yield ('head')
 </head>
 <body>

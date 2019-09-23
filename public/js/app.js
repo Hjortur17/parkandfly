@@ -2013,23 +2013,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -2939,7 +2922,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".theme-orange .vdatetime-popup__header,\n.theme-orange .vdatetime-calendar__month__day--selected > span > span,\n.theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {\n  background: #FF9800;\n}\n.theme-orange .vdatetime-year-picker__item--selected,\n.theme-orange .vdatetime-time-picker__item--selected,\n.theme-orange .vdatetime-popup__actions__button {\n  color: #ff9800;\n}\n", ""]);
+exports.push([module.i, ".theme-orange .vdatetime-popup__header,\n.theme-orange .vdatetime-calendar__month__day--selected > span > span,\n.theme-orange .vdatetime-calendar__month__day--selected:hover > span > span {\n  background: #FF9800;\n}\n.theme-orange .vdatetime-year-picker__item--selected,\n.theme-orange .vdatetime-time-picker__item--selected,\n.theme-orange .vdatetime-popup__actions__button {\n  color: #ff9800;\n}\n.multiselect__tag {\n  background: #ed8936;\n  border-radius: .25rem;\n  font-size: .875rem;\n  padding-right: 0.5rem;\n  padding-left: 0.5rem;\n  padding-top: 0.25rem;\n  padding-bottom: 0.25rem;\n  margin-right: 0.25rem;\n  color: white;\n}\n.multiselect__input {\n  background: transparent;\n  margin-top: 1rem;\n  margin-bottom: 1rem;\n  outline: 0;\n}\n.multiselect__content {\n  width: 100%;\n  transition: .5s;\n}\n.multiselect__element {\n  padding-top: 0.5rem;\n  padding-bottom: 0.5rem;\n  overflow: auto;\n  cursor: pointer;\n}\n.multiselect__element:hover {\n  text-decoration: underline;\n}\n.multiselect__content-wrapper {\n  z-index: 10 !important;\n  max-height: 200px !important;\n  overflow: auto !important;\n}\n.multiselect__option--selected {\n  font-weight: bold;\n}\n", ""]);
 
 // exports
 
@@ -43222,15 +43205,17 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "flex flex-wrap -mx-3 mt-12" },
+                { staticClass: "flex flex-wrap -mx-3 mt-12 relative" },
                 [
                   _c(
                     "multiselect",
                     {
+                      staticClass:
+                        "absolute appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
                       attrs: {
                         options: _vm.sortedServices,
                         multiple: true,
-                        placeholder: "Sláðu inn ef þú vilt leita af þjónustu",
+                        placeholder: "Veldu þér þjónustu með okkur",
                         "track-by": "description",
                         label: "description",
                         "close-on-select": false
@@ -43322,7 +43307,7 @@ var render = function() {
                         "button",
                         {
                           staticClass:
-                            "bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full",
+                            "bg-orange-500 text-white font-bold text-center px-6 py-2 rounded",
                           attrs: { title: "Sýna greiðslugátt" },
                           on: {
                             click: function($event) {
