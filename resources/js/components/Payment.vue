@@ -27,6 +27,10 @@
 									<div class="flex-1 text-right text-sm md:text-base"><span v-text="priceForDays + 'kr'"></span></div>
 								</div>
 								<div class="block flex justify-between mb-4">
+									<div class="flex-1 text-left text-sm md:text-base">Útgöngumiði fyrir bílastæði Isavia</div>
+									<div class="flex-1 text-right text-sm md:text-base">-500kr</div>
+								</div>
+								<div class="block flex justify-between mb-4">
 									<div class="flex-1 text-left text-sm md:text-base">Þjónusta</div>
 									<div class="flex-1 text-right text-sm md:text-base"><span v-text="servicePrice + 'kr'"></span></div>
 								</div>
@@ -62,8 +66,11 @@
 											<input class="mr-2 leading-tight" type="checkbox" v-model="termsChecked">Ég samþykki <a href="/skilmalar" target="_blank" class="font-bold hover:text-orange-500 transition">skilmála</a> Park and fly</p>
 										</p>
 
-										<p class="mb-6 text-sm">
+										<p class="mb-2 text-sm">
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
+										</p>
+										<p class="mb-6 font-bold text-sm">
+											<small>ATH! Greitt er 500kr minna en upplagt verð fyrir útgöngumiða á bílastæði Isavia. </small>
 										</p>
 
 										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
