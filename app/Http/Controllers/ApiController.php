@@ -182,7 +182,6 @@ class ApiController extends Controller
 				Log::channel('slack')->notice('Bókun hefur verið staðfest. Bókunarnr.: '.($result['bookingRef']).', Skref: 2');
 				
 				Mail::to($result['email'])
-				->cc('bokanir@parkandfly.is')
 				->send(new BookingConfirmed($result));
 			}
 
@@ -232,7 +231,6 @@ class ApiController extends Controller
 			Log::channel('slack')->notice('Bókun hefur verið staðfest. Bókunarnr.: '.($result['bookingRef']).', Korta auth_code.: '.($request->input('authcode')).', Skref: 2');
 
 			Mail::to($result['email'])
-			->cc('bokanir@parkandfly.is')
 			->send(new BookingConfirmed($result));
 
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
