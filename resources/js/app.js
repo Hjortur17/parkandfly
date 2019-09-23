@@ -3,6 +3,8 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+window._ = require('lodash');
+
 import 'vue-datetime/dist/vue-datetime.css'
 import { Datetime } from 'vue-datetime';
 import dt from 'luxon/src/datetime.js';
