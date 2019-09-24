@@ -80,7 +80,7 @@
 
 			<div class="flex flex-wrap -mx-3 my-6">
 				<div class="inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
-					<datetime type="datetime" v-model="selectedDeliveryDay" class="theme-orange" :min-datetime="today" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="formatDate(selectedDeliveryDay)" placeholder="Brottför"></datetime>
+					<datetime type="datetime" v-model="selectedDeliveryDay" class="theme-orange" :min-datetime="this.today" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="formatDate(selectedDeliveryDay)" placeholder="Brottför"></datetime>
 				</div>
 				<div class="inline-block relative w-full md:w-1/2 px-3">
 					<datetime type="datetime" v-model="selectedPickUpDay" class="theme-orange" :min-datetime="selectedDeliveryDay" :phrases="{ok: 'Komið', cancel: 'Hætta'}" input-class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" :format="formatDate(selectedPickUpDay)" placeholder="Heimkoma"></datetime>
@@ -154,63 +154,93 @@
 			</div>
 		</section>
 
-		<section class="w-full mt-8 md:mt-16" id="service-form" v-if="step === 4">
+		<section class="w-full mt-8 md:mt-8" id="service-form" v-if="step === 4">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center">Yfirlit á bókun</h2>
 			</div>
 
-			<div class="flex flex-wrap -mx-3 mt-12 mb-6">
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-lg text-white">Upplýsingar</h2>
+			<div class="flex flex-wrap -mx-3 my-8">
+				<div id="about" class="w-full">	
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="mb-2 text-lg text-white font-bold">Upplýsingar um þig</h2>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white" >Nafn</h2>
-						<p  class="text-white" v-text="this.booking.name"></p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white" >Nafn</h2>
+							<p  class="text-white" v-text="this.booking.name"></p>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white" >Netfang</h2>
-						<p  class="text-white" v-text="this.booking.email"></p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white" >Netfang</h2>
+							<p  class="text-white" v-text="this.booking.email"></p>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white" >Símanr.</h2>
-						<p  class="text-white" v-text="this.booking.phone"></p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white" >Símanr.</h2>
+							<p  class="text-white" v-text="this.booking.phone"></p>
+						</div>
 					</div>
 				</div>
 
-				<div class="w-full mt-4">
-					<div class="flex justify-between">
-						<h2 class="text-lg text-white">Verð</h2>
+				<div id="car" class="w-full">
+					<div class="w-full mt-4">
+						<div class="flex justify-between">
+							<h2 class="mb-2 text-lg text-white font-bold">Upplýsingar um bílinn</h2>
+						</div>
+					</div>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Bílnúmer</h2>
+							<p  class="text-white" v-text="this.booking.carNumber"></p>
+						</div>
+					</div>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Tegund</h2>
+							<p  class="text-white" v-text="this.booking.carModel"></p>
+						</div>
+					</div>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Flokkur</h2>
+							<p  class="text-white" v-text="this.booking.carSize"></p>
+						</div>
 					</div>
 				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white">Grunngjald</h2>
-						<p class="text-white">4500kr</p>
+
+				<div id="price" class="w-full">
+					<div class="w-full mt-4">
+						<div class="flex justify-between">
+							<h2 class="mb-2 text-lg text-white font-bold">Verð</h2>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white">Geymsla (<span v-text="numberOfDaysData"></span> dagar)</h2>
-						<p class="text-white"><span v-text="priceForDays + 'kr'"></span></p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Grunngjald</h2>
+							<p class="text-white">4500kr</p>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white">Útgöngumiði fyrir bílastæði Isavia</h2>
-						<p class="text-white">-500kr</p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Geymsla (<span v-text="numberOfDaysData"></span> dagar)</h2>
+							<p class="text-white"><span v-text="priceForDays + 'kr'"></span></p>
+						</div>
 					</div>
-				</div>
-				<div class="w-full">
-					<div class="flex justify-between">
-						<h2 class="text-white">Þjónusta</h2>
-						<p class="text-white"><span v-text="servicePrice + 'kr'"></span></p>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Útgöngumiði fyrir bílastæði Isavia</h2>
+							<p class="text-white">-500kr</p>
+						</div>
+					</div>
+					<div class="w-full">
+						<div class="flex justify-between">
+							<h2 class="text-white">Þjónustur (<span><span v-for="service in this.selectedServicesDescription" v-text="service + ', '"></span></span>)</h2>
+							<p class="text-white"><span v-text="servicePrice + 'kr'"></span></p>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -271,16 +301,6 @@
 				</div>
 			</div>
 		</section>
-
-		<!-- <payment v-if="showPayment"
-			@hide="hideModal"
-			:servicePrice="servicePrice"
-			:numberOfDays="numberOfDaysData"
-			:priceForDays="priceForDays"
-			:paidPrice="total"
-			:booking="booking"
-			:selectedServicesId="selectedServicesId">
-		</payment> -->
 	</div>
 </template>
 
@@ -295,8 +315,6 @@ export default {
 
 	data() {
 		return {
-			today: dayjs().format(),
-
 			errors: [],
 
 			services: [],
@@ -510,11 +528,20 @@ export default {
 		selectedServicesId: function () {
 			return this.selectedServices.map(service => service.id);
 		},
+		selectedServicesDescription: function () {
+			return this.selectedServices.map(service => service.description);
+		},
 		sortedServices: function () {
 			let filtered = _.filter(this.services, ['carMake', 'Fólksbíll']);
 			let sorted = _.sortBy(filtered, 'description');
 
 			return sorted;
+		},
+		today: function () {
+			let now = dayjs();
+			let today = now.add('6', 'hours');
+
+			return today.format();
 		}
 	},
 

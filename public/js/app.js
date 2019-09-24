@@ -2131,6 +2131,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2142,7 +2162,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      today: dayjs__WEBPACK_IMPORTED_MODULE_1___default()().format(),
       errors: [],
       services: [],
       selectedServices: [],
@@ -2336,12 +2355,22 @@ __webpack_require__.r(__webpack_exports__);
         return service.id;
       });
     },
+    selectedServicesDescription: function selectedServicesDescription() {
+      return this.selectedServices.map(function (service) {
+        return service.description;
+      });
+    },
     sortedServices: function sortedServices() {
       var filtered = _.filter(this.services, ['carMake', 'Fólksbíll']);
 
       var sorted = _.sortBy(filtered, 'description');
 
       return sorted;
+    },
+    today: function today() {
+      var now = dayjs__WEBPACK_IMPORTED_MODULE_1___default()();
+      var today = now.add('6', 'hours');
+      return today.format();
     }
   },
   mounted: function mounted() {
@@ -43020,7 +43049,7 @@ var render = function() {
                     staticClass: "theme-orange",
                     attrs: {
                       type: "datetime",
-                      "min-datetime": _vm.today,
+                      "min-datetime": this.today,
                       phrases: { ok: "Komið", cancel: "Hætta" },
                       "input-class":
                         "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
@@ -43417,81 +43446,145 @@ var render = function() {
     _vm.step === 4
       ? _c(
           "section",
-          {
-            staticClass: "w-full mt-8 md:mt-16",
-            attrs: { id: "service-form" }
-          },
+          { staticClass: "w-full mt-8 md:mt-8", attrs: { id: "service-form" } },
           [
             _vm._m(4),
             _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 mt-12 mb-6" }, [
-              _vm._m(5),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex justify-between" }, [
-                  _c("h2", { staticClass: "text-white" }, [_vm._v("Nafn")]),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "text-white",
-                    domProps: { textContent: _vm._s(this.booking.name) }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex justify-between" }, [
-                  _c("h2", { staticClass: "text-white" }, [_vm._v("Netfang")]),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "text-white",
-                    domProps: { textContent: _vm._s(this.booking.email) }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex justify-between" }, [
-                  _c("h2", { staticClass: "text-white" }, [_vm._v("Símanr.")]),
-                  _vm._v(" "),
-                  _c("p", {
-                    staticClass: "text-white",
-                    domProps: { textContent: _vm._s(this.booking.phone) }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(6),
-              _vm._v(" "),
-              _vm._m(7),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex justify-between" }, [
-                  _c("h2", { staticClass: "text-white" }, [
-                    _vm._v("Geymsla ("),
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.numberOfDaysData) }
-                    }),
-                    _vm._v(" dagar)")
-                  ]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-white" }, [
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.priceForDays + "kr") }
+            _c("div", { staticClass: "flex flex-wrap -mx-3 my-8" }, [
+              _c("div", { staticClass: "w-full", attrs: { id: "about" } }, [
+                _vm._m(5),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [_vm._v("Nafn")]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.name) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Netfang")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.email) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Símanr.")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.phone) }
                     })
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(8),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full" }, [
-                _c("div", { staticClass: "flex justify-between" }, [
-                  _c("h2", { staticClass: "text-white" }, [_vm._v("Þjónusta")]),
-                  _vm._v(" "),
-                  _c("p", { staticClass: "text-white" }, [
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.servicePrice + "kr") }
+              _c("div", { staticClass: "w-full", attrs: { id: "car" } }, [
+                _vm._m(6),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Bílnúmer")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.carNumber) }
                     })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [_vm._v("Tegund")]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.carModel) }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Flokkur")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", {
+                      staticClass: "text-white",
+                      domProps: { textContent: _vm._s(this.booking.carSize) }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "w-full", attrs: { id: "price" } }, [
+                _vm._m(7),
+                _vm._v(" "),
+                _vm._m(8),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Geymsla ("),
+                      _c("span", {
+                        domProps: { textContent: _vm._s(_vm.numberOfDaysData) }
+                      }),
+                      _vm._v(" dagar)")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-white" }, [
+                      _c("span", {
+                        domProps: {
+                          textContent: _vm._s(_vm.priceForDays + "kr")
+                        }
+                      })
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(9),
+                _vm._v(" "),
+                _c("div", { staticClass: "w-full" }, [
+                  _c("div", { staticClass: "flex justify-between" }, [
+                    _c("h2", { staticClass: "text-white" }, [
+                      _vm._v("Þjónustur ("),
+                      _c(
+                        "span",
+                        _vm._l(this.selectedServicesDescription, function(
+                          service
+                        ) {
+                          return _c("span", {
+                            domProps: { textContent: _vm._s(service + ", ") }
+                          })
+                        }),
+                        0
+                      ),
+                      _vm._v(")")
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-white" }, [
+                      _c("span", {
+                        domProps: {
+                          textContent: _vm._s(_vm.servicePrice + "kr")
+                        }
+                      })
+                    ])
                   ])
                 ])
               ])
@@ -43601,9 +43694,9 @@ var render = function() {
             attrs: { id: "service-form" }
           },
           [
-            _vm._m(9),
-            _vm._v(" "),
             _vm._m(10),
+            _vm._v(" "),
+            _vm._m(11),
             _vm._v(" "),
             _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
               _c("div", { staticClass: "w-1/2" }, [
@@ -43769,7 +43862,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full" }, [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "text-lg text-white" }, [_vm._v("Upplýsingar")])
+        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
+          _vm._v("Upplýsingar um þig")
+        ])
       ])
     ])
   },
@@ -43779,7 +43874,21 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "w-full mt-4" }, [
       _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "text-lg text-white" }, [_vm._v("Verð")])
+        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
+          _vm._v("Upplýsingar um bílinn")
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "w-full mt-4" }, [
+      _c("div", { staticClass: "flex justify-between" }, [
+        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
+          _vm._v("Verð")
+        ])
       ])
     ])
   },
