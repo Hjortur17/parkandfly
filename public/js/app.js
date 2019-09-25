@@ -2151,6 +2151,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2723,9 +2733,10 @@ __webpack_require__.r(__webpack_exports__);
         if (_this2.amount == 0) {
           window.location.href = 'https://parkandfly.is?status=1';
         } else {
-          var key = response.data.bookingRef + '-' + response.data.tokenKorta;
-          var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + _this2.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
-          window.location.href = kortaLinkUrl;
+          // var key = response.data.bookingRef + '-' + response.data.tokenKorta;
+          // var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
+          // window.location.href = kortaLinkUrl;
+          window.location.href = 'http://admin.parkandfly.is/Customer/CustomerPaymentKorta/CardAuth';
           return false;
         }
       })["catch"](function (error) {
@@ -42644,218 +42655,390 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "p-0" }, [
-    _vm.step === 1
-      ? _c(
-          "section",
-          { staticClass: "w-full mt-8 md:mt-16", attrs: { id: "car-form" } },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm.errors.length
-              ? _c("p", { staticClass: "text-white mb-6" }, [
-                  _c("strong", { staticClass: "text-lg font-bold" }, [
-                    _vm._v("Úpps! Eitthvað fór úrskeiðis:")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "ul",
-                    _vm._l(_vm.errors, function(error) {
-                      return _c("li", { staticClass: "text-base" }, [
-                        _vm._v(_vm._s(error))
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("form", { staticClass: "w-full" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "flex items-center bg-gray-200 text-gray-700 border border-gray-200 rounded pr-2 focus:bg-white focus:border-gray-500"
-                    },
-                    [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.booking.carNumber,
-                            expression: "booking.carNumber"
-                          }
-                        ],
-                        staticClass:
-                          "appearance-none block w-full leading-tight bg-gray-200 py-3 px-4 focus:outline-none",
-                        attrs: {
-                          type: "text",
-                          name: "carNumber",
-                          placeholder: "Bílnúmer",
-                          required: "",
-                          maxlength: 7,
-                          "aria-label": "Bílnúmer"
-                        },
-                        domProps: { value: _vm.booking.carNumber },
-                        on: {
-                          keyup: function($event) {
-                            return _vm.carNumberToUpperCase(
-                              _vm.booking.carNumber
-                            )
-                          },
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.booking,
-                              "carNumber",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "button",
-                        {
-                          staticClass:
-                            "flex-shrink-0 text-white text-sm py-1 px-2 bg-orange-600 rounded outline-none",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.getCarInfo()
-                            }
-                          }
-                        },
-                        [_vm._v("\n\t\t\t\t\t\t\tLeita\n\t\t\t\t\t\t")]
-                      )
-                    ]
-                  )
-                ])
-              ]),
+  return _c(
+    "div",
+    { staticClass: "p-0" },
+    [
+      _vm.step === 1
+        ? _c(
+            "section",
+            { staticClass: "w-full mt-8 md:mt-16", attrs: { id: "car-form" } },
+            [
+              _vm._m(0),
               _vm._v(" "),
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.booking.carModel,
-                      expression: "booking.carModel"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Tegund",
-                    name: "carModel",
-                    required: "",
-                    "aria-label": "Tegund"
-                  },
-                  domProps: { value: _vm.booking.carModel },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.booking, "carModel", $event.target.value)
-                    }
-                  }
-                }),
-                _vm._v(" "),
-                _c("p", { staticClass: "text-white text-xs mt-2" }, [
-                  _vm._v("Tegund - Undirtegund (Litur)")
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c(
-                  "div",
-                  { staticClass: "inline-block relative w-full mb-0" },
-                  [
-                    _c(
-                      "select",
-                      {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.booking.carSize,
-                            expression: "booking.carSize"
-                          }
-                        ],
-                        staticClass:
-                          "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                        attrs: { name: "carSize", "aria-label": "Stærð bíls" },
-                        on: {
-                          change: function($event) {
-                            var $$selectedVal = Array.prototype.filter
-                              .call($event.target.options, function(o) {
-                                return o.selected
-                              })
-                              .map(function(o) {
-                                var val = "_value" in o ? o._value : o.value
-                                return val
-                              })
-                            _vm.$set(
-                              _vm.booking,
-                              "carSize",
-                              $event.target.multiple
-                                ? $$selectedVal
-                                : $$selectedVal[0]
-                            )
-                          }
-                        }
-                      },
-                      [
-                        _c("option", { attrs: { selected: "", value: "" } }, [
-                          _vm._v("Veldu stærð")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Fólksbíll" } }, [
-                          _vm._v("Fólksbíll")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Jepplingur" } }, [
-                          _vm._v("Jepplingur")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Jeppi" } }, [
-                          _vm._v("Jeppi")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "Yfirstærð" } }, [
-                          _vm._v("Yfirstærð")
-                        ])
-                      ]
-                    ),
+              _vm.errors.length
+                ? _c("p", { staticClass: "text-white mb-6" }, [
+                    _c("strong", { staticClass: "text-lg font-bold" }, [
+                      _vm._v("Úpps! Eitthvað fór úrskeiðis:")
+                    ]),
                     _vm._v(" "),
                     _c(
+                      "ul",
+                      _vm._l(_vm.errors, function(error) {
+                        return _c("li", { staticClass: "text-base" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("form", { staticClass: "w-full" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "flex items-center bg-gray-200 text-gray-700 border border-gray-200 rounded pr-2 focus:bg-white focus:border-gray-500"
+                        },
+                        [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.booking.carNumber,
+                                expression: "booking.carNumber"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none block w-full leading-tight bg-gray-200 py-3 px-4 focus:outline-none",
+                            attrs: {
+                              type: "text",
+                              name: "carNumber",
+                              placeholder: "Bílnúmer",
+                              required: "",
+                              maxlength: 7,
+                              "aria-label": "Bílnúmer"
+                            },
+                            domProps: { value: _vm.booking.carNumber },
+                            on: {
+                              keyup: function($event) {
+                                return _vm.carNumberToUpperCase(
+                                  _vm.booking.carNumber
+                                )
+                              },
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.booking,
+                                  "carNumber",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c(
+                            "button",
+                            {
+                              staticClass:
+                                "flex-shrink-0 text-white text-sm py-1 px-2 bg-orange-600 rounded outline-none",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  return _vm.getCarInfo()
+                                }
+                              }
+                            },
+                            [_vm._v("\n\t\t\t\t\t\t\tLeita\n\t\t\t\t\t\t")]
+                          )
+                        ]
+                      )
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.carModel,
+                          expression: "booking.carModel"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Tegund",
+                        name: "carModel",
+                        required: "",
+                        "aria-label": "Tegund"
+                      },
+                      domProps: { value: _vm.booking.carModel },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.booking, "carModel", $event.target.value)
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("p", { staticClass: "text-white text-xs mt-2" }, [
+                      _vm._v("Tegund - Undirtegund (Litur)")
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c(
                       "div",
+                      { staticClass: "inline-block relative w-full mb-0" },
+                      [
+                        _c(
+                          "select",
+                          {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.booking.carSize,
+                                expression: "booking.carSize"
+                              }
+                            ],
+                            staticClass:
+                              "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                            attrs: {
+                              name: "carSize",
+                              "aria-label": "Stærð bíls"
+                            },
+                            on: {
+                              change: function($event) {
+                                var $$selectedVal = Array.prototype.filter
+                                  .call($event.target.options, function(o) {
+                                    return o.selected
+                                  })
+                                  .map(function(o) {
+                                    var val = "_value" in o ? o._value : o.value
+                                    return val
+                                  })
+                                _vm.$set(
+                                  _vm.booking,
+                                  "carSize",
+                                  $event.target.multiple
+                                    ? $$selectedVal
+                                    : $$selectedVal[0]
+                                )
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "option",
+                              { attrs: { selected: "", value: "" } },
+                              [_vm._v("Veldu stærð")]
+                            ),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Fólksbíll" } }, [
+                              _vm._v("Fólksbíll")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Jepplingur" } }, [
+                              _vm._v("Jepplingur")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Jeppi" } }, [
+                              _vm._v("Jeppi")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "Yfirstærð" } }, [
+                              _vm._v("Yfirstærð")
+                            ])
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass:
+                              "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pr-4 text-gray-700"
+                          },
+                          [
+                            _c(
+                              "svg",
+                              {
+                                staticClass: "fill-current h-4 w-4",
+                                attrs: {
+                                  xmlns: "http://www.w3.org/2000/svg",
+                                  viewBox: "0 0 20 20"
+                                }
+                              },
+                              [
+                                _c("path", {
+                                  attrs: {
+                                    d:
+                                      "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                  }
+                                })
+                              ]
+                            )
+                          ]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.name,
+                          expression: "booking.name"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Nafn",
+                        name: "name",
+                        required: "",
+                        "aria-label": "Nafn"
+                      },
+                      domProps: { value: _vm.booking.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.booking, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.email,
+                          expression: "booking.email"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "email",
+                        placeholder: "Netfang",
+                        name: "email",
+                        required: "",
+                        "aria-label": "Netfang"
+                      },
+                      domProps: { value: _vm.booking.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.booking, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.phone,
+                          expression: "booking.phone"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "phone",
+                        placeholder: "Símanúmer",
+                        name: "phone",
+                        required: "",
+                        "aria-label": "Símanúmer"
+                      },
+                      domProps: { value: _vm.booking.phone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.booking, "phone", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
+                _c(
+                  "div",
+                  { staticClass: "w-full px-3 mb-6 md:mb-0 float-right" },
+                  [
+                    _c(
+                      "button",
                       {
-                        staticClass:
-                          "pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 pr-4 text-gray-700"
+                        staticClass: "float-right",
+                        attrs: { title: "Halda áfram" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.checkCarUserForm(), _vm.next()
+                          }
+                        }
                       },
                       [
                         _c(
                           "svg",
                           {
-                            staticClass: "fill-current h-4 w-4",
                             attrs: {
                               xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 20 20"
+                              viewBox: "0 0 512 512",
+                              width: "30px",
+                              height: "30px",
+                              fill: "#fff"
                             }
                           },
                           [
                             _c("path", {
                               attrs: {
                                 d:
-                                  "M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
+                                  "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
                               }
                             })
                           ]
@@ -42865,935 +43048,457 @@ var render = function() {
                   ]
                 )
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.booking.name,
-                      expression: "booking.name"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Nafn",
-                    name: "name",
-                    required: "",
-                    "aria-label": "Nafn"
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.step === 2
+        ? _c(
+            "section",
+            {
+              staticClass: "w-full mt-8 md:mt-16",
+              attrs: { id: "arrival-form" }
+            },
+            [
+              _vm._m(1),
+              _vm._v(" "),
+              _vm.errors.length
+                ? _c("p", { staticClass: "text-white mb-6" }, [
+                    _c("strong", { staticClass: "text-lg font-bold" }, [
+                      _vm._v("Úpps! Eitthvað fór úrskeiðis:")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(_vm.errors, function(error) {
+                        return _c("li", { staticClass: "text-base" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3 my-6" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass:
+                      "inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0"
                   },
-                  domProps: { value: _vm.booking.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                  [
+                    _c("datetime", {
+                      staticClass: "theme-orange",
+                      attrs: {
+                        type: "datetime",
+                        "min-datetime": this.today,
+                        phrases: { ok: "Komið", cancel: "Hætta" },
+                        "input-class":
+                          "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                        format: _vm.formatDate(_vm.selectedDeliveryDay),
+                        placeholder: "Brottför"
+                      },
+                      model: {
+                        value: _vm.selectedDeliveryDay,
+                        callback: function($$v) {
+                          _vm.selectedDeliveryDay = $$v
+                        },
+                        expression: "selectedDeliveryDay"
                       }
-                      _vm.$set(_vm.booking, "name", $event.target.value)
-                    }
-                  }
-                })
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "inline-block relative w-full md:w-1/2 px-3" },
+                  [
+                    _c("datetime", {
+                      staticClass: "theme-orange",
+                      attrs: {
+                        type: "datetime",
+                        "min-datetime": _vm.selectedDeliveryDay,
+                        phrases: { ok: "Komið", cancel: "Hætta" },
+                        "input-class":
+                          "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                        format: _vm.formatDate(_vm.selectedPickUpDay),
+                        placeholder: "Heimkoma"
+                      },
+                      model: {
+                        value: _vm.selectedPickUpDay,
+                        callback: function($$v) {
+                          _vm.selectedPickUpDay = $$v
+                        },
+                        expression: "selectedPickUpDay"
+                      }
+                    })
+                  ],
+                  1
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.booking.email,
-                      expression: "booking.email"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: {
-                    type: "email",
-                    placeholder: "Netfang",
-                    name: "email",
-                    required: "",
-                    "aria-label": "Netfang"
-                  },
-                  domProps: { value: _vm.booking.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+              _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
+                _c(
+                  "div",
+                  { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.flightNumber,
+                          expression: "booking.flightNumber"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Flugnúmer á heimleið",
+                        name: "flightNumber",
+                        "aria-label": "Flugnúmer"
+                      },
+                      domProps: { value: _vm.booking.flightNumber },
+                      on: {
+                        keyup: function($event) {
+                          return _vm.flightNumberToUpperCase(
+                            _vm.booking.flightNumber
+                          )
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.booking,
+                            "flightNumber",
+                            $event.target.value
+                          )
+                        }
                       }
-                      _vm.$set(_vm.booking, "email", $event.target.value)
-                    }
-                  }
-                })
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible"
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.flightAirlane,
+                          expression: "booking.flightAirlane"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Flugfélag",
+                        name: "flightAirlane",
+                        disabled: "",
+                        "aria-label": "Flugfélag"
+                      },
+                      domProps: { value: _vm.booking.flightAirlane },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.booking,
+                            "flightAirlane",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible"
+                  },
+                  [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.booking.flightDeparture,
+                          expression: "booking.flightDeparture"
+                        }
+                      ],
+                      staticClass:
+                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Brottfarastaður",
+                        name: "flightDeparture",
+                        disabled: "",
+                        "aria-label": "Brottfarastaður"
+                      },
+                      domProps: { value: _vm.booking.flightDeparture },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.booking,
+                            "flightDeparture",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]
+                )
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.booking.phone,
-                      expression: "booking.phone"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: {
-                    type: "phone",
-                    placeholder: "Símanúmer",
-                    name: "phone",
-                    required: "",
-                    "aria-label": "Símanúmer"
-                  },
-                  domProps: { value: _vm.booking.phone },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.booking, "phone", $event.target.value)
-                    }
-                  }
-                })
+              _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
+                _c("div", { staticClass: "w-full px-3 mb-6 md:mb-0" }, [
+                  _c("ul", { staticClass: "flex float-right" }, [
+                    _c("li", { staticClass: "pr-4" }, [
+                      _c(
+                        "button",
+                        {
+                          attrs: { title: "Til baka" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.prev()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512",
+                                width: "30px",
+                                height: "30px",
+                                fill: "#fff"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("li", [
+                      _c(
+                        "button",
+                        {
+                          attrs: { title: "Halda áfram" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.checkDateForm(),
+                                _vm.numberOfDays(),
+                                _vm.next()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512",
+                                width: "30px",
+                                height: "30px",
+                                fill: "#fff"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
+                    ])
+                  ])
+                ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.step === 3
+        ? _c(
+            "section",
+            {
+              staticClass: "w-full mt-8 md:mt-16",
+              attrs: { id: "service-form" }
+            },
+            [
+              _vm._m(2),
+              _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "w-full px-3 mb-6 md:mb-0 float-right" },
+                { staticClass: "flex flex-wrap -mx-3 mt-12 relative" },
                 [
                   _c(
-                    "button",
+                    "multiselect",
                     {
-                      staticClass: "float-right",
-                      attrs: { title: "Halda áfram" },
-                      on: {
-                        click: function($event) {
-                          $event.preventDefault()
-                          _vm.checkCarUserForm(), _vm.next()
-                        }
+                      staticClass:
+                        "absolute appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
+                      attrs: {
+                        options: _vm.sortedServices,
+                        multiple: true,
+                        placeholder: "Veldu þér þjónustu með okkur",
+                        "track-by": "description",
+                        label: "description",
+                        "close-on-select": false
+                      },
+                      model: {
+                        value: _vm.selectedServices,
+                        callback: function($$v) {
+                          _vm.selectedServices = $$v
+                        },
+                        expression: "selectedServices"
                       }
                     },
                     [
                       _c(
-                        "svg",
-                        {
-                          attrs: {
-                            xmlns: "http://www.w3.org/2000/svg",
-                            viewBox: "0 0 512 512",
-                            width: "30px",
-                            height: "30px",
-                            fill: "#fff"
-                          }
-                        },
+                        "span",
+                        { attrs: { slot: "noResult" }, slot: "noResult" },
                         [
-                          _c("path", {
-                            attrs: {
-                              d:
-                                "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
-                            }
-                          })
+                          _vm._v(
+                            "Engin þjónusta fannst! Reyndu annað leitarskilirði"
+                          )
                         ]
                       )
                     ]
                   )
-                ]
-              )
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.step === 2
-      ? _c(
-          "section",
-          {
-            staticClass: "w-full mt-8 md:mt-16",
-            attrs: { id: "arrival-form" }
-          },
-          [
-            _vm._m(1),
-            _vm._v(" "),
-            _vm.errors.length
-              ? _c("p", { staticClass: "text-white mb-6" }, [
-                  _c("strong", { staticClass: "text-lg font-bold" }, [
-                    _vm._v("Úpps! Eitthvað fór úrskeiðis:")
-                  ]),
-                  _vm._v(" "),
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
+                _c("div", { staticClass: "w-1/2" }, [
                   _c(
-                    "ul",
-                    _vm._l(_vm.errors, function(error) {
-                      return _c("li", { staticClass: "text-base" }, [
-                        _vm._v(_vm._s(error))
-                      ])
-                    }),
-                    0
-                  )
-                ])
-              : _vm._e(),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 my-6" }, [
-              _c(
-                "div",
-                {
-                  staticClass:
-                    "inline-block relative w-full md:w-1/2 px-3 mb-6 md:mb-0"
-                },
-                [
-                  _c("datetime", {
-                    staticClass: "theme-orange",
-                    attrs: {
-                      type: "datetime",
-                      "min-datetime": this.today,
-                      phrases: { ok: "Komið", cancel: "Hætta" },
-                      "input-class":
-                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                      format: _vm.formatDate(_vm.selectedDeliveryDay),
-                      placeholder: "Brottför"
-                    },
-                    model: {
-                      value: _vm.selectedDeliveryDay,
-                      callback: function($$v) {
-                        _vm.selectedDeliveryDay = $$v
-                      },
-                      expression: "selectedDeliveryDay"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "inline-block relative w-full md:w-1/2 px-3" },
-                [
-                  _c("datetime", {
-                    staticClass: "theme-orange",
-                    attrs: {
-                      type: "datetime",
-                      "min-datetime": _vm.selectedDeliveryDay,
-                      phrases: { ok: "Komið", cancel: "Hætta" },
-                      "input-class":
-                        "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                      format: _vm.formatDate(_vm.selectedPickUpDay),
-                      placeholder: "Heimkoma"
-                    },
-                    model: {
-                      value: _vm.selectedPickUpDay,
-                      callback: function($$v) {
-                        _vm.selectedPickUpDay = $$v
-                      },
-                      expression: "selectedPickUpDay"
-                    }
-                  })
-                ],
-                1
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 mb-6" }, [
-              _c("div", { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0" }, [
-                _c("input", {
-                  directives: [
+                    "h3",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.booking.flightNumber,
-                      expression: "booking.flightNumber"
-                    }
-                  ],
-                  staticClass:
-                    "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                  attrs: {
-                    type: "text",
-                    placeholder: "Flugnúmer á heimleið",
-                    name: "flightNumber",
-                    "aria-label": "Flugnúmer"
-                  },
-                  domProps: { value: _vm.booking.flightNumber },
-                  on: {
-                    keyup: function($event) {
-                      return _vm.flightNumberToUpperCase(
-                        _vm.booking.flightNumber
-                      )
+                      staticClass: "text-white uppercase font-regular text-xl"
                     },
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.booking, "flightNumber", $event.target.value)
-                    }
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.booking.flightAirlane,
-                        expression: "booking.flightAirlane"
-                      }
-                    ],
-                    staticClass:
-                      "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Flugfélag",
-                      name: "flightAirlane",
-                      disabled: "",
-                      "aria-label": "Flugfélag"
-                    },
-                    domProps: { value: _vm.booking.flightAirlane },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.booking,
-                          "flightAirlane",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "w-full md:w-1/3 px-3 mb-6 md:mb-0 invisible" },
-                [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.booking.flightDeparture,
-                        expression: "booking.flightDeparture"
-                      }
-                    ],
-                    staticClass:
-                      "appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                    attrs: {
-                      type: "text",
-                      placeholder: "Brottfarastaður",
-                      name: "flightDeparture",
-                      disabled: "",
-                      "aria-label": "Brottfarastaður"
-                    },
-                    domProps: { value: _vm.booking.flightDeparture },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(
-                          _vm.booking,
-                          "flightDeparture",
-                          $event.target.value
-                        )
-                      }
-                    }
-                  })
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
-              _c("div", { staticClass: "w-full px-3 mb-6 md:mb-0" }, [
-                _c("ul", { staticClass: "flex float-right" }, [
-                  _c("li", { staticClass: "pr-4" }, [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Til baka" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.prev()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Halda áfram" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.checkDateForm(), _vm.numberOfDays(), _vm.next()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.step === 3
-      ? _c(
-          "section",
-          {
-            staticClass: "w-full mt-8 md:mt-16",
-            attrs: { id: "service-form" }
-          },
-          [
-            _vm._m(2),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "flex flex-wrap -mx-3 mt-12 relative" },
-              [
-                _c(
-                  "multiselect",
-                  {
-                    staticClass:
-                      "absolute appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500",
-                    attrs: {
-                      options: _vm.sortedServices,
-                      multiple: true,
-                      placeholder: "Veldu þér þjónustu með okkur",
-                      "track-by": "description",
-                      label: "description",
-                      "close-on-select": false
-                    },
-                    model: {
-                      value: _vm.selectedServices,
-                      callback: function($$v) {
-                        _vm.selectedServices = $$v
-                      },
-                      expression: "selectedServices"
-                    }
-                  },
-                  [
-                    _c(
-                      "span",
-                      { attrs: { slot: "noResult" }, slot: "noResult" },
-                      [
-                        _vm._v(
-                          "Engin þjónusta fannst! Reyndu annað leitarskilirði"
-                        )
-                      ]
-                    )
-                  ]
-                )
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _vm._m(3),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
-              _c("div", { staticClass: "w-1/2" }, [
-                _c(
-                  "h3",
-                  { staticClass: "text-white uppercase font-regular text-xl" },
-                  [
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.total) }
-                    }),
-                    _vm._v(" kr.")
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/2" }, [
-                _c("ul", { staticClass: "flex float-right" }, [
-                  _c("li", { staticClass: "pr-4" }, [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Til baka" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.prev()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Halda áfram" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.checkDateForm(), _vm.numberOfDays(), _vm.next()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.step === 4
-      ? _c(
-          "section",
-          { staticClass: "w-full mt-8 md:mt-8", attrs: { id: "service-form" } },
-          [
-            _vm._m(4),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3 my-8" }, [
-              _c("div", { staticClass: "w-full", attrs: { id: "about" } }, [
-                _vm._m(5),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [_vm._v("Nafn")]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.name) }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Netfang")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.email) }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Símanr.")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.phone) }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full", attrs: { id: "car" } }, [
-                _vm._m(6),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Bílnúmer")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.carNumber) }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [_vm._v("Tegund")]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.carModel) }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Flokkur")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", {
-                      staticClass: "text-white",
-                      domProps: { textContent: _vm._s(this.booking.carSize) }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-full", attrs: { id: "price" } }, [
-                _vm._m(7),
-                _vm._v(" "),
-                _vm._m(8),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Geymsla ("),
+                    [
                       _c("span", {
-                        domProps: { textContent: _vm._s(_vm.numberOfDaysData) }
+                        domProps: { textContent: _vm._s(_vm.total) }
                       }),
-                      _vm._v(" dagar)")
-                    ]),
-                    _vm._v(" "),
-                    _c("p", { staticClass: "text-white" }, [
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.priceForDays + "kr")
-                        }
-                      })
-                    ])
-                  ])
+                      _vm._v(" kr.")
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
-                _vm._m(9),
-                _vm._v(" "),
-                _c("div", { staticClass: "w-full" }, [
-                  _c("div", { staticClass: "flex justify-between" }, [
-                    _c("h2", { staticClass: "text-white" }, [
-                      _vm._v("Þjónustur ("),
+                _c("div", { staticClass: "w-1/2" }, [
+                  _c("ul", { staticClass: "flex float-right" }, [
+                    _c("li", { staticClass: "pr-4" }, [
                       _c(
-                        "span",
-                        _vm._l(this.selectedServicesDescription, function(
-                          service
-                        ) {
-                          return _c("span", {
-                            domProps: { textContent: _vm._s(service + ", ") }
-                          })
-                        }),
-                        0
-                      ),
-                      _vm._v(")")
+                        "button",
+                        {
+                          attrs: { title: "Til baka" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              return _vm.prev()
+                            }
+                          }
+                        },
+                        [
+                          _c(
+                            "svg",
+                            {
+                              attrs: {
+                                xmlns: "http://www.w3.org/2000/svg",
+                                viewBox: "0 0 512 512",
+                                width: "30px",
+                                height: "30px",
+                                fill: "#fff"
+                              }
+                            },
+                            [
+                              _c("path", {
+                                attrs: {
+                                  d:
+                                    "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
+                                }
+                              })
+                            ]
+                          )
+                        ]
+                      )
                     ]),
                     _vm._v(" "),
-                    _c("p", { staticClass: "text-white" }, [
-                      _c("span", {
-                        domProps: {
-                          textContent: _vm._s(_vm.servicePrice + "kr")
-                        }
-                      })
+                    _c("li", [
+                      _c(
+                        "button",
+                        {
+                          staticClass:
+                            "bg-orange-500 text-white font-bold text-center px-6 py-2 rounded",
+                          attrs: { title: "Sýna greiðslugátt" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              _vm.showPayment = true
+                            }
+                          }
+                        },
+                        [_vm._v("\n\t\t\t\t\t\t\tKlára Pöntun\n\t\t\t\t\t\t")]
+                      )
                     ])
                   ])
                 ])
               ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
-              _c("div", { staticClass: "w-1/2" }, [
-                _c(
-                  "h3",
-                  { staticClass: "text-white uppercase font-regular text-xl" },
-                  [
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.total) }
-                    }),
-                    _vm._v(" kr.")
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/2" }, [
-                _c("ul", { staticClass: "flex float-right" }, [
-                  _c("li", { staticClass: "pr-4" }, [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Til baka" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.prev()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Halda áfram" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.checkDateForm(), _vm.numberOfDays(), _vm.next()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.step === 5
-      ? _c(
-          "section",
-          {
-            staticClass: "w-full mt-8 md:mt-16",
-            attrs: { id: "service-form" }
-          },
-          [
-            _vm._m(10),
-            _vm._v(" "),
-            _vm._m(11),
-            _vm._v(" "),
-            _c("div", { staticClass: "flex flex-wrap -mx-3" }, [
-              _c("div", { staticClass: "w-1/2" }, [
-                _c(
-                  "h3",
-                  { staticClass: "text-white uppercase font-regular text-xl" },
-                  [
-                    _c("span", {
-                      domProps: { textContent: _vm._s(_vm.total) }
-                    }),
-                    _vm._v(" kr.")
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "w-1/2" }, [
-                _c("ul", { staticClass: "flex float-right" }, [
-                  _c("li", { staticClass: "pr-4" }, [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Til baka" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            return _vm.prev()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zm116-292H256v-70.9c0-10.7-13-16.1-20.5-8.5L121.2 247.5c-4.7 4.7-4.7 12.2 0 16.9l114.3 114.9c7.6 7.6 20.5 2.2 20.5-8.5V300h116c6.6 0 12-5.4 12-12v-64c0-6.6-5.4-12-12-12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("li", [
-                    _c(
-                      "button",
-                      {
-                        attrs: { title: "Halda áfram" },
-                        on: {
-                          click: function($event) {
-                            $event.preventDefault()
-                            _vm.checkDateForm(), _vm.numberOfDays(), _vm.next()
-                          }
-                        }
-                      },
-                      [
-                        _c(
-                          "svg",
-                          {
-                            attrs: {
-                              xmlns: "http://www.w3.org/2000/svg",
-                              viewBox: "0 0 512 512",
-                              width: "30px",
-                              height: "30px",
-                              fill: "#fff"
-                            }
-                          },
-                          [
-                            _c("path", {
-                              attrs: {
-                                d:
-                                  "M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"
-                              }
-                            })
-                          ]
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      : _vm._e()
-  ])
+            ]
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.showPayment
+        ? _c("payment", {
+            attrs: {
+              servicePrice: _vm.servicePrice,
+              numberOfDays: _vm.numberOfDaysData,
+              priceForDays: _vm.priceForDays,
+              paidPrice: _vm.total,
+              booking: _vm.booking,
+              selectedServicesId: _vm.selectedServicesId
+            },
+            on: { hide: _vm.hideModal }
+          })
+        : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -43843,120 +43548,6 @@ var staticRenderFns = [
     return _c("div", { staticClass: "flex flex-wrap -mx-3 mt-4 mb-12" }, [
       _c("small", { staticClass: "italic text-white" }, [
         _vm._v("* Inni geymsla er 990kr á dag.")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("h2", { staticClass: "font-bold text-white text-4xl text-center" }, [
-        _vm._v("Yfirlit á bókun")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
-          _vm._v("Upplýsingar um þig")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mt-4" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
-          _vm._v("Upplýsingar um bílinn")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full mt-4" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "mb-2 text-lg text-white font-bold" }, [
-          _vm._v("Verð")
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "text-white" }, [_vm._v("Grunngjald")]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-white" }, [_vm._v("4500kr")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("div", { staticClass: "flex justify-between" }, [
-        _c("h2", { staticClass: "text-white" }, [
-          _vm._v("Útgöngumiði fyrir bílastæði Isavia")
-        ]),
-        _vm._v(" "),
-        _c("p", { staticClass: "text-white" }, [_vm._v("-500kr")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "w-full" }, [
-      _c("h2", { staticClass: "font-bold text-white text-4xl text-center" }, [
-        _vm._v("Greiða fyrir bókun")
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("form", { staticClass: "max-w-xl" }, [
-      _c("div", { staticClass: "flex flex-wrap" }, [
-        _c("input", {
-          staticClass: "bg-white px-2 py-1 w-full",
-          attrs: { type: "text", placeholder: "Kortanr." }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "bg-white px-2 py-1 w-full",
-          attrs: { type: "text", placeholder: "Gildistími" }
-        }),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "bg-white px-2 py-1 w-full",
-          attrs: { type: "text", placeholder: "CVC" }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass:
-              "bg-orange-500 text-white font-bold text-center px-4 py-1 rounded"
-          },
-          [_vm._v("Borga")]
-        )
       ])
     ])
   }
@@ -44516,7 +44107,7 @@ var render = function() {
                           "button",
                           {
                             staticClass:
-                              "bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer",
+                              "bg-orange-500 text-white font-bold text-center px-6 py-2 rounded cursor-pointer",
                             attrs: { type: "submit" }
                           },
                           [_vm._v("Borga")]

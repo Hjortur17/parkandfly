@@ -145,8 +145,8 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="checkDateForm(), numberOfDays(), next()" title="Halda áfram">
-								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="30px" height="30px" fill="#fff"><path d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zM140 300h116v70.9c0 10.7 13 16.1 20.5 8.5l114.3-114.9c4.7-4.7 4.7-12.2 0-16.9l-114.3-115c-7.6-7.6-20.5-2.2-20.5 8.5V212H140c-6.6 0-12 5.4-12 12v64c0 6.6 5.4 12 12 12z"/></svg>
+							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-6 py-2 rounded" title="Sýna greiðslugátt">
+								Klára Pöntun
 							</button>
 						</li>
 					</ul>
@@ -154,7 +154,7 @@
 			</div>
 		</section>
 
-		<section class="w-full mt-8 md:mt-8" id="service-form" v-if="step === 4">
+		<!-- <section class="w-full mt-8 md:mt-8" id="service-form" v-if="step === 4">
 			<div class="w-full">
 				<h2 class="font-bold text-white text-4xl text-center">Yfirlit á bókun</h2>
 			</div>
@@ -300,7 +300,17 @@
 					</ul>
 				</div>
 			</div>
-		</section>
+		</section> -->
+
+		<payment v-if="showPayment"
+			@hide="hideModal"
+			:servicePrice="servicePrice"
+			:numberOfDays="numberOfDaysData"
+			:priceForDays="priceForDays"
+			:paidPrice="total"
+			:booking="booking"
+			:selectedServicesId="selectedServicesId">
+		</payment>
 	</div>
 </template>
 

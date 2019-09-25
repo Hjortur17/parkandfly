@@ -66,7 +66,7 @@
 											<small>Það skal hafa í huga að þú hefur 10 mínútur til þess að borga, annars verður bókunin gerð ógild.</small>
 										</p>
 
-										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full cursor-pointer">Borga</button>
+										<button type="submit" class="bg-orange-500 text-white font-bold text-center px-6 py-2 rounded cursor-pointer">Borga</button>
 									</form>
 								</div>
 							</div>
@@ -230,11 +230,13 @@ export default {
 				if (this.amount == 0) {
 					window.location.href = 'https://parkandfly.is?status=1';
 				} else {
-					var key = response.data.bookingRef + '-' + response.data.tokenKorta;
+					// var key = response.data.bookingRef + '-' + response.data.tokenKorta;
 
-					var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
+					// var kortaLinkUrl = 'https://netgreidslur.korta.is/?amount=' + this.amount + '&currency=ISK&merchant=' + response.data.providerMerchant + '&terminal=' + response.data.providerTerminal + '&description=' + response.data.providerDescription + '&lang=is&' + response.data.providerKeyMethod + '=' + response.data.providerKey + '&downloadurl=https://parkandfly.is/api/database/booking/update&refermethod=POST&refertarget=_top&reference=' + key + '&startnewpayment=y';
 
-					window.location.href = kortaLinkUrl;
+					// window.location.href = kortaLinkUrl;
+
+					window.location.href = 'http://admin.parkandfly.is/Customer/CustomerPaymentKorta/CardAuth'
 
 					return false;
 				}
