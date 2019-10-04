@@ -16,6 +16,10 @@ class PagesController extends Controller
 			return redirect('/')->with('flash', 'Bókun þín hefur verið gerð!');
 		}
 
+		if ($status == 2) {
+			return redirect('/')->with('flash', 'Óvænt villa!');
+		}
+
 		return view('pages.index');
 	}
 

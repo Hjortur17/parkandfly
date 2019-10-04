@@ -93,7 +93,6 @@ import sha256 from 'sha256';
 
 export default {
 	props: [
-		'userAge',
 		'servicePrice',
 		'numberOfDays',
 		'priceForDays',
@@ -111,7 +110,6 @@ export default {
 			netgiroId: '881E674F-7891-4C20-AFD8-56FE2624C4B5',
 
 			discounts: [],
-			errors: [],
 
 			paymentPicked: null,
 			termsChecked: false,
@@ -185,19 +183,11 @@ export default {
 		checkPaymentForm(e) {
 			e.preventDefault();
 			e.stopPropagation();
-			
-			this.checkData();
 
 			if (!this.termsChecked) {
 				alert('Úpps! Þú þarft að samþykkja skilmálana!');
 				return false;
 			}
-
-			if (this.errors.length > 0) {
-				alert('Úpps! Þú fylltir ekki formið rétt inn!');
-				return false;
-			}
-
 
 			axios.post('/api/database/booking/create', {
 				carNumber: this.booking.carNumber,
@@ -258,59 +248,7 @@ export default {
 			});
 
 			return false;
-		},
-
-		checkUserAge() {
-			if (this.userAge >= 65) {
-				return this.couponPrice = this.paidPrice - (this.paidPrice *(15)/100)
-			}
-		},
-
-		checkData() {
-			this.errors = [];
-
-			if (!this.booking.carNumber) {
-				this.errors.push('Vantar bílnúmer!');
-			}
-			if (!this.booking.carSize) {
-				this.errors.push('Veldu stærð!');
-			}
-			if (!this.booking.carMake) {
-				this.errors.push('Vantar tegund bíls!');
-			}
-			if (!this.booking.carType) {
-				this.errors.push('Vantar undirtegund bíls!');
-			}
-			if (!this.booking.carColor) {
-				this.errors.push('Vantar lit bíls!');
-			}
-
-			if (!this.booking.name) {
-				this.errors.push('Vantar nafn!');
-			}
-			if (!this.booking.email) {
-				this.errors.push('Vantar netfang!');
-			}
-			if (!this.booking.phone) {
-				this.errors.push('Vantar símanúmer!');
-			}
-
-			if (!this.booking.dropOffDate) {
-				this.errors.push('Vantar brottfarardag!');
-			}
-			if (!this.booking.dropOffTime) {
-				this.errors.push('Vantar brottfarartíma!');
-			}
-			if (!this.booking.pickUpDate) {
-				this.errors.push('Vantar komudag!');
-			}
-			if (!this.booking.pickUpTime) {
-				this.errors.push('Vantar komutíma!');
-			}
-			if (!this.booking.flightNumber) {
-				this.errors.push('Vantar flugnúmer!');
-			}
-		},
+		}
 	},
 
 	computed: {
@@ -320,12 +258,8 @@ export default {
 		netgiro_link: function () {
 			return 'https://parkandfly.is/api/database/booking/update?bookingId=' + this.bookingId;
 		}
-	},
-
-	mounted() {
-		this.checkUserAge();
-	},
-}
+	}
+};
 </script>
 
 <style>

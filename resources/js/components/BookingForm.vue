@@ -434,10 +434,7 @@
 			</div>
 
 			<div class="flex flex-wrap -mx-3">
-				<div class="w-1/2">
-					<h3 class="text-white uppercase font-regular text-xl"><span v-text="total"></span> kr.</h3>
-				</div>
-				<div class="w-1/2">
+				<div class="w-full">
 					<ul class="flex float-right">
 						<li class="pr-4 self-center">
 							<button @click.prevent="prev()" class="mt-1" title="Til baka">
@@ -445,7 +442,7 @@
 							</button>
 						</li>
 						<li>
-							<button @click.prevent="showPayment = true" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" title="Sýna greiðslugátt">
+							<button @click.prevent="checkBooking()" class="bg-orange-500 text-white font-bold text-center px-12 py-2 rounded-full" title="Sýna greiðslugátt">
 								Klára Pöntun
 							</button>
 						</li>
@@ -456,7 +453,6 @@
 
 		<payment v-if="showPayment"
 		@hide="hideModal"
-		:userAge="userAge"
 		:servicePrice="servicePrice"
 		:numberOfDays="numberOfDaysData"
 		:priceForDays="priceForDays"
@@ -524,6 +520,10 @@ export default {
 
 			showPayment: false,
 			price: 4000,
+
+			total: null,
+			servicePrice: null,
+			priceForDays: null
 		}
 	},
 
@@ -613,6 +613,59 @@ export default {
 				this.errors.push('Vantar flugnúmer!');
 			}
 		},
+		
+		checkBooking() {
+			axios.post('/api/database/booking/checkbooking', {
+				carNumber: this.booking.carNumber,
+				carSize: this.booking.carSize,
+				carMake: this.booking.carMake,
+				carType: this.booking.carType,
+				carColor: this.booking.carColor,
+
+				name: this.booking.name,
+				socialId: this.booking.socialId,
+				email: this.booking.email,
+				phone: this.booking.phone,
+
+				dropOffDate: String(moment(this.selectedDeliveryDay).format('YYYY-MM-DD')),
+				dropOffTime: this.booking.dropOffTime,
+				pickUpDate: String(moment(this.selectedPickUpDay).format('YYYY-MM-DD')),
+				pickUpTime: this.booking.pickUpTime,
+
+				flightNumber: this.booking.flightNumber,
+
+				numberOfDays: this.numberOfDaysData,
+				priceForDays: 0,
+
+				paidPrice: '0',
+
+				selectedServicesId: this.selectedServicesId,
+
+				discountCode: 'ekkert',
+
+				step: 1
+			})
+			.then(response => {
+				if (response.data.success == false) {
+					alert('Aðgerð tókst ekki! Reyndu síðar');
+
+					window.location.href = 'https://parkandfly.is?status=2';
+				} else {
+					this.numberOfDaysData = response.data.numberOfDays;;
+
+					this.priceForDays = response.data.priceForDays;
+
+					this.servicePrice = Number(response.data.priceTotalService);
+
+					this.total = Number(response.data.priceTotalDiscount);
+					
+					this.showPayment = true;
+				}
+			})
+			.catch(function (error) {
+				alert('Bókunin er ekki fyllt inn rétt! Reyndu aftur!');
+			});
+		},
 
 		prev() {
 			this.step--;
@@ -663,22 +716,10 @@ export default {
 		}
 	},
 
-	computed: {
-		total: function() {
-			return (this.priceForDays + this.selectedServicesPrices.reduce((sum, item) => sum + item, this.price));
-		},
-		servicePrice: function () {
-			return (this.total - this.price) - this.priceForDays;
-		},
-		priceForDays: function () {
-			return (this.numberOfDaysData * 500);
-		}
-	},
-
 	mounted() {
 		this.getServices();
 	}
-};
+}; 
 </script>
 
 
